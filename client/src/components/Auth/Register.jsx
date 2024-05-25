@@ -2,6 +2,7 @@ import styles from "./AuthForms.module.css";
 import { useState } from "react";
 import { firebaseAuth } from "../../config/firebase";
 import { useNavigate } from "react-router-dom";
+import { useUser } from "../../contexts/UserContext";
 
 const Register = () => {
   const [email, setEmail] = useState("");
@@ -9,6 +10,7 @@ const Register = () => {
   const [rePassword, setRePassword] = useState("");
 
   const navigate = useNavigate();
+  const { setUser } = useUser();
 
   const submitHandler = async (e) => {
     e.preventDefault();
@@ -21,7 +23,8 @@ const Register = () => {
     try {
       const userCredential = await firebaseAuth.register(email, password);
       const user = userCredential.user;
-      console.log(user);
+
+      setUser({ userId: user.uid, email: user.email });
 
       navigate("/catalog");
     } catch (error) {

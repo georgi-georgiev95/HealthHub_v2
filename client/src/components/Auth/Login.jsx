@@ -2,12 +2,14 @@ import styles from "./AuthForms.module.css";
 import { useState } from "react";
 import { firebaseAuth } from "../../config/firebase";
 import { useNavigate } from "react-router-dom";
+import { useUser } from "../../contexts/UserContext";
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
   const navigate = useNavigate();
+  const { setUser } = useUser();
 
   const submitHandler = async (e) => {
     e.preventDefault();
@@ -16,7 +18,7 @@ const Login = () => {
       const userCredential = await firebaseAuth.login(email, password);
       const user = userCredential.user;
 
-      console.log(user);
+      setUser({ userId: user.uid, email: user.email });
       navigate("/catalog");
     } catch (error) {
       console.log(error);
