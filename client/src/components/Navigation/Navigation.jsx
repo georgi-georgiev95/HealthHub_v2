@@ -1,7 +1,18 @@
-import styles from './Navigation.module.css';
-import {Link} from 'react-router-dom'
+import styles from './Navigation.module.css'
+import { firebaseAuth } from '../../config/firebase'
+import {useUser} from '../../contexts/UserContext'
+import {Link, useNavigate} from 'react-router-dom'
 
 const Navigation = () => {
+  const navigate = useNavigate();
+  const {user, setUser} = useUser();
+
+  const logoutHandler = async () => {
+    await firebaseAuth.logout();
+    setUser({});
+    navigate("/");
+  };
+
     return (
       <nav className={styles.siteNavigation}>
         <ul>
@@ -9,9 +20,14 @@ const Navigation = () => {
           <Link to="catalog">Catalog</Link>
         </ul>
         <ul>
-          <Link to="users/login">Login</Link>
-          <Link to="users/register">Register</Link>
-          <Link>Logout</Link>
+          {user.email ? (
+            <Link onClick={logoutHandler}>Logout</Link>
+          ) : (
+            <>
+              <Link to="users/login">Login</Link>
+              <Link to="users/register">Register</Link>
+            </>
+          )}
         </ul>
       </nav>
     );
