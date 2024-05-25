@@ -8,6 +8,8 @@ export const UserProvider = ({ children }) => {
     userId: "",
     email: "",
   });
+  const [loading, setLoading] = useState(true);
+
 
   useEffect(() => {
     const unsubscribe = firebaseAuth.onAuthStateChanged((firebaseUser) => {
@@ -23,13 +25,14 @@ export const UserProvider = ({ children }) => {
         });
       }
 
+      setLoading(false);
     });
 
     return () => unsubscribe();
   }, []);
 
   return (
-    <UserContext.Provider value={{ user, setUser }}>
+    <UserContext.Provider value={{ user, setUser, loading }}>
       {children}
     </UserContext.Provider>
   );
