@@ -1,5 +1,7 @@
 import { initializeApp } from 'firebase/app';
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, onAuthStateChanged } from 'firebase/auth';
+import { getFirestore } from 'firebase/firestore';
+
 
 const firebaseConfig = {
     apiKey: "AIzaSyBqmVfoEIdv7WdIQJBRJ_nBODHWeUQZ7Z4",
@@ -13,13 +15,15 @@ const firebaseConfig = {
 
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
+const db = getFirestore(app);
 
 const firebaseAuth = {
     register: (email, password) => createUserWithEmailAndPassword(auth, email, password),
     login: (email, password) => signInWithEmailAndPassword(auth, email, password),
     logout: () => signOut(auth),
     onAuthStateChanged: (callback) => onAuthStateChanged(auth, callback),
-    currentUser: () => auth.currentUser
+    currentUser: () => auth.currentUser,
+    db: () => db
 };
 
 export { firebaseAuth };
