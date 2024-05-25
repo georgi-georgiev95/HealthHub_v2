@@ -16,12 +16,13 @@ const Navigation = () => {
   return (
     <>
       {user.username && (
-        <p className={styles.username}>Welcome, {user.username}</p>
+        <p className={styles.username}>Welcome, {user.username}!</p>
       )}
       <nav className={styles.siteNavigation}>
         <ul>
           <Link to="/">Home</Link>
           <Link to="catalog">Catalog</Link>
+          {user.username && <Link to="add">Add</Link>}
         </ul>
         <ul>
           {user.email ? (
