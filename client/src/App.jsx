@@ -5,12 +5,13 @@ import Home from './components/Home/Home'
 import Catalog from './components/Catalog/Catalog'
 import Login from './components/Auth/Login'
 import Register from './components/Auth/Register'
+import Loader from './components/Shared/Loader'
 import { useUser } from './contexts/UserContext'
 
 function App() {
   const { loading } = useUser();
   
-  if(loading) return <div>Loading...</div>
+  if(loading) return <Loader />
 
   return (
     <div className="site">
