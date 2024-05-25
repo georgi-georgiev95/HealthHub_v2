@@ -7,7 +7,11 @@ const Navigation = () => {
         <ul>
           <Link to="/">Home</Link>
           <Link to="catalog">Catalog</Link>
+        </ul>
+        <ul>
           <Link to="users/login">Login</Link>
+          <Link to="users/register">Register</Link>
+          <Link>Logout</Link>
         </ul>
       </nav>
     );
