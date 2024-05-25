@@ -49,9 +49,27 @@ const validateRePassword = (e, password, error, setError) => {
     setError({ ...error, rePassword: '' });
 };
 
+const validateUsername = (e, error, setError) => {
+    if (!e.target.value) {
+        setError({ ...error, username: `Username is required!` });
+        return;
+    }    
+
+    const usernameRegex = /^[^\s]+$/;
+    const isValid = usernameRegex.test(e.target.value.trim());
+
+    if (!isValid) {
+        setError({ ...error, username: `Username can not include whitespaces!` });
+        return;
+    }
+    
+
+    setError({ ...error, username: '' });
+}
 
 export {
     validateEmail,
     validatePassword,
     validateRePassword,
+    validateUsername
 }

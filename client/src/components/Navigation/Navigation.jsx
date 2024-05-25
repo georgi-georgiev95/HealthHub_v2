@@ -13,7 +13,11 @@ const Navigation = () => {
     navigate("/");
   };
 
-    return (
+  return (
+    <>
+      {user.username && (
+        <p className={styles.username}>Welcome, {user.username}</p>
+      )}
       <nav className={styles.siteNavigation}>
         <ul>
           <Link to="/">Home</Link>
@@ -30,7 +34,8 @@ const Navigation = () => {
           )}
         </ul>
       </nav>
-    );
+    </>
+  );
 };
 
 export default Navigation;

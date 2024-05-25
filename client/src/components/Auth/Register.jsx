@@ -1,11 +1,13 @@
 import styles from "./AuthForms.module.css";
 import { useState } from "react";
 import { firebaseAuth } from "../../config/firebase";
+import { setDoc, doc } from "firebase/firestore";
 import { useNavigate } from "react-router-dom";
 import { useUser } from "../../contexts/UserContext";
-import { validateEmail, validatePassword, validateRePassword } from "../../utils/authInputValidator";
+import { validateEmail, validatePassword, validateRePassword, validateUsername } from "../../utils/authInputValidator";
 
 const Register = () => {
+  const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [rePassword, setRePassword] = useState("");
@@ -30,18 +32,36 @@ const Register = () => {
       const userCredential = await firebaseAuth.register(email, password);
       const user = userCredential.user;
 
-      setUser({ userId: user.uid, email: user.email });
+      await setDoc(doc(firebaseAuth.db(), "users", user.uid), {
+        username: username,
+        email: email,
+      });
 
+      setUser({ userId: user.uid, email: user.email, username: username });
+      
       navigate("/catalog");
     } catch (error) {
       setError({ ...error, email: "Email already registered!" });
       setPassword("");
       setRePassword("");
+      return;
     }
   };
 
   return (
     <form className={styles.authForm} onSubmit={submitHandler}>
+      <div>
+        <label htmlFor="username">Username:</label>
+        <input
+          className={error.username ? styles.fieldError : styles.field}
+          type="text"
+          id="username"
+          value={username}
+          onChange={(e) => setUsername(e.target.value)}
+          onBlur={(e) => validateUsername(e, error, setError)}
+        />
+      </div>
+      {error.username && <p className={styles.error}>{error.username}</p>}
       <div>
         <label htmlFor="email">Email:</label>
         <input
