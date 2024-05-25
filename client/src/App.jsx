@@ -12,8 +12,8 @@ function App() {
       <Navigation />
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/" element={<Catalog />} />
-        <Route path="/" element={<Login />} />
+        <Route path="catalog" element={<Catalog />} />
+        <Route path="users/login" element={<Login />} />
       </Routes>
     </>
   );
