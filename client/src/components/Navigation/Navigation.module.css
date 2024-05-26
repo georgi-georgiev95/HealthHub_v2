@@ -1,11 +1,21 @@
+@import url('https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400;1,700;1,900&display=swap');
+
+.navWrapper {
+    background-color: rgba(255, 0, 0, 0.676);
+    font-family: 'Merriweather', serif;
+}
+
+.navContent {
+    max-width: 1280px;
+    margin: 0 auto;
+}
+
 .siteNavigation {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color: rgba(128, 128, 128, 0.559);
-    font-size: 1.5em;
+    font-size: 1.1em;
     padding: 0.5rem 1rem;
-    border-radius: 0.3em;
 }
 
 .siteNavigation ul {
@@ -21,6 +31,7 @@
 .siteNavigation a {
     text-decoration: none;
     color: white;
+    text-align: center;
 }
 
 .siteNavigation a:hover {
@@ -28,6 +39,10 @@
 }
 
 .username {
+    padding-top: 1em;
+    color: white;
+    border-bottom: 2px solid white;
     text-align: right;
     font-style: italic;
+    padding-right: 2em;
 }
