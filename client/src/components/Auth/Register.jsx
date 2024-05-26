@@ -49,68 +49,71 @@ const Register = () => {
   };
 
   return (
-    <form className={styles.authForm} onSubmit={submitHandler}>
-      <div>
-        <label htmlFor="username">Username:</label>
-        <input
-          className={error.username ? styles.fieldError : styles.field}
-          type="text"
-          id="username"
-          value={username}
-          onChange={(e) => setUsername(e.target.value)}
-          onBlur={(e) => validateUsername(e, error, setError)}
-        />
-      </div>
-      {error.username && <p className={styles.error}>{error.username}</p>}
-      <div>
-        <label htmlFor="email">Email:</label>
-        <input
-          className={error.email ? styles.fieldError : styles.field}
-          type="email"
-          id="email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          onBlur={(e) => validateEmail(e, error, setError)}
-        />
-      </div>
-      {error.email && <p className={styles.error}>{error.email}</p>}
-      <div>
-        <label htmlFor="password">Password:</label>
-        <input
-          className={error.email ? styles.fieldError : styles.field}
-          type="password"
-          id="password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          onBlur={(e) => validatePassword(e, error, setError)}
-        />
-      </div>
-      {error.password && <p className={styles.error}>{error.password}</p>}
-      <div>
-        <label htmlFor="rePassword">Repeat Password:</label>
-        <input
-          className={error.email ? styles.fieldError : styles.field}
-          type="password"
-          id="rePassword"
-          value={rePassword}
-          onChange={(e) => setRePassword(e.target.value)}
-          onBlur={(e) => validateRePassword(e, password, error, setError)}
-        />
-      </div>
-      {error.rePassword && <p className={styles.error}>{error.rePassword}</p>}
-      <div className={styles.buttons}>
-        <button className={styles.button} type="submit">
-          Register
-        </button>
-        <button
-          className={styles.button}
-          type="button"
-          onClick={() => navigate("/users/login")}
-        >
-          Already an user ?
-        </button>
-      </div>
-    </form>
+    <>
+      <h2 className={styles.authFormIntro}>Join our community!</h2>
+      <form className={styles.authForm} onSubmit={submitHandler}>
+        <div>
+          <label htmlFor="username">Username:</label>
+          <input
+            className={error.username ? styles.fieldError : styles.field}
+            type="text"
+            id="username"
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
+            onBlur={(e) => validateUsername(e, error, setError)}
+          />
+        </div>
+        {error.username && <p className={styles.error}>{error.username}</p>}
+        <div>
+          <label htmlFor="email">Email:</label>
+          <input
+            className={error.email ? styles.fieldError : styles.field}
+            type="email"
+            id="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            onBlur={(e) => validateEmail(e, error, setError)}
+          />
+        </div>
+        {error.email && <p className={styles.error}>{error.email}</p>}
+        <div>
+          <label htmlFor="password">Password:</label>
+          <input
+            className={error.email ? styles.fieldError : styles.field}
+            type="password"
+            id="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            onBlur={(e) => validatePassword(e, error, setError)}
+          />
+        </div>
+        {error.password && <p className={styles.error}>{error.password}</p>}
+        <div>
+          <label htmlFor="rePassword">Repeat Password:</label>
+          <input
+            className={error.email ? styles.fieldError : styles.field}
+            type="password"
+            id="rePassword"
+            value={rePassword}
+            onChange={(e) => setRePassword(e.target.value)}
+            onBlur={(e) => validateRePassword(e, password, error, setError)}
+          />
+        </div>
+        {error.rePassword && <p className={styles.error}>{error.rePassword}</p>}
+        <div className={styles.buttons}>
+          <button className={styles.button} type="submit">
+            Register
+          </button>
+          <button
+            className={styles.button}
+            type="button"
+            onClick={() => navigate("/users/login")}
+          >
+            Already an user ?
+          </button>
+        </div>
+      </form>
+    </>
   );
 };
 

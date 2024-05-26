@@ -1,3 +1,14 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&display=swap');
+
+.authFormIntro {
+    text-align: center;
+    margin-top: 1em;
+    font-style: italic;
+    font-weight: bold;
+    color: white;
+    font-family: 'DM Serif Display', serif;
+}
+
 .authForm {
   align-items: center;
   background-color: #f9f9f9;
