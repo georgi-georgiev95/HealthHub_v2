@@ -8,6 +8,8 @@ import Register from './components/Auth/Register'
 import Loader from './components/Shared/Loader'
 import { useUser } from './contexts/UserContext'
 import CreateRecipe from './components/CreateForms/RecipeCreate'
+import CreateHomeView from './components/CreateForms/CreateHomeView'
+import CreateWorkout from './components/CreateForms/WorkoutCreate'
 
 function App() {
   const { loading } = useUser();
@@ -21,7 +23,9 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="catalog" element={<Catalog />} />
-          <Route path="add" element={<CreateRecipe />} />
+          <Route path="create" element={<CreateHomeView />} />
+          <Route path="create/recipe" element={<CreateRecipe />} />
+          <Route path="create/workout" element={<CreateWorkout />} />
           <Route path="users/login" element={<Login />} />
           <Route path="users/register" element={<Register />} />
         </Routes>

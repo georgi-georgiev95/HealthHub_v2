@@ -22,7 +22,7 @@ const Navigation = () => {
         <ul>
           <Link to="/">Home</Link>
           <Link to="catalog">Catalog</Link>
-          {user.username && <Link to="add">Add</Link>}
+          {user.username && <Link to="create">Add</Link>}
         </ul>
         <ul>
           {user.email ? (

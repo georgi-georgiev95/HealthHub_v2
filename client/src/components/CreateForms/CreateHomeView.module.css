@@ -1,0 +1,32 @@
+.createHomeView {
+    display: flex;
+    justify-content: space-between;
+    padding: 2em;
+    margin-top: 10em;
+}
+
+.createHomeView a {
+    text-decoration: none;
+    color: white;
+}
+
+.groupLink {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 2em;
+    background-color: rgba(128, 128, 128, 0.396);
+    border-radius: 50%;
+    box-shadow: 0 0 10px 2px rgba(0, 0, 0, 0.3);
+    border-top: 4px solid white;
+    border-bottom: 4px solid rgba(128, 128, 128, 0.559);
+    font-size: 2em;
+}
+
+.groupLink:hover {
+    transform: scale(1.1);
+    transition: 0.5s;
+    cursor: pointer;
+    border-top: 4px solid rgba(128, 128, 128, 0.559);
+    border-bottom: 4px solid white;
+}
