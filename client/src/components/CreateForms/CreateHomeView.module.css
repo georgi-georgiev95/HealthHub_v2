@@ -1,8 +1,16 @@
+.catalogIntro {
+    text-align: center;
+    margin-top: 1em;
+    font-style: italic;
+    font-weight: bold;
+    color: white;
+}
+
 .createHomeView {
     display: flex;
     justify-content: space-between;
     padding: 2em;
-    margin-top: 10em;
+    margin-top: 7em;
 }
 
 .createHomeView a {
