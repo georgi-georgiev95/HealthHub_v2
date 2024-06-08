@@ -1,81 +1,80 @@
-@import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&display=swap');
-
+@import url("https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&display=swap");
 
 .catalogIntro {
-    text-align: center;
-    margin-top: 1em;
-    font-style: italic;
-    font-weight: bold;
-    color: white;
-    font-family: 'DM Serif Display', serif;
+  text-align: center;
+  margin-top: 1em;
+  font-style: italic;
+  font-weight: bold;
+  color: black;
+  font-family: "DM Serif Display", serif;
 }
 
 .createHomeView {
-    display: flex;
-    justify-content: space-between;
-    padding: 2em;
-    margin-top: 7em;
+  display: flex;
+  justify-content: space-between;
+  padding: 2em;
+  margin-top: 7em;
 }
 
 .createHomeView a {
-    text-decoration: none;
-    color: white;
-    font-size: 1.8rem;
+  text-decoration: none;
+  color: white;
+  font-size: 1.8rem;
 }
 
 .groupLink {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 500px;
-    height: 500px;
-    background-color: rgba(128, 128, 128, 0.396);
-    border-radius: 50%;
-    box-shadow: 0 0 10px 2px rgba(0, 0, 0, 0.3);
-    border-top: 4px solid white;
-    border-bottom: 4px solid rgba(128, 128, 128, 0.559);
-    overflow: hidden; /* Ensures no overflow */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 500px;
+  height: 500px;
+  background-color: #ff6347;
+  border-radius: 50%;
+  box-shadow: 0 0 10px 2px rgba(0, 0, 0, 0.3);
+  border-top: 4px solid white;
+  border-bottom: 4px solid #9c9c9c;
+  overflow: hidden; /* Ensures no overflow */
 }
 
 .upperSide {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
-    height: 50%; /* Takes up the upper half */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 50%; /* Takes up the upper half */
 }
 
 .bottomSide {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
-    height: 50%; /* Takes up the lower half */
-    background-color: rgba(128, 128, 128, 0.396);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 50%; /* Takes up the lower half */
+  background-color: #ff6347;
 }
 
 .groupLink img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
 .groupLink:hover {
-    transition: 0.5s;
-    cursor: pointer;
-    border-top: 4px solid rgba(128, 128, 128, 0.559);
-    border-bottom: 4px solid white;
+  transition: 0.5s;
+  cursor: pointer;
+  border-top: 4px solid #9c9c9c;
+  border-bottom: 4px solid white;
 }
 
 /* Additional styles for the reversed layout */
 .reverse {
-    flex-direction: column-reverse;
+  flex-direction: column-reverse;
 }
 
 .reverse .bottomSide {
-    border-radius: 0 0 50% 50%; /* Ensures the bottom part is circular */
+  border-radius: 0 0 50% 50%; /* Ensures the bottom part is circular */
 }
 
 .reverse .upperSide {
-    border-radius: 50% 50% 0 0; /* Ensures the upper part is circular */
+  border-radius: 50% 50% 0 0; /* Ensures the upper part is circular */
 }
