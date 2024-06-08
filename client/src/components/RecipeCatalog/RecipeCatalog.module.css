@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400;1,700;1,900&display=swap');
+
 .container {
     display: flex;
     flex-wrap: wrap;
@@ -7,13 +9,14 @@
 }
 
 .title {
-  display: flex;
-  flex-direction: column;
-  gap: 2em;
-  align-items: center;
-  margin: 2em;
-  font-size: 1.5em;
-  color: orangered;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5em;
+    align-items: center;
+    margin: 2em;
+    font-size: 1.5em;
+    color: white;
+    font-family: 'Merriweather', serif;
 }
 
 .flip-card {
@@ -59,5 +62,6 @@
   background-color: rgba(128, 128, 128, 0.849);
   color: rgb(0, 0, 0);
   transform: rotateY(180deg);
-  color: white
+  color: white;
+  font-size: 1.2em;
 }
