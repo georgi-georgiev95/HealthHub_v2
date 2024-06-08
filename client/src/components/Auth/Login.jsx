@@ -40,7 +40,7 @@ const Login = () => {
 
   return (
     <>
-      <h2 className={styles.authFormIntro}>It's nice to have you back!</h2>
+      <h2 className={styles.authFormIntro}>It&apos;s nice to have you back!</h2>
       <form className={styles.authForm} onSubmit={submitHandler}>
         <div>
           <label htmlFor="email">Email:</label>

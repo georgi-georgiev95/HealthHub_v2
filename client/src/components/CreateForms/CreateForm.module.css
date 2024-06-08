@@ -30,7 +30,7 @@
     color: white;
 }
 
-.formGroup input, .formGroup textarea {
+.formGroup input, .formGroup textarea, .formGroup select {
     padding: 5px;
     border: 1px solid gray;
     border-radius: 5px;
@@ -58,3 +58,16 @@
   background-color: #e5533d;
   color: white;
 }
+
+.button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.addButton {
+  max-width: fit-content;
+  padding: 0.1em 1em;
+  align-self: flex-end;
+  margin-top: 0.5em;
+}
+
