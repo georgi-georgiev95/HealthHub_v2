@@ -162,16 +162,24 @@ html {
 }
 
 .arrow p {
-  font-size: 1.2em; /* Adjust font size as needed */
-  margin-bottom: 10px; /* Add some bottom margin */
+  font-size: 1.2em;
+  margin-bottom: 10px;
 }
 
 .arrow svg {
   font-size: 24px;
-  color: #666; /* Adjust color as needed */
+  color: #666;
   transition: color 0.3s;
 }
 
 .arrow:hover svg {
-  color: #333; /* Adjust hover color as needed */
+  color: #333;
+}
+
+
+@media (max-width: 1100px) {
+      .features {
+        flex-direction: column;
+        align-items: center;
+      }
 }
