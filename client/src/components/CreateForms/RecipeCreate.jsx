@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { firebaseAuth } from "../../config/firebase";
-import { setDoc, doc } from "firebase/firestore";
+import { setDoc, doc, collection } from "firebase/firestore";
 import { useNavigate } from "react-router-dom";
 import styles from "./CreateForm.module.css";
 
@@ -34,9 +34,15 @@ const CreateRecipe = () => {
       image: event.target.image.value,
       difficulty: difficulty,
       ownerId: firebaseAuth.currentUser().uid,
+      ownerName: firebaseAuth.currentUser().displayName,
     };
 
-    await setDoc(doc(firebaseAuth.db(), "recipes", recipeData.ownerId), recipeData);
+    try {
+      const recipeDocRef = doc(collection(firebaseAuth.db(), "recipes"));
+      await setDoc(recipeDocRef, recipeData);
+    } catch (error) {
+      console.log(error);
+    }
 
     navigate("/catalog/recipes");
   };
