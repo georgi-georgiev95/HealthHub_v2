@@ -29,7 +29,7 @@ const Login = () => {
       const userDataFromDB = userDoc.data();
 
       setUser({ userId: user.uid, email: user.email, username: userDataFromDB.username });
-      navigate("/catalog");
+      navigate("/");
     } catch (error) {
       setError({ ...error, email: "Invalid email or password!" });
       setPassword("");

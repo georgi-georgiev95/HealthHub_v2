@@ -39,7 +39,7 @@ const Register = () => {
 
       setUser({ userId: user.uid, email: user.email, username: username });
       
-      navigate("/catalog");
+      navigate("/");
     } catch (error) {
       setError({ ...error, email: "Email already registered!" });
       setPassword("");
