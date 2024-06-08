@@ -1,7 +1,6 @@
 import styles from "./AuthForms.module.css";
 import { useState } from "react";
 import { firebaseAuth } from "../../config/firebase";
-import { getDoc, doc } from "firebase/firestore";
 import { useNavigate } from "react-router-dom";
 import { useUser } from "../../contexts/UserContext";
 import { validateEmail, validatePassword } from "../../utils/authInputValidator";
@@ -25,10 +24,8 @@ const Login = () => {
       const userCredential = await firebaseAuth.login(email, password);
       const user = userCredential.user;
 
-      const userDoc = await getDoc(doc(firebaseAuth.db(), "users", user.uid));
-      const userDataFromDB = userDoc.data();
 
-      setUser({ userId: user.uid, email: user.email, username: userDataFromDB.username });
+      setUser({ userId: user.uid, email: user.email, username: user.displayName });
       navigate("/");
     } catch (error) {
       setError({ ...error, email: "Invalid email or password!" });

@@ -1,10 +1,10 @@
 import styles from "./AuthForms.module.css";
 import { useState } from "react";
 import { firebaseAuth } from "../../config/firebase";
-import { setDoc, doc } from "firebase/firestore";
 import { useNavigate } from "react-router-dom";
 import { useUser } from "../../contexts/UserContext";
 import { validateEmail, validatePassword, validateRePassword, validateUsername } from "../../utils/authInputValidator";
+import { updateProfile } from "firebase/auth";
 
 const Register = () => {
   const [username, setUsername] = useState("");
@@ -29,12 +29,9 @@ const Register = () => {
     }
 
     try {
-      const userCredential = await firebaseAuth.register(email, password);
-      const user = userCredential.user;
-
-      await setDoc(doc(firebaseAuth.db(), "users", user.uid), {
-        username: username,
-        email: email,
+      const user = await firebaseAuth.register(email, password)
+      await updateProfile(user.user, {
+        displayName: username,
       });
 
       setUser({ userId: user.uid, email: user.email, username: username });
