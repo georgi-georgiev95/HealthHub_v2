@@ -69,11 +69,16 @@
 
 @media (max-width: 600px) {
   .title {
-    font-size: 1em;
+    font-size: 0.7em;
   }
 
   .contailer {
     flex-direction: column;
     gap: 1em;
   }
+
+  .flip-card {
+  width: 230px;
+  height: 230px;
+}
 }
