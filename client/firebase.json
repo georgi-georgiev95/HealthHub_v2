@@ -1,6 +1,6 @@
 {
   "hosting": {
-    "public": "client/dist",
+    "public": "dist/HealthHub_v2",
     "ignore": [
       "firebase.json",
       "**/.*",
