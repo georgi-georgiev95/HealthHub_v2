@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { firebaseAuth } from "../../config/firebase";
-import { setDoc, doc, collection } from "firebase/firestore";
 import { useNavigate } from "react-router-dom";
+import { createRecipe } from "../../services/recipeService";
 import styles from "./CreateForm.module.css";
 
 const CreateRecipe = () => {
@@ -37,12 +37,7 @@ const CreateRecipe = () => {
       ownerName: firebaseAuth.currentUser().displayName,
     };
 
-    try {
-      const recipeDocRef = doc(collection(firebaseAuth.db(), "recipes"));
-      await setDoc(recipeDocRef, recipeData);
-    } catch (error) {
-      console.log(error);
-    }
+    await createRecipe(recipeData);
 
     navigate("/catalog/recipes");
   };
