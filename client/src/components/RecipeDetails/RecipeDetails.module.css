@@ -1,0 +1,19 @@
+.image {
+    display: block;
+    max-width: 500px;
+}
+
+h2 {
+    text-align: center;
+}
+
+.details {
+    display: flex;
+    gap: 2em;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.description {
+    padding: 2em;
+}

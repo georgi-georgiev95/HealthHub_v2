@@ -12,6 +12,7 @@ import CreateHomeView from './components/CreateForms/CreateHomeView'
 import CreateWorkout from './components/CreateForms/WorkoutCreate'
 import RecipeCatalog from './components/RecipeCatalog/RecipeCatalog'
 import WorkoutCatalog from './components/WorkoutCatalog/WorkoutCatalog'
+import RecipeDetails from './components/RecipeDetails/RecipeDetails'
 
 function App() {
   const { loading } = useUser();
@@ -27,6 +28,7 @@ function App() {
             <Route path="/" element={<Home />} />
             <Route path="catalog" element={<Catalog />} />
             <Route path="catalog/recipes" element={<RecipeCatalog />} />
+            <Route path="catalog/recipes/:id" element={<RecipeDetails />} />
             <Route path="catalog/workouts" element={<WorkoutCatalog/>} />
             <Route path="create" element={<CreateHomeView />} />
             <Route path="create/recipe" element={<CreateRecipe />} />

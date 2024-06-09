@@ -1,5 +1,8 @@
-import { getDocs, collection, setDoc, doc } from "firebase/firestore";
+import { getDocs, getDoc, collection, setDoc, doc } from "firebase/firestore";
 import { firebaseAuth } from "../config/firebase";
+
+
+
 
 
 export const getAllRecipes = async (setRecipe) => {
@@ -18,6 +21,17 @@ export const getAllRecipes = async (setRecipe) => {
     }
 };
 
+export const getOneRecipe = async (recipeId, setRecipe) => {
+    try {
+        const recipeDocRef = doc(firebaseAuth.db(), "recipes", recipeId);
+        const recipeSnapshot = await getDoc(recipeDocRef);
+        const recipeData = recipeSnapshot.data();
+        setRecipe(recipeData);
+    } catch (error) {
+        console.log(error);
+    }
+};
+
 export const createRecipe = async (recipeData) => {
     try {
         const recipeDocRef = doc(collection(firebaseAuth.db(), "recipes"));
@@ -26,4 +40,5 @@ export const createRecipe = async (recipeData) => {
         console.log(error);
     }
 };
+
 
