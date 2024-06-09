@@ -17,22 +17,24 @@ const RecipeDetails = () => {
         getOneRecipe(id, setRecipe);
     }, [id]);
     return (
-        <div>
-            <h2>{recipe.title}</h2>
-            <div className={styles.details}>
-                <img src={recipe.image} alt={recipe.title} className={styles.image} />
-                <div className={styles.description}>
-                    <p>{recipe.description}</p>
-                    <p>Ingredients:</p>
-                    <ul>
-                        {recipe.ingredients.map((ingredient, index) => (
-                            <li key={index}>{ingredient}</li>
-                        ))}
-                    </ul>
-                </div>
-            </div>
+      <div>
+        <h2>{recipe.title}</h2>
+        <div className={styles.details}>
+          <img src={recipe.image} alt={recipe.title} className={styles.image} />
+          <div className={styles.description}>
+            <p>{recipe.description}</p>
+            <p>
+              <i className="fa-solid fa-utensils"></i> Ingredients:
+            </p>
+            <ul>
+              {recipe.ingredients.map((ingredient, index) => (
+                <li key={index}>{ingredient}</li>
+              ))}
+            </ul>
+          </div>
         </div>
-    )
+      </div>
+    );
 };
 
 
