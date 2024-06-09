@@ -1,30 +1,13 @@
 import { useEffect, useState } from "react";
-import { getDocs, collection } from "firebase/firestore";
-import {firebaseAuth} from "../../config/firebase";
+import { getAllRecipes } from "../../services/recipeService";
+import { Link } from "react-router-dom";
 import styles from "./RecipeCatalog.module.css";
 
 const RecipeCatalog = () => {
   const [recipe, setRecipe] = useState([]);
 
   useEffect(() => { 
-    const fetchRecipes = async () => {
-      try {
-        const recipesCollection = collection(firebaseAuth.db(), "recipes");
-        const recipesSnapshot = await getDocs(recipesCollection);
-        const recipesList = recipesSnapshot.docs.map((doc) => {
-          return {
-            id: doc.id,
-            ...doc.data(),
-          }
-        });
-        setRecipe(recipesList);
-      } catch (error) {
-        console.log(error);
-      }
-    }
-
-    fetchRecipes();
-
+    getAllRecipes(setRecipe);
   }, []);
 
 
@@ -38,6 +21,7 @@ const RecipeCatalog = () => {
       </div>
       <div className={styles.container}>
         {recipe.length > 0 && recipe.map((recipe) => (
+          <Link to={`/catalog/recipes/${recipe.id}`} key={recipe.id}>
           <div className={styles["flip-card"]} key={recipe.id}>
             <div className={styles["flip-card-inner"]}>
               <div
@@ -53,7 +37,8 @@ const RecipeCatalog = () => {
                 <p>Added by: {recipe.ownerName}</p>
               </div>
             </div>
-          </div>
+            </div>
+          </Link>
         ))}
       </div>
     </>
