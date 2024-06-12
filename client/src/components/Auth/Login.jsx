@@ -1,7 +1,7 @@
 import styles from "./AuthForms.module.css";
 import { useState } from "react";
 import { firebaseAuth } from "../../config/firebase";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { useUser } from "../../contexts/UserContext";
 import { validateEmail, validatePassword } from "../../utils/authInputValidator";
 
@@ -36,47 +36,49 @@ const Login = () => {
 
 
   return (
-    <>
-      <h2 className={styles.authFormIntro}>It&apos;s nice to have you back!</h2>
-      <form className={styles.authForm} onSubmit={submitHandler}>
-        <div>
-          <label htmlFor="email">Email:</label>
+    <form className={styles.form} onSubmit={submitHandler}>
+      <header className={styles.header}>
+        <h1>Login</h1>
+      </header>
+
+      <fieldset>
+        <legend>User details:</legend>
+        <div className={`${styles.field} ${styles.text} ${styles.iconEmail}`}>
           <input
-            className={error.email ? styles.fieldError : styles.field}
             type="email"
             id="email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             onBlur={(e) => validateEmail(e, error, setError)}
+            required
           />
+          <i className="fa fa-envelope"></i>
+          <label htmlFor="email">Email:</label>
+          {error.email && <p className={styles.error}>{error.email}</p>}
         </div>
-        {error.email && <p className={styles.error}>{error.email}</p>}
-        <div>
-          <label htmlFor="password">Password:</label>
+
+        <div
+          className={`${styles.field} ${styles.text} ${styles.iconPassword}`}
+        >
           <input
-            className={error.password ? styles.fieldError : styles.field}
             type="password"
             id="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             onBlur={(e) => validatePassword(e, error, setError)}
+            required
           />
+          <i className="fa fa-key"></i>
+          <label htmlFor="password">Password:</label>
+          {error.password && <p className={styles.error}>{error.password}</p>}
         </div>
-        {error.password && <p className={styles.error}>{error.password}</p>}
-        <div className={styles.buttons}>
-          <button className={styles.button} type="submit">
-            Login
-          </button>
-          <button
-            className={styles.button}
-            type="button"
-            onClick={() => navigate("/users/register")}
-          >
-            Not an user ?
-          </button>
-        </div>
-      </form>
-    </>
+      </fieldset>
+
+      <input className={styles.submit} type="submit" value="Login" />
+      <Link className={styles.link} to="/users/register">
+        Don&apos;t have an account? Register here!
+      </Link>
+    </form>
   );
 };
 

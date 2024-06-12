@@ -2,7 +2,7 @@ html {
     font: 14px/1.5 Roboto, Helvetica Neue, Helvetica, Arial, sans-serif;
 }
 
-body, input, button, table {
+body, input, button, table, label {
     font: inherit;
 }
 
