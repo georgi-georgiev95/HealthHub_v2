@@ -12,17 +12,17 @@
 
 .logo {
     background-image: url("../../assets/logo-v2.png");
-    width: 150px;
-    height: 120px;
-    background-size: 150px 120px;
+    width: 120px;
+    height: 100px;
+    background-size: 120px 100px;
     background-position: center;
 }
 .siteNavigation {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    font-size: 1.1em;
     padding: 0.5rem 1rem;
+    padding-bottom: 0;
     border-bottom-left-radius: 3em;
     border-bottom-right-radius: 3em;
 }
@@ -33,9 +33,9 @@
     gap: 2rem;
     list-style: none;
     align-items: center;
-    padding: 0.5rem 1rem;
-    font-size: 2em;
-    margin: 0.5em 0;
+    padding: 0 1rem;
+    font-size: 1.4em;
+    margin: 0;
 }
 
 .siteNavigation a {
