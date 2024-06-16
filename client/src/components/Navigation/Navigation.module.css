@@ -70,6 +70,7 @@
     width: 90px;
     height: 70px;
     background-size: 90px 70px;
+    margin-bottom: 1em;
     }
 
     .siteNavigation {
@@ -79,5 +80,10 @@
     .siteNavigation ul {
         flex-direction: column;
         width: 100%;
+        gap: 0;
+    }
+
+    .siteNavigation a {
+        margin-bottom: 0.6em;
     }
 }
