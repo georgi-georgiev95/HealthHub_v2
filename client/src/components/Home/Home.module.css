@@ -81,6 +81,7 @@ html {
 .feature p {
   font-size: 1em;
   margin-bottom: 1em;
+  color: black;
 }
 
 .featureButton {

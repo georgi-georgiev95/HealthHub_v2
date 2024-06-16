@@ -1,7 +1,7 @@
 .loader {
   position: relative;
-  width: 100px;
-  height: 100px;
+  width: 50px;
+  height: 50px;
 }
 
 .loader:before , .loader:after{
@@ -25,6 +25,7 @@
 
 .container {
   position: absolute;
-  top: 40%;
-  left: 40%;
+  top: 45%;
+  left: 45%;
+  transform: translate(-50%, -50%);
 }

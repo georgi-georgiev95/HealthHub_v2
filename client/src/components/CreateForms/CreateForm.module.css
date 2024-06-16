@@ -17,7 +17,8 @@
   font-size: 1.2em;
   box-shadow: 0 0 10px 2px rgba(0, 0, 0, 0.3);
   border-radius: 1em;
-  background-color: #ff6347;
+  background-color: rgba(255, 255, 255, 0.1);
+  color: white;
 }
 
 .formGroup {
@@ -36,6 +37,8 @@
   padding: 5px;
   border: 1px solid gray;
   border-radius: 5px;
+  background-color: rgba(21, 32, 42, 1);
+  color: white;
 }
 
 .buttons {
@@ -47,13 +50,13 @@
 
 .button {
   display: inline-block;
-  padding: 0.5em 1em;
-  background-color: white;
-  color: black;
-  text-decoration: none;
-  border-radius: 5px;
-  transition: background-color 0.3s;
-  border: 2px solid white;
+  max-width: fit-content;
+  padding: 0.2em 2em;
+  align-self: flex-end;
+  margin-top: 0.5em;
+  background-color: rgba(21, 32, 42, 1);
+  border: none;
+  color: rgba(133, 255, 122, 1);
 }
 
 .button:hover {
@@ -71,4 +74,19 @@
   padding: 0.1em 1em;
   align-self: flex-end;
   margin-top: 0.5em;
+  background-color: rgba(21, 32, 42, 1);
+  border: none;
+  color: rgba(133, 255, 122, 1);
+}
+
+.formGroup:nth-of-type(4) input[type="text"] {
+  margin-bottom: 0.6em;
+}
+ 
+
+@media (max-width: 600px) {
+  .form {
+    padding: 1em;
+    font-size: 0.8em;
+  }
 }
