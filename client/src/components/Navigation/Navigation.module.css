@@ -10,6 +10,13 @@
     margin: 0 auto;
 }
 
+.logo {
+    background-image: url("../../assets/logo-v2.png");
+    width: 150px;
+    height: 120px;
+    background-size: 150px 120px;
+    background-position: center;
+}
 .siteNavigation {
     display: flex;
     justify-content: space-between;
@@ -58,4 +65,11 @@
     .username {
         font-size: 0.7em;
     }
+
+    .logo {
+    width: 90px;
+    height: 70px;
+    background-size: 90px 70px;
+    }
+
 }

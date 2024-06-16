@@ -21,7 +21,7 @@ const Navigation = () => {
           )}
           <nav className={styles.siteNavigation}>
             <ul>
-              <Link to="/">Home</Link>
+              <Link to="/"><p className={styles.logo}></p></Link>
               <Link to="catalog">Catalog</Link>
               {user.username && <Link to="create">Add</Link>}
             </ul>
