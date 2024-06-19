@@ -5,18 +5,10 @@
   color: white;
 }
 
-.logo {
-  background-image: url('../../assets/logo-6.png');
-  background-repeat: no-repeat;
-  background-position: center;
-  width: 100%px;
-  height: 200px;
-  background-size: 200px;
-}
-
 .createHomeView {
   display: flex;
   justify-content: space-between;
+  align-items: center;
   padding: 2em;
   margin-top: 3em;
 }
@@ -31,14 +23,14 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 500px;
-  height: 500px;
+  width: 400px;
+  height: 400px;
   background-color: #ff6347;
   border-radius: 50%;
   box-shadow: 0 0 10px 2px rgba(0, 0, 0, 0.3);
   border-top: 4px solid white;
   border-bottom: 4px solid #9c9c9c;
-  overflow: hidden; /* Ensures no overflow */
+  overflow: hidden;
 }
 
 .upperSide {
@@ -46,7 +38,7 @@
   align-items: center;
   justify-content: center;
   width: 100%;
-  height: 50%; /* Takes up the upper half */
+  height: 50%;
 }
 
 .bottomSide {
@@ -54,7 +46,7 @@
   align-items: center;
   justify-content: center;
   width: 100%;
-  height: 50%; /* Takes up the lower half */
+  height: 50%;
   background-color: #ff6347;
 }
 
@@ -71,17 +63,34 @@
   border-bottom: 4px solid white;
 }
 
-/* Additional styles for the reversed layout */
+
 .reverse {
   flex-direction: column-reverse;
 }
 
 .reverse .bottomSide {
-  border-radius: 0 0 50% 50%; /* Ensures the bottom part is circular */
+  border-radius: 0 0 50% 50%;
 }
 
 .reverse .upperSide {
-  border-radius: 50% 50% 0 0; /* Ensures the upper part is circular */
+  border-radius: 50% 50% 0 0;
+}
+
+.logo {
+  background-image: url('../../assets/logo-6.png');
+  background-repeat: no-repeat;
+  background-position: center;
+  width: 200px;
+  height: 200px;
+  background-size: 200px;
+}
+
+@media (max-width: 1100px) {
+  .createHomeView {
+    flex-direction: column;
+    gap: 2em;
+    align-items: center;
+  }
 }
 
 @media (max-width: 600px) {
@@ -92,26 +101,23 @@
 
   .createHomeView {
     margin-top: 1em;
-    flex-direction: column;
-    gap: 2em;
-    align-items: center;
   }
 
   .createHomeView a {
-  text-decoration: none;
-  color: white;
-  font-size: 1.2rem;
-}
+    text-decoration: none;
+    color: white;
+    font-size: 1.2rem;
+  }
 
-.catalogIntro {
-  font-size: 1.4rem;
-  font-family: Roboto;
-  font-weight: normal;
-  font-style: normal;
+  .catalogIntro {
+    font-size: 1.4rem;
+    font-family: Roboto;
+    font-weight: normal;
+    font-style: normal;
 
-}
+  }
 
-.logo {
-  background-size: 150px;
-}
+  .logo {
+    display: none;
+  }
 }
