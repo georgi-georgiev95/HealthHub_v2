@@ -5,6 +5,7 @@ const CreateHomeView = () => {
     return (
       <>
         <h2 className={styles.catalogIntro}>Create your own</h2>
+        <div className={styles.logo}></div>
         <div className={styles.createHomeView}>
           <Link className={styles.groupLink} to="/create/recipe">
             <div className={styles.groupLink}>

@@ -5,11 +5,20 @@
   color: white;
 }
 
+.logo {
+  background-image: url('../../assets/logo-6.png');
+  background-repeat: no-repeat;
+  background-position: center;
+  width: 100%px;
+  height: 200px;
+  background-size: 200px;
+}
+
 .createHomeView {
   display: flex;
   justify-content: space-between;
   padding: 2em;
-  margin-top: 7em;
+  margin-top: 3em;
 }
 
 .createHomeView a {
