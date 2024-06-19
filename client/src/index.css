@@ -36,12 +36,6 @@ body, input, button, table {
 h1, h2, h3, h4, h5, h6 {
     font-family: "PT-Serif", serif;
     font-weight: normal;
-    margin-top: 1em;
-    margin-bottom: 2em;
-}
-
-h1 {
-    margin-top: 0;
 }
 
 h1 { font-size: 2.8em; }
@@ -50,20 +44,3 @@ h3 { font-size: 1.8em; }
 h4 { font-size: 1.6em; }
 h5 { font-size: 1.4em; }
 h6 { font-size: 1.2em; }
-
-
-blockquote {
-    font-style: italic;
-    border-left: 5px solid #DDD;
-    padding-left: 1.5em;
-    margin: 0 2.5em 1.5em 1.5em;
-}
-
-blockquote p:last-of-type{
-    padding-bottom: 0;
-}
-
-blockquote p.author {
-    text-align: right;
-    font-style: bold;
-}
