@@ -5,6 +5,7 @@ const Catalog = () => {
     return (
       <>
         <h2 className={styles.catalogIntro}>Explore our catalog</h2>
+        <div className={styles.logo}></div>
         <div className={styles.createHomeView}>
           <Link className={styles.groupLink} to="/catalog/recipes">
             <div className={styles.groupLink}>
