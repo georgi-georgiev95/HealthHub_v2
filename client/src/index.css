@@ -1,5 +1,64 @@
 @import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css');
+@import url('https://fonts.googleapis.com/css2?family=PT+Serif:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=PT+Sans:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+*, *:before, *:after {
+    box-sizing: inherit;
+}
+
+html {
+    box-sizing: border-box;
+}
 
 body {
     background-color: rgba(21, 32, 42, 1);
+}
+
+html {
+    font: 14px/1.5 "PT-Sans", sans-serif;
+}
+
+@media (max-width: 600px) {
+    html {
+        font-size: 10px;
+    }
+}
+
+body, input, button, table {
+    font: inherit;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: "PT-Serif", serif;
+    font-weight: normal;
+    margin-bottom: 2em;
+}
+
+h1 { font-size: 2.8em; }
+h2 { font-size: 2.2em; }
+h3 { font-size: 1.8em; }
+h4 { font-size: 1.6em; }
+h5 { font-size: 1.4em; }
+h6 { font-size: 1.2em; }
+
+
+blockquote {
+    font-style: italic;
+    border-left: 5px solid #DDD;
+    padding-left: 1.5em;
+    margin: 0 2.5em 1.5em 1.5em;
+}
+
+blockquote p:last-of-type{
+    padding-bottom: 0;
+}
+
+blockquote p.author {
+    text-align: right;
+    font-style: bold;
 }
