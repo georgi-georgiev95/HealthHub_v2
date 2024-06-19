@@ -56,7 +56,6 @@
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    bottom: -117px;
     z-index: 1000;
     background-color: #ccccccc0;
     width: 100%;
@@ -182,5 +181,9 @@
 
     .siteNavigation > i {
         display: block;
+     }
+
+     .dropDown {
+        font-size: 1.5em;
      }
 }
