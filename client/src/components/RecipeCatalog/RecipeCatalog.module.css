@@ -66,6 +66,7 @@
 @media (max-width: 600px) {
   .title {
     font-size: 0.7em;
+    padding-top: 1.4em;
   }
 
   .contailer {
@@ -74,8 +75,8 @@
   }
 
   .flip-card {
-    width: 230px;
-    height: 230px;
+    width: 150px;
+    height: 150px;
   }
 
   .flip-card-back {
