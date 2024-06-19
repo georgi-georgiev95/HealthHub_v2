@@ -45,10 +45,20 @@
     text-decoration: none;
     color: white;
     text-align: center;
+    position: relative;
 }
 
 .siteNavigation a:hover {
     color: rgba(133, 255, 122, 1);
+}
+
+.siteNavigation ul a:hover::after {
+    display: block;
+    position: absolute;
+    content: "";
+    width: 20px;
+    padding-bottom: 0.5em;
+    border-bottom: 1px solid white;
 }
 
 .navContent .dropDown {
