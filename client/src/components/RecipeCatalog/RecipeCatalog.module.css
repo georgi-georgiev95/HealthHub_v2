@@ -2,8 +2,12 @@
   display: flex;
   flex-wrap: wrap;
   margin-top: 2em;
-  justify-content: space-around;
+  justify-content: center;
   gap: 2em;
+}
+
+.contailer a {
+  flex: 1 0 100%;
 }
 
 .title {
