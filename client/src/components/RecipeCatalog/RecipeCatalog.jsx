@@ -32,7 +32,7 @@ const RecipeCatalog = () => {
                 }}
               ></div>
               <div className={styles["flip-card-back"]}>
-                <h1>{recipe.title}</h1>
+                <h2>{recipe.title}</h2>
                 <p>Difficulty level: {recipe.difficulty}</p>
                 <p>Added by: {recipe.ownerName}</p>
               </div>
