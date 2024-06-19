@@ -50,7 +50,7 @@ const Navigation = () => {
           {mobileNavStatus && 
             <ul className={styles.dropDown}>
               <Link onClick={collapseNav} to="catalog">Catalog</Link>
-              {user.username && <Link to="create">Add</Link>}
+              {user.username && <Link onClick={collapseNav} to="create">Add</Link>}
               {user.email ? (
                 <Link onClick={logoutHandler}>Logout</Link>
               ) : (
