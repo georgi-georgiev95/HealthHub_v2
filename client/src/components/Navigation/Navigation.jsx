@@ -8,6 +8,13 @@ const Navigation = () => {
   const navigate = useNavigate();
   const { user, setUser } = useUser();
   const [mobileNavStatus, setMobileNavStatus] = useState(false);
+  const [profileDetailsVisibility, setProfileDetailsVisibility] = useState(false);
+
+
+  const handleLogout = async () => {
+    await logoutHandler();
+    collapseNav();
+  }
 
   const logoutHandler = async () => {
     await firebaseAuth.logout();
@@ -21,23 +28,31 @@ const Navigation = () => {
 
   const collapseNav = () => {
     setMobileNavStatus(false);
+    setProfileDetailsVisibility(false);
+  }
+
+  const expandProfile = () => {
+    setProfileDetailsVisibility(!profileDetailsVisibility);
   }
 
   return (
       <div className={styles.navWrapper}>
         <div className={styles.navContent}>
-          {user.username && (
-            <p className={styles.username}>Welcome, {user.username}!</p>
-          )}
           <nav className={styles.siteNavigation}>
-              <Link to="/"><p className={styles.logo}></p></Link>
+              <Link onClick={collapseNav} to="/"><p className={styles.logo}></p></Link>
             <ul>
-              <Link to="catalog">Catalog</Link>
-              {user.username && <Link to="create">Add</Link>}
+              <Link onClick={collapseNav} to="catalog">Catalog</Link>
+              {user.username && <Link onClick={collapseNav} to="create">Add</Link>}
             </ul>
-            <ul>
+            <ul className={styles.profileDropdown}>
               {user.email ? (
-                <Link onClick={logoutHandler}>Logout</Link>
+                <>
+                  {user.username && (
+                    <>
+                    <button onClick={expandProfile}><i className="fa-regular fa-user"></i></button>
+                    </>
+                  )}
+                </>
               ) : (
                 <>
                   <Link to="users/login">Sign in</Link>
@@ -52,13 +67,19 @@ const Navigation = () => {
               <Link onClick={collapseNav} to="catalog">Catalog</Link>
               {user.username && <Link onClick={collapseNav} to="create">Add</Link>}
               {user.email ? (
-                <Link onClick={logoutHandler}>Logout</Link>
+                  <Link onClick={handleLogout}>Logout</Link>
               ) : (
                 <>
                   <Link onClick={collapseNav} to="users/login">Sign in</Link>
                   <Link onClick={collapseNav} to="users/register" className={styles.signUp}>Sign up</Link>
                 </>
               )}
+            </ul>}
+            {profileDetailsVisibility && 
+            <ul className={styles.profileMenu}>
+                    <p className={styles.username}>Welcome, {user.username}!</p>
+                    <Link>Profile</Link>
+                    <Link onClick={handleLogout}>Logout</Link>
             </ul>}
         </div>
       </div>
