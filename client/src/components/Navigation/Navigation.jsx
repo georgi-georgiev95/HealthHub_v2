@@ -19,6 +19,10 @@ const Navigation = () => {
     setMobileNavStatus(!mobileNavStatus);
   }
 
+  const collapseNav = () => {
+    setMobileNavStatus(false);
+  }
+
   return (
       <div className={styles.navWrapper}>
         <div className={styles.navContent}>
@@ -45,14 +49,14 @@ const Navigation = () => {
           </nav>
           {mobileNavStatus && 
             <ul className={styles.dropDown}>
-              <Link to="catalog">Catalog</Link>
+              <Link onClick={collapseNav} to="catalog">Catalog</Link>
               {user.username && <Link to="create">Add</Link>}
               {user.email ? (
                 <Link onClick={logoutHandler}>Logout</Link>
               ) : (
                 <>
-                  <Link to="users/login">Sign in</Link>
-                  <Link to="users/register" className={styles.signUp}>Sign up</Link>
+                  <Link onClick={collapseNav} to="users/login">Sign in</Link>
+                  <Link onClick={collapseNav} to="users/register" className={styles.signUp}>Sign up</Link>
                 </>
               )}
             </ul>}
