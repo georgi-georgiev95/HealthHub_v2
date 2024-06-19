@@ -1,30 +1,33 @@
-@import url('https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400;1,700;1,900&display=swap');
 
 .navWrapper {
     background-color: rgba(255,255,255,0.1);
-    font-family: 'Merriweather', serif;
 }
 
 .navContent {
     max-width: 1280px;
     margin: 0 auto;
+    position: relative;
 }
 
 .logo {
-    background-image: url("../../assets/logo-v2.png");
+    background-image: url("../../assets/Logo11.png");
     width: 120px;
     height: 100px;
     background-size: 120px 100px;
     background-position: center;
+    margin-bottom: 0;
 }
 .siteNavigation {
     display: flex;
-    justify-content: space-between;
     align-items: center;
     padding: 0.5rem 1rem;
     padding-bottom: 0;
     border-bottom-left-radius: 3em;
     border-bottom-right-radius: 3em;
+}
+
+.siteNavigation  ul:first-of-type {
+    flex-grow: 1;
 }
 
 .siteNavigation ul {
@@ -48,6 +51,40 @@
     color: rgba(133, 255, 122, 1);
 }
 
+.navContent .dropDown {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    bottom: -117px;
+    z-index: 1000;
+    background-color: #ccccccc0;
+    width: 100%;
+}
+
+
+.dropDown a,
+.dropDown .signUp {
+    display: block;
+    text-decoration: none;
+    color: black;
+    width: 100%;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.23);
+    padding-left: 1em;
+    padding-top: 1em;
+    padding-bottom: 1em;
+}
+
+
+.dropDown .signUp {
+    border: none;
+}
+
+.dropDown {
+    padding-left: 0;
+    display: none;
+}
+
 .username {
     padding-top: 1em;
     color: white;
@@ -57,7 +94,28 @@
     padding-right: 2em;
 }
 
+.signUp {
+    border: 2px solid #ccc;
+    padding: 0.5em;
+    border-radius: 0.5em;
+}
+
+.signUp:hover {
+    background-color:  rgba(255,255,255,0.1);
+}
+
+.siteNavigation > i {
+   display: none;
+   font-size: 2.5em;
+   display: none;
+}
+
+
 @media (max-width: 600px) {
+    .siteNavigation {
+        justify-content: space-between;
+    }
+    
     .siteNavigation ul {
         font-size: 1em;
     }
@@ -70,20 +128,16 @@
     width: 90px;
     height: 70px;
     background-size: 90px 70px;
-    margin-bottom: 1em;
+    text-align: center;
+    padding: 1em;
     }
 
-    .siteNavigation {
-        flex-direction: column;
-    }
 
     .siteNavigation ul {
-        flex-direction: column;
-        width: 100%;
-        gap: 0;
+        display: none;
     }
 
-    .siteNavigation a {
-        margin-bottom: 0.6em;
-    }
+    .siteNavigation > i {
+        display: block;
+     }
 }
