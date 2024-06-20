@@ -54,7 +54,6 @@ const CreateRecipe = () => {
           <label htmlFor="description">Description:</label>
           <textarea name="description" id="description" />
         </div>
-        <div className="ingredients"></div>
         <div className={styles.formGroup}>
           <label htmlFor="ingredients">Ingredients:</label>
           {inputFields.map((inputField, index) => (
