@@ -14,8 +14,11 @@ const RecipeDetails = () => {
     
         
     useEffect(() => {
-        getOneRecipe(id, setRecipe);
+      (async () => {
+        await getOneRecipe(id, setRecipe);
+      })();
     }, [id]);
+    
     return (
       <div>
         <h2>{recipe.title}</h2>

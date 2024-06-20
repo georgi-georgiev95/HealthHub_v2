@@ -4,10 +4,12 @@ import { Link } from "react-router-dom";
 import styles from "./RecipeCatalog.module.css";
 
 const RecipeCatalog = () => {
-  const [recipe, setRecipe] = useState([]);
+  const [recipes, setRecipes] = useState([]);
 
-  useEffect(() => { 
-    getAllRecipes(setRecipe);
+  useEffect(() => {
+    (async () => {
+      await getAllRecipes(setRecipes);
+    })();
   }, []);
 
 
@@ -20,7 +22,7 @@ const RecipeCatalog = () => {
         </h3>
       </div>
       <div className={styles.container}>
-        {recipe.length > 0 && recipe.map((recipe) => (
+        {recipes.length > 0 && recipes.map((recipe) => (
           <Link to={`/catalog/recipes/${recipe.id}`} key={recipe.id}>
           <div className={styles["flip-card"]} key={recipe.id}>
             <div className={styles["flip-card-inner"]}>
