@@ -1,8 +1,15 @@
+import styles from "./WorkoutCatalog.module.css"
+
 const WorkoutCatalog = () => {
     return (
-        <div>
-            <h1>Workouts Catalog</h1>
-        </div>
+        <>
+            <div className={styles.title}>
+                <h2>Workouts</h2>
+                <h3>
+                    <i>From rookie to expert!</i>
+                </h3>
+            </div>
+        </>
     );
 };
 
