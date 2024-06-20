@@ -146,6 +146,10 @@
     color: black;
 }
 
+.profileMenu a:hover {
+    font-weight: bold;
+}
+
 .profileMenu p {
     color: black;
     padding-bottom: 1em;
