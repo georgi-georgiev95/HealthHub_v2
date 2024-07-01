@@ -11,6 +11,9 @@ const CreateRecipe = () => {
   const navigate = useNavigate();
 
   const addInputField = () => {
+    if (inputFields[inputFields.length - 1].value === "") {
+      return;
+    }
     setInputFields([...inputFields, { value: "" }]);
   };
 
@@ -22,6 +25,13 @@ const CreateRecipe = () => {
 
   const handleDifficultyChange = (event) => {
     setDifficulty(parseInt(event.target.value));
+  };
+
+  const deleteInputField = (index) => {
+    if (inputFields[index].value === "") {
+      return;
+    }
+    setInputFields(inputFields.filter((ingredient, i) => i !== index));
   };
 
   const handleSubmit = async (event) => {
@@ -57,12 +67,18 @@ const CreateRecipe = () => {
         <div className={styles.formGroup}>
           <label htmlFor="ingredients">Ingredients:</label>
           {inputFields.map((inputField, index) => (
-            <div key={index} className={styles.formGroup}>
+            <div key={index} className={styles.ingredientGroup}>
               <input
                 type="text"
                 value={inputField.value}
                 onChange={(e) => handleInputChange(index, e)}
               />
+              {inputFields.length > 1 && (
+                <i
+                  onClick={() => deleteInputField(index)}
+                  className="fa-solid fa-x"
+                ></i>
+              )}
             </div>
           ))}
           <button
