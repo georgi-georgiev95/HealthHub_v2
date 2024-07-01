@@ -22,12 +22,47 @@ h2 {
 }
 
 .description {
+    display: flex;
+    flex-direction: column;
     padding: 2em;
 }
+
+.ingredientList {
+    flex: 1 1 auto;
+}
+
+.buttons {
+    display: flex;
+    justify-content: center;
+    gap: 1em;
+}
+
+.editButton,
+.likeButton,
+.deleteButton {
+    padding: 0.5em 2em;
+    border-radius: 5px;
+    background-color: #ff6347;
+    color: white;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.editButton:hover,
+.likeButton:hover,
+.deleteButton:hover {
+    background-color: #e5533d;
+}   
+
 
 @media (max-width: 900px) {
     .details {
         flex-direction: column;
         align-items: center;
+    }
+
+    .description {
+        width: 100%;
     }
 }

@@ -1,6 +1,7 @@
 import { useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { getOneRecipe } from "../../services/recipeService";
+import { Link } from "react-router-dom";
 import styles from "./RecipeDetails.module.css";
 
 const RecipeDetails = () => {
@@ -29,11 +30,18 @@ const RecipeDetails = () => {
             <p>
               <i className="fa-solid fa-utensils"></i> Ingredients:
             </p>
-            <ul>
+            <ul className={styles.ingredientList}>
               {recipe.ingredients.map((ingredient, index) => (
                 <li key={index}>{ingredient}</li>
               ))}
             </ul>
+            <div className={styles.buttons}>
+              <Link to={`edit`}>
+                <button className={styles.editButton}>Edit</button>
+              </Link>
+              <button className={styles.deleteButton}>Delete</button>
+              <button className={styles.likeButton}>Like</button>
+            </div>
           </div>
         </div>
       </div>
