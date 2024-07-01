@@ -5,7 +5,7 @@ import Home from './components/Home/Home'
 import Catalog from './components/Catalog/Catalog'
 import Login from './components/Auth/Login'
 import Register from './components/Auth/Register'
-import Loader from './components/Shared/Loader'
+import Loader from './components/Shared/PrimaryLoader/Loader'
 import { useUser } from './contexts/UserContext'
 import CreateRecipe from './components/CreateForms/CreateRecipeForm/RecipeCreate'
 import PreCreateFormView from "./components/CreateForms/PreCreateFormView";
@@ -44,4 +44,4 @@ function App() {
   );
 }
 
-export default App
+export default App;

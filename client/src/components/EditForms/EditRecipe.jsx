@@ -2,6 +2,7 @@ import styles from "../CreateForms/EntityForm.module.css";
 import { useParams, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { getOneRecipe, editRecipe } from "../../services/recipeService";
+import SecondaryLoader from "../Shared/SecondaryLoader/SecondaryLoader";
 
 
 const EditRecipe = () => {
@@ -15,10 +16,12 @@ const EditRecipe = () => {
   });
   const { id } = useParams();
   const navigate = useNavigate();
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     (async () => {
       await getOneRecipe(id, setRecipe);
+      setLoading(false);
     })();
   }, [id]);
 
@@ -44,8 +47,12 @@ const EditRecipe = () => {
     const recipeData = recipe;
 
     await editRecipe(id, recipeData);
-    navigate("/catalog/recipes");
+    navigate("/catalog/recipes/" + id);
   };
+
+  if (loading) {
+    return <SecondaryLoader />;
+  }
 
   return (
     <>
