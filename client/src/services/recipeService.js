@@ -1,4 +1,4 @@
-import { getDocs, getDoc, collection, setDoc, doc } from "firebase/firestore";
+import { getDocs, getDoc, collection, setDoc, doc, updateDoc } from "firebase/firestore";
 import { firebaseAuth } from "../config/firebase";
 
 export const getAllRecipes = async (setRecipe) => {
@@ -40,7 +40,7 @@ export const createRecipe = async (recipeData) => {
 export const editRecipe = async (recipeId, recipeData) => {
     try {
         const recipeDocRef = doc(firebaseAuth.db(), "recipes", recipeId);
-        await setDoc(recipeDocRef, recipeData);
+        await updateDoc(recipeDocRef, recipeData);
     } catch (error) {
         console.log(error);
     }
