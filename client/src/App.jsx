@@ -13,6 +13,7 @@ import CreateWorkout from './components/CreateForms/CreateWorkoutForm/WorkoutCre
 import RecipeCatalog from './components/RecipeCatalog/RecipeCatalog'
 import WorkoutCatalog from './components/WorkoutCatalog/WorkoutCatalog'
 import RecipeDetails from './components/RecipeDetails/RecipeDetails'
+import EditRecipe from './components/EditForms/EditRecipe'
 
 function App() {
   const { loading } = useUser();
@@ -29,6 +30,7 @@ function App() {
             <Route path="catalog" element={<Catalog />} />
             <Route path="catalog/recipes" element={<RecipeCatalog />} />
             <Route path="catalog/recipes/:id" element={<RecipeDetails />} />
+            <Route path="catalog/recipes/:id/edit" element={<EditRecipe />} />
             <Route path="catalog/workouts" element={<WorkoutCatalog />} />
             <Route path="create" element={<PreCreateFormView />} />
             <Route path="create/recipe" element={<CreateRecipe />} />
