@@ -30,7 +30,7 @@ RecipeGridCard.propTypes = {
     id: PropTypes.string.isRequired,
     image: PropTypes.string.isRequired,
     title: PropTypes.string.isRequired,
-    difficulty: PropTypes.string.isRequired,
+    difficulty: PropTypes.number.isRequired,
     ownerName: PropTypes.string.isRequired,
   }).isRequired,
 };
