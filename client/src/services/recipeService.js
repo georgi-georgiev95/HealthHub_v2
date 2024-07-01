@@ -37,4 +37,13 @@ export const createRecipe = async (recipeData) => {
     }
 };
 
+export const editRecipe = async (recipeId, recipeData) => {
+    try {
+        const recipeDocRef = doc(firebaseAuth.db(), "recipes", recipeId);
+        await setDoc(recipeDocRef, recipeData);
+    } catch (error) {
+        console.log(error);
+    }
+};
+
 

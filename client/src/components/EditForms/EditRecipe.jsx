@@ -1,7 +1,8 @@
 import styles from "../CreateForms/EntityForm.module.css";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { getOneRecipe } from "../../services/recipeService";
+import { getOneRecipe, editRecipe } from "../../services/recipeService";
+
 
 const EditRecipe = () => {
   const [recipe, setRecipe] = useState({
@@ -13,6 +14,7 @@ const EditRecipe = () => {
     difficulty: 1,
   });
   const { id } = useParams();
+  const navigate = useNavigate();
 
   useEffect(() => {
     (async () => {
@@ -39,10 +41,10 @@ const EditRecipe = () => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-
     const recipeData = recipe;
 
-    console.log(recipeData);
+    await editRecipe(id, recipeData);
+    navigate("/catalog/recipes");
   };
 
   return (

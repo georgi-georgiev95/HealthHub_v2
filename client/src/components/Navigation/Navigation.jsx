@@ -2,7 +2,7 @@ import styles from "./Navigation.module.css";
 import { firebaseAuth } from "../../config/firebase";
 import { useUser } from "../../contexts/UserContext";
 import { Link, useNavigate } from "react-router-dom";
-import {useState, useEffect} from "react";
+import {useState } from "react";
 
 const Navigation = () => {
   const navigate = useNavigate();

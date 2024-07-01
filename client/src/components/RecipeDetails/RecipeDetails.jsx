@@ -2,6 +2,7 @@ import { useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { getOneRecipe } from "../../services/recipeService";
 import { Link } from "react-router-dom";
+import { useUser } from "../../contexts/UserContext";
 import styles from "./RecipeDetails.module.css";
 
 const RecipeDetails = () => {
@@ -11,14 +12,16 @@ const RecipeDetails = () => {
         description: "",
         ingredients: [],
         });
-        const { id } = useParams();
+    const { id } = useParams();
+    const { user } = useUser();
     
         
     useEffect(() => {
       (async () => {
         await getOneRecipe(id, setRecipe);
       })();
-    }, [id]);
+      console.log(user.userId);
+    }, [id, user]);
     
     return (
       <div>
@@ -36,11 +39,17 @@ const RecipeDetails = () => {
               ))}
             </ul>
             <div className={styles.buttons}>
-              <Link to={`edit`}>
-                <button className={styles.editButton}>Edit</button>
-              </Link>
-              <button className={styles.deleteButton}>Delete</button>
-              <button className={styles.likeButton}>Like</button>
+              {user.userId === recipe.ownerId && (
+                <Link to={`edit`}>
+                  <button className={styles.editButton}>Edit</button>
+                </Link>
+              )}
+              {user.userId === recipe.ownerId && (
+                <button className={styles.deleteButton}>Delete</button>
+              )}
+              {user.userId !== recipe.ownerId && user.userId !== '' && user.userId !== undefined && (
+                <button className={styles.likeButton}>Like</button>
+              )}
             </div>
           </div>
         </div>
