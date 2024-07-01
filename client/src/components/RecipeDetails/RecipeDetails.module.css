@@ -1,12 +1,26 @@
-div {
+.detailsContainer {
     color: white;
+    position: relative;
+}
+
+.detailsContainer > a > i {
+    position: absolute;
+    top: 5%;
+    left: 30%;
+    transform: translate(0, -50%);
+    font-size: 3em;
+}
+
+.detailsContainer > i:hover {
+    cursor: pointer;
 }
 
 .image {
     display: block;
-    width: 100%;
-    height: auto;
     max-width: 500px;
+    height: auto;
+    border-radius: 1em;
+    object-fit: cover;
 }
 
 h2 {
@@ -64,5 +78,9 @@ h2 {
 
     .description {
         width: 100%;
+    }
+
+    .detailsContainer > a > i {
+        display: none;
     }
 }
