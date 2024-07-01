@@ -31,7 +31,8 @@ input[type="submit"] {
   background-color: rgba(21, 32, 42, 1);
   border: none;
   border-radius: 0.4em;
-  color: rgba(133, 255, 122, 1);
+  color: white;
+  /* color: rgba(133, 255, 122, 1); */
   margin-top: 2em;
   cursor: pointer;
 }
@@ -39,6 +40,8 @@ input[type="submit"] {
 input[type="submit"]:hover {
   background-color: rgba(133, 255, 122, 1);
   color: rgba(21, 32, 42, 1);
+  background-color: #e5533d;
+  color: white;
 }
 
 input[type="text"],
@@ -47,7 +50,8 @@ input[type="password"] {
   border: 2px solid rgba(44, 63, 82, 1);
   border-radius: 0.4em;
   background-color: transparent;
-  color: rgba(133, 255, 122, 1);
+  /* color: rgba(133, 255, 122, 1); */
+  color: white;
 }
 
 
@@ -76,7 +80,7 @@ input[type="password"]:focus ~ i {
   margin: 3em auto;
   padding: 2em;
   background-color: rgba(255,255,255,0.1);
-  box-shadow: 0 0 20px 0 rgb(255,255,255,0.051);
+  /* box-shadow: 0 0 20px 0 rgb(255,255,255,0.051); */
   border-radius: 0.5em;
 }
 
@@ -91,7 +95,8 @@ input[type="password"]:focus ~ i {
   inset: 0;
   display: block;
   content: "";
-  background-color: rgb(0,0,0,0.2);
+  /* background-color: rgb(0,0,0,0.2); */
+  background-color: #ff6347;
   padding: 2em;
   transform: perspective(60px) rotateX(-2deg) rotateY(-1deg) translateX(-0.3em);
 }
@@ -99,7 +104,9 @@ input[type="password"]:focus ~ i {
 .form .header h1 {
   text-align: center;
   z-index: 1000;
-  color: rgba(133, 255, 122, 1);
+  /* color: #ff6347; */
+  /* color: rgba(133, 255, 122, 1); */
+  color: white;
   position: absolute;
   top: 50%;
   left: 50%;
@@ -114,7 +121,8 @@ input[type="password"]:focus ~ i {
 }
 
 .field label {
-  color: rgba(133, 255, 122, 0.5);
+  color: white;
+  /* color: rgba(133, 255, 122, 0.5); */
   order: 1;
 }
 
@@ -131,7 +139,8 @@ input[type="password"]:focus ~ i {
   display: flex;
   align-items: center;
   padding: 0 1em;
-  color: rgba(133, 255, 122, 1);
+  color: white;
+  /* color: rgba(133, 255, 122, 1); */
   border: 2px solid rgba(44, 63, 82, 1);
   border-radius: 0.4em;
   border-right: 0;
@@ -154,7 +163,8 @@ input[type="password"]:focus ~ i {
   display: block;
   text-align: center;
   margin-top: 1em;
-  color: rgba(133, 255, 122, 1);
+  color: white;
+  /* color: rgba(133, 255, 122, 1); */
   text-decoration: none;
   font-style: italic;
 }
