@@ -2,7 +2,7 @@ import { useState } from "react";
 import { firebaseAuth } from "../../../config/firebase";
 import { useNavigate } from "react-router-dom";
 import { createRecipe } from "../../../services/recipeService";
-import styles from "../CreateForm.module.css";
+import styles from "../EntityForm.module.css";
 
 const CreateRecipe = () => {
   const [inputFields, setInputFields] = useState([{ value: "" }]);
@@ -44,7 +44,7 @@ const CreateRecipe = () => {
 
   return (
     <>
-      <h1 className={styles.formTitle}>Create Recipe</h1>
+      <h2 className={styles.formTitle}>Create Recipe</h2>
       <form className={styles.form} onSubmit={handleSubmit}>
         <div className={styles.formGroup}>
           <label htmlFor="title">Title:</label>

@@ -1,4 +1,4 @@
-import styles from "../CreateForm.module.css";
+import styles from "../EntityForm.module.css";
 import { useState } from "react";
 import { firebaseAuth } from "../../../config/firebase";
 import { useNavigate } from "react-router-dom";
@@ -43,7 +43,7 @@ const CreateWorkout = () => {
 
   return (
     <>
-      <h1 className={styles.formTitle}>Create Workout</h1>
+      <h2 className={styles.formTitle}>Create Workout</h2>
       <form className={styles.form} onSubmit={handleSubmit}>
         <div className={styles.formGroup}>
           <label htmlFor="title">Title:</label>
