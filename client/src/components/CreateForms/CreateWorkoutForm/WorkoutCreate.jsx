@@ -1,8 +1,8 @@
-import styles from "./CreateForm.module.css";
+import styles from "../CreateForm.module.css";
 import { useState } from "react";
-import { firebaseAuth } from "../../config/firebase";
+import { firebaseAuth } from "../../../config/firebase";
 import { useNavigate } from "react-router-dom";
-import { createWorkout } from "../../services/workoutService";
+import { createWorkout } from "../../../services/workoutService";
 
 const CreateWorkout = () => {
   const [inputFields, setInputFields] = useState([{value: ""}]);

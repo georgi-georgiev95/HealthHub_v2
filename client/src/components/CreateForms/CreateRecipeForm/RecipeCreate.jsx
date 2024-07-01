@@ -1,8 +1,8 @@
 import { useState } from "react";
-import { firebaseAuth } from "../../config/firebase";
+import { firebaseAuth } from "../../../config/firebase";
 import { useNavigate } from "react-router-dom";
-import { createRecipe } from "../../services/recipeService";
-import styles from "./CreateForm.module.css";
+import { createRecipe } from "../../../services/recipeService";
+import styles from "../CreateForm.module.css";
 
 const CreateRecipe = () => {
   const [inputFields, setInputFields] = useState([{ value: "" }]);
