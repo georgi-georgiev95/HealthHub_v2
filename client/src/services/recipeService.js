@@ -46,4 +46,11 @@ export const editRecipe = async (recipeId, recipeData) => {
     }
 };
 
-
+export const deleteRecipe = async (recipeId) => {
+    try {
+        const recipeDocRef = doc(firebaseAuth.db(), "recipes", recipeId);
+        await recipeDocRef.delete();
+    } catch (error) {
+        console.log(error);
+    }
+};
