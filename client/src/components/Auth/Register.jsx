@@ -46,7 +46,7 @@ const Register = () => {
   };
 
   return (
-    <form className={styles.form} onSubmit={submitHandler}>
+    <form className={styles.authForm} onSubmit={submitHandler}>
       <header className={styles.header}>
         <h1>Register</h1>
       </header>

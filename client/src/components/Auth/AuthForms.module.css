@@ -44,9 +44,9 @@ input[type="submit"]:hover {
   color: white;
 }
 
-input[type="text"],
-input[type="email"], 
-input[type="password"] {
+.authForm input[type="text"],
+.authForm input[type="email"], 
+.authForm input[type="password"] {
   border: 2px solid rgba(44, 63, 82, 1);
   border-radius: 0.4em;
   background-color: transparent;
@@ -55,9 +55,9 @@ input[type="password"] {
 }
 
 
-input[type="text"]:focus,
-input[type="email"]:focus, 
-input[type="password"]:focus {
+.authForm input[type="text"]:focus,
+.authForm input[type="email"]:focus, 
+.authForm input[type="password"]:focus {
   border-color: rgba(133, 255, 122, 1);
 } 
 
@@ -67,15 +67,15 @@ input[type="password"]:focus  ~ label {
   color: rgba(133, 255, 122, 1);
 } 
 
-input[type="text"]:focus ~ i,
-input[type="email"]:focus ~ i, 
-input[type="password"]:focus ~ i {
+.authForm input[type="text"]:focus ~ i,
+.authForm input[type="email"]:focus ~ i, 
+.authForm input[type="password"]:focus ~ i {
   border-color: rgba(133, 255, 122, 1);
   background-color: rgba(133, 255, 122, 1);
   color: rgba(44, 63, 82, 1);
 } 
 
-.form {
+.authForm {
   max-width: 400px;
   margin: 3em auto;
   padding: 2em;
@@ -84,13 +84,13 @@ input[type="password"]:focus ~ i {
   border-radius: 0.5em;
 }
 
-.form .header {
+.authForm .header {
   position: relative;
   padding: 2em 0;
   margin-bottom: 2em;
 }
 
-.form .header::before {
+.authForm .header::before {
   position: absolute;
   inset: 0;
   display: block;
@@ -101,7 +101,7 @@ input[type="password"]:focus ~ i {
   transform: perspective(60px) rotateX(-2deg) rotateY(-1deg) translateX(-0.3em);
 }
 
-.form .header h1 {
+.authForm .header h1 {
   text-align: center;
   z-index: 1000;
   /* color: #ff6347; */
@@ -170,7 +170,7 @@ input[type="password"]:focus ~ i {
 }
 
 @media (max-width: 600px) {
-  .form {
+  .authForm {
     max-width: 300px;
   }
 }
