@@ -1,5 +1,5 @@
 import styles from "./Loader.module.css";
-import { useUser } from "../../contexts/UserContext";
+import { useUser } from "../../../contexts/UserContext";
 
 const Loader = () => {
   const { loading } = useUser();
