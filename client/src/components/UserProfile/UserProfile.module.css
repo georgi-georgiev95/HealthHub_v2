@@ -1,0 +1,37 @@
+.userProfileContainer {
+    max-width: 600px;
+    border: 2px solid white;
+    color: white;
+    margin: 2em auto;
+    padding: 1em;
+}
+
+.greeting {
+    text-align: center;
+    font-size: 1.3em;
+}
+
+.greeting h2 {
+    padding-bottom: 0;
+}
+
+.recipes {
+    margin: 2em 0;
+}
+
+.recipes h3 {
+    padding: 1em;
+}
+
+.recipeList {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1em;
+    padding: 0
+}
+
+.noRecipes {
+    text-align: center;
+    font-style: italic;
+}
