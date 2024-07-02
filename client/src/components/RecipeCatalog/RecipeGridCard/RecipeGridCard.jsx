@@ -3,6 +3,8 @@ import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 
 const RecipeGridCard = ({ recipeData }) => {
+  const difficulty = "⭐".repeat(recipeData.difficulty);
+
     return (
       <Link to={`/catalog/recipes/${recipeData.id}`} key={recipeData.id}>
         <div className={styles["flip-card"]} key={recipeData.id}>
@@ -16,7 +18,7 @@ const RecipeGridCard = ({ recipeData }) => {
             ></div>
             <div className={styles["flip-card-back"]}>
               <h2>{recipeData.title}</h2>
-              <p>Difficulty level: {recipeData.difficulty}</p>
+              <p>Difficulty: {difficulty}</p>
               <p>Added by: {recipeData.ownerName}</p>
             </div>
           </div>
