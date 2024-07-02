@@ -14,7 +14,7 @@ const Weather = () => {
 
       try {
         const locationKeyResponse = await fetch(
-          `http://dataservice.accuweather.com/locations/v1/cities/geoposition/search?apikey=uOtUB2HjqvccRseuDd3b9Yv3WG9krzT4&q=${latitude},${longitude}`
+          `https://dataservice.accuweather.com/locations/v1/cities/geoposition/search?apikey=uOtUB2HjqvccRseuDd3b9Yv3WG9krzT4&q=${latitude},${longitude}`
         );
 
         if (!locationKeyResponse.ok) {
@@ -26,7 +26,7 @@ const Weather = () => {
         setCityName(locationKeyData.LocalizedName);
 
         const weatherResponse = await fetch(
-          `http://dataservice.accuweather.com/currentconditions/v1/${locationKey}?apikey=uOtUB2HjqvccRseuDd3b9Yv3WG9krzT4`
+          `https://dataservice.accuweather.com/currentconditions/v1/${locationKey}?apikey=uOtUB2HjqvccRseuDd3b9Yv3WG9krzT4`
         );
 
         if (!weatherResponse.ok) {
@@ -46,7 +46,15 @@ const Weather = () => {
   }, []);
 
   if (!weather || !location)
-    return <div className="weather-widget loading">Loading...</div>;
+    return (
+      <div
+        className={`${styles.weatherWidget} ${
+          isDayTime ? styles.dayTime : styles.nightTime
+        }`}
+      >
+        <p>Loading...</p>
+      </div>
+    );
 
   return (
     <div
