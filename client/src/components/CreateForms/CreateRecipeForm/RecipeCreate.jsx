@@ -101,7 +101,7 @@ const CreateRecipe = () => {
             value={difficulty}
             onChange={handleDifficultyChange}
           >
-            {[...Array(10).keys()].map((num) => (
+            {[...Array(5).keys()].map((num) => (
               <option key={num + 1} value={num + 1}>
                 {num + 1}
               </option>
