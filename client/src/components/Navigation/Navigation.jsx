@@ -117,7 +117,7 @@ const Navigation = () => {
         {profileDetailsVisibility && (
           <ul className={styles.profileMenu}>
             <p className={styles.username}>Welcome, {user.username}!</p>
-            <Link>Profile</Link>
+            <Link onClick={collapseNav} to="users/profile">Profile</Link>
             <Link onClick={handleLogout}>Logout</Link>
           </ul>
         )}
