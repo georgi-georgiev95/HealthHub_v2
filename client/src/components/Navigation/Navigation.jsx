@@ -2,7 +2,8 @@ import styles from "./Navigation.module.css";
 import { firebaseAuth } from "../../config/firebase";
 import { useUser } from "../../contexts/UserContext";
 import { Link, useNavigate } from "react-router-dom";
-import {useState } from "react";
+import { useState } from "react";
+import Weather from "../Weather/Weather";
 
 const Navigation = () => {
   const navigate = useNavigate();
@@ -52,6 +53,7 @@ const Navigation = () => {
               </Link>
             )}
           </ul>
+          <Weather />
           <ul className={styles.profileDropdown}>
             {user.email ? (
               <>
