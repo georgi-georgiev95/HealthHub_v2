@@ -6,6 +6,7 @@ const Weather = () => {
   const [location, setLocation] = useState(null);
   const [cityName, setCityName] = useState("");
   const [isDayTime, setIsDayTime] = useState(true);
+  const [error, setError] = useState("");
 
   useEffect(() => {
     navigator.geolocation.getCurrentPosition(async (position) => {
@@ -41,8 +42,13 @@ const Weather = () => {
         setIsDayTime(currentTime < sunsetTime);
       } catch (error) {
         console.error("Error fetching weather data:", error);
+        setError("Failed to load weather data.");
       }
-    });
+    },
+    (err) => {
+          console.error("Error getting geolocation:", err);
+          setError("Geolocation is not enabled.");
+        });
   }, []);
 
   if (!weather || !location)
@@ -53,6 +59,7 @@ const Weather = () => {
         }`}
       >
         <p>Loading...</p>
+        {error && <p>{error}</p>}
       </div>
     );
 
