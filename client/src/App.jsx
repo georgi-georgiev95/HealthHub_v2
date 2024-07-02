@@ -14,6 +14,7 @@ import RecipeCatalog from './components/RecipeCatalog/RecipeCatalog'
 import WorkoutCatalog from './components/WorkoutCatalog/WorkoutCatalog'
 import RecipeDetails from './components/RecipeDetails/RecipeDetails'
 import EditRecipe from './components/EditForms/EditRecipe'
+import UserProfile from './components/UserProfile/UserProfile'
 
 function App() {
   const { loading } = useUser();
@@ -37,6 +38,7 @@ function App() {
             <Route path="create/workout" element={<CreateWorkout />} />
             <Route path="users/login" element={<Login />} />
             <Route path="users/register" element={<Register />} />
+            <Route path="users/profile" element={<UserProfile/>} />
           </Routes>
         </div>
       </div>
