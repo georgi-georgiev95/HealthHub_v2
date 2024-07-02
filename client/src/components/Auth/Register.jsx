@@ -29,8 +29,9 @@ const Register = () => {
     }
 
     try {
-      const user = await firebaseAuth.register(email, password)
-      await updateProfile(user.user, {
+      const userCredential = await firebaseAuth.register(email, password);
+      const user = userCredential.user;
+      await updateProfile(user, {
         displayName: username,
       });
 
