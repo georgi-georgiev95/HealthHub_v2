@@ -15,11 +15,11 @@ export const UserProvider = ({ children }) => {
   useEffect(() => {
     const unsubscribe = firebaseAuth.onAuthStateChanged((firebaseUser) => {
       if (firebaseUser) {
-          setUser({
-            userId: firebaseUser.uid,
-            email: firebaseUser.email,
-            username: firebaseUser.displayName,
-          });
+        setUser({
+          userId: firebaseUser.uid,
+          email: firebaseUser.email,
+          username: firebaseUser.displayName,
+        });
       } else {
         setUser({
           userId: "",
@@ -27,7 +27,6 @@ export const UserProvider = ({ children }) => {
           username: "",
         });
       }
-
       setLoading(false);
     });
 
