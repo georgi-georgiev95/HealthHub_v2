@@ -7,13 +7,17 @@
   height: 120px;
   margin: 5px auto;
   padding: 20px;
-  border-radius: 15px;
+  /* border-radius: 15px; */
+  border-bottom-left-radius: 15px;
+  border-bottom-right-radius: 15px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   color: #fff;
   transition: transform 0.3s ease, opacity 0.3s ease;
   opacity: 0;
   transform: scale(0.9);
   animation: fadeIn 0.5s forwards;
+  position: absolute;
+  left: 515px;
 }
 
 .weatherWidget p {
