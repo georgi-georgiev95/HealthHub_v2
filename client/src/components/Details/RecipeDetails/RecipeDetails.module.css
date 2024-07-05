@@ -18,7 +18,7 @@
 .image {
     display: block;
     max-width: 500px;
-    height: auto;
+    max-height: 500px;
     border-radius: 1em;
     object-fit: cover;
 }
