@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
-import { getAllRecipes } from "../../services/recipeService";
+import { getAllRecipes } from "../../../services/recipeService";
 import styles from "./RecipeCatalog.module.css";
 import RecipeGridCard from "./RecipeGridCard/RecipeGridCard";
-import SecondaryLoader from "../Shared/SecondaryLoader/SecondaryLoader";
+import SecondaryLoader from "../../Shared/SecondaryLoader/SecondaryLoader";
 
 const RecipeCatalog = () => {
   const [recipes, setRecipes] = useState([]);

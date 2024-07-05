@@ -1,6 +1,6 @@
 import styles from "./WorkoutCatalog.module.css"
 import { useEffect, useState } from "react";
-import {getAllWorkouts} from "../../services/workoutService"
+import {getAllWorkouts} from "../../../services/workoutService"
 
 const WorkoutCatalog = () => {
     const [workouts, setWorkouts] = useState([]);

@@ -1,11 +1,11 @@
 import { useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
-import { getOneRecipe, deleteRecipe } from "../../services/recipeService";
+import { getOneRecipe, deleteRecipe } from "../../../services/recipeService";
 import { Link, useNavigate } from "react-router-dom";
-import { useUser } from "../../contexts/UserContext";
+import { useUser } from "../../../contexts/UserContext";
 import styles from "./RecipeDetails.module.css";
-import SecondaryLoader from "../Shared/SecondaryLoader/SecondaryLoader";
-import DeleteConfirmationModal from "../Shared/DeleteModal/DeleteConfirmationModal";
+import SecondaryLoader from "../../Shared/SecondaryLoader/SecondaryLoader";
+import DeleteConfirmationModal from "../../Shared/DeleteModal/DeleteConfirmationModal";
 
 const RecipeDetails = () => {
   const [recipe, setRecipe] = useState({

@@ -82,7 +82,7 @@ const EditRecipe = () => {
         <div className={styles.formGroup}>
           <label htmlFor="ingredients">Ingredients:</label>
           {recipe.ingredients.map((ingredient, index) => (
-            <div key={index} className={styles.ingredientGroup}>
+            <div key={index} className={styles.listGroup}>
               <input
                 type="text"
                 value={ingredient}
@@ -97,7 +97,12 @@ const EditRecipe = () => {
                   })
                 }
               />
-                {recipe.ingredients.length > 1 && <i onClick={() => deleteInputField(index)} className="fa-solid fa-x" ></i>}  
+              {recipe.ingredients.length > 1 && (
+                <i
+                  onClick={() => deleteInputField(index)}
+                  className="fa-solid fa-x"
+                ></i>
+              )}
             </div>
           ))}
           <button
@@ -128,7 +133,7 @@ const EditRecipe = () => {
               setRecipe({ ...recipe, difficulty: parseInt(e.target.value) })
             }
           >
-            {[...Array(10).keys()].map((num) => (
+            {[...Array(5).keys()].map((num) => (
               <option key={num + 1} value={num + 1}>
                 {num + 1}
               </option>
