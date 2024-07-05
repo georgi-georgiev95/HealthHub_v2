@@ -5,7 +5,9 @@ import { useNavigate } from "react-router-dom";
 import { createWorkout } from "../../../services/workoutService";
 
 const CreateWorkout = () => {
+  const difficultyLevels = ["-", "Beginner", "Intermediate", "Advanced"];
   const [exercises, setExercises] = useState([{ value: "" }]);
+  const [difficulty, setDifficulty] = useState("-");
   
 
   const navigate = useNavigate();
@@ -22,6 +24,10 @@ const CreateWorkout = () => {
     values[index].value = event.target.value;
     setExercises(values);
   }
+
+  const handleDifficultyChange = (event) => {
+    setDifficulty(event.target.value);
+  }
   
   const deleteExercise = (index) => {
     setExercises(exercises.filter((exercise, i) => i !== index));
@@ -34,9 +40,14 @@ const CreateWorkout = () => {
       title: event.target.title.value,
       description: event.target.description.value,
       exercises: exercises.map((field) => field.value),
+      difficulty: difficulty,
       ownerId: firebaseAuth.currentUser().uid,
       ownerName: firebaseAuth.currentUser().displayName,
     };
+
+    if (workoutData.title === "" || workoutData.description === "" || difficulty === "-" || workoutData.exercises[0] === "") {
+      return;
+    } 
 
     await createWorkout(workoutData);
 
@@ -80,6 +91,21 @@ const CreateWorkout = () => {
           >
             Add Exercise
           </button>
+        </div>
+        <div className={styles.formGroup}>
+          <label htmlFor="difficulty">Difficulty Level:</label>
+          <select
+            name="difficulty"
+            id="difficulty"
+            value={difficulty}
+            onChange={handleDifficultyChange}
+          >
+            {difficultyLevels.map((level) => (
+              <option key={level} value={level}>
+                {level}
+              </option>
+            ))}
+          </select>
         </div>
         <div className={styles.buttons}>
           <button className={styles.button} type="submit">

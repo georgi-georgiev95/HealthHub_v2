@@ -11,6 +11,8 @@ const WorkoutCatalog = () => {
         })();
     }, []);
 
+    console.log(workouts);
+    
     return (
       <>
         <div className={styles.title}>
