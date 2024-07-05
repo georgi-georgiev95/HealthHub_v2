@@ -3,11 +3,14 @@ import { useState } from "react";
 import { firebaseAuth } from "../../../config/firebase";
 import { useNavigate } from "react-router-dom";
 import { createWorkout } from "../../../services/workoutService";
+import MultiRowInput from "../../Shared/MultiRowInput/MultiRowInput";
 
 const CreateWorkout = () => {
   const difficultyLevels = ["-", "Beginner", "Intermediate", "Advanced"];
+  const goals = ["-", "Weight Loss", "Muscle Gain"];
   const [exercises, setExercises] = useState([{ value: "" }]);
   const [difficulty, setDifficulty] = useState("-");
+  const [goal, setGoal] = useState("-");
   
 
   const navigate = useNavigate();
@@ -41,11 +44,12 @@ const CreateWorkout = () => {
       description: event.target.description.value,
       exercises: exercises.map((field) => field.value),
       difficulty: difficulty,
+      goal: goal,
       ownerId: firebaseAuth.currentUser().uid,
       ownerName: firebaseAuth.currentUser().displayName,
     };
 
-    if (workoutData.title === "" || workoutData.description === "" || difficulty === "-" || workoutData.exercises[0] === "") {
+    if (workoutData.title === "" || workoutData.description === "" || difficulty === "-" || goal === "-" || workoutData.exercises[0] === "") {
       return;
     } 
 
@@ -70,19 +74,14 @@ const CreateWorkout = () => {
         <div className={styles.formGroup}>
           <label htmlFor="exercises">Exercises:</label>
           {exercises.map((inputField, index) => (
-            <div key={index} className={styles.listGroup}>
-              <input
-                type="text"
-                value={inputField.value}
-                onChange={(e) => handleNewExercise(index, e)}
-              />
-              {exercises.length > 1 && (
-                <i
-                  onClick={() => deleteExercise(index)}
-                  className="fa-solid fa-x"
-                ></i>
-              )}
-            </div>
+            <MultiRowInput
+              key={index}
+              index={index}
+              inputField={inputField}
+              entitiesArray={exercises}
+              handleNewEntity={handleNewExercise}
+              deleteEntity={deleteExercise}
+            />
           ))}
           <button
             type="button"
@@ -101,6 +100,21 @@ const CreateWorkout = () => {
             onChange={handleDifficultyChange}
           >
             {difficultyLevels.map((level) => (
+              <option key={level} value={level}>
+                {level}
+              </option>
+            ))}
+          </select>
+        </div>
+        <div className={styles.formGroup}>
+          <label htmlFor="goal">Goal:</label>
+          <select
+            name="goal"
+            id="goal"
+            value={goal}
+            onChange={(e) => setGoal(e.target.value)}
+          >
+            {goals.map((level) => (
               <option key={level} value={level}>
                 {level}
               </option>

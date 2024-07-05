@@ -2,6 +2,7 @@ import { useState } from "react";
 import { firebaseAuth } from "../../../config/firebase";
 import { useNavigate } from "react-router-dom";
 import { createRecipe } from "../../../services/recipeService";
+import MultiRowInput from "../../Shared/MultiRowInput/MultiRowInput";
 import styles from "../EntityForm.module.css";
 
 const CreateRecipe = () => {
@@ -44,6 +45,10 @@ const CreateRecipe = () => {
       ownerName: firebaseAuth.currentUser().displayName,
     };
 
+    if (recipeData.title === "" || recipeData.description === "" || difficulty === "-" || recipeData.ingredients[0] === "" || recipeData.image === "") {
+      return;
+    }
+
     await createRecipe(recipeData);
 
     navigate("/catalog/recipes");
@@ -64,19 +69,14 @@ const CreateRecipe = () => {
         <div className={styles.formGroup}>
           <label htmlFor="ingredients">Ingredients:</label>
           {ingredients.map((inputField, index) => (
-            <div key={index} className={styles.listGroup}>
-              <input
-                type="text"
-                value={inputField.value}
-                onChange={(e) => handleIngredientsChange(index, e)}
-              />
-              {ingredients.length > 1 && (
-                <i
-                  onClick={() => deleteInputField(index)}
-                  className="fa-solid fa-x"
-                ></i>
-              )}
-            </div>
+            <MultiRowInput
+              key={index}
+              index={index}
+              inputField={inputField}
+              entitiesArray={ingredients}
+              handleNewEntity={handleIngredientsChange}
+              deleteEntity={deleteInputField}
+            />
           ))}
           <button
             type="button"
