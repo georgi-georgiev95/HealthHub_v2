@@ -7,16 +7,16 @@ const RecipeGridCard = ({ recipeData }) => {
 
     return (
       <Link to={`/catalog/recipes/${recipeData.id}`} key={recipeData.id}>
-        <div className={styles["flip-card"]} key={recipeData.id}>
-          <div className={styles["flip-card-inner"]}>
+        <div className={styles.flipCard} key={recipeData.id}>
+          <div className={styles.flipCardInner}>
             <div
-              className={styles["flip-card-front"]}
+              className={styles.flipCardFront}
               style={{
                 backgroundImage: `url(${recipeData.image})`,
                 backgroundSize: `cover`,
               }}
             ></div>
-            <div className={styles["flip-card-back"]}>
+            <div className={styles.flipCardBack}>
               <h2>{recipeData.title}</h2>
               <p>Difficulty: {difficulty}</p>
               <p>Added by: {recipeData.ownerName}</p>
