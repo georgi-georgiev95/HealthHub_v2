@@ -31,6 +31,9 @@ const RecipeCatalog = () => {
         {recipes.length > 0 && recipes.map((recipe) => (
           <RecipeGridCard key={recipe.id} recipeData={recipe} />
         ))}
+        {recipes.length === 0 && (
+          <p className={styles.noRecipes}>No recipes found.</p>
+        )}
       </div>
     </>
   );
