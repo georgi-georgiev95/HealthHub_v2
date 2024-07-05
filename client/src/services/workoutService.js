@@ -11,7 +11,7 @@ export const getAllWorkouts = async (setWorkout) => {
                 ...doc.data(),
             }
         });
-        setRecipe(workoutsList);
+        setWorkout(workoutsList);
     } catch (error) {
         console.log(error);
     }
