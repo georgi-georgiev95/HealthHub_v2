@@ -5,22 +5,22 @@ import { createRecipe } from "../../../services/recipeService";
 import styles from "../EntityForm.module.css";
 
 const CreateRecipe = () => {
-  const [inputFields, setInputFields] = useState([{ value: "" }]);
+  const [ingredients, setIngredients] = useState([{ value: "" }]);
   const [difficulty, setDifficulty] = useState("-"); 
 
   const navigate = useNavigate();
 
   const addInputField = () => {
-    if (inputFields[inputFields.length - 1].value === "") {
+    if (ingredients[ingredients.length - 1].value === "") {
       return;
     }
-    setInputFields([...inputFields, { value: "" }]);
+    setIngredients([...ingredients, { value: "" }]);
   };
 
-  const handleInputChange = (index, event) => {
-    const values = [...inputFields];
+  const handleIngredientsChange = (index, event) => {
+    const values = [...ingredients];
     values[index].value = event.target.value;
-    setInputFields(values);
+    setIngredients(values);
   };
 
   const handleDifficultyChange = (event) => {
@@ -28,10 +28,7 @@ const CreateRecipe = () => {
   };
 
   const deleteInputField = (index) => {
-    if (inputFields[index].value === "") {
-      return;
-    }
-    setInputFields(inputFields.filter((ingredient, i) => i !== index));
+    setIngredients(ingredients.filter((ingredient, i) => i !== index));
   };
 
   const handleSubmit = async (event) => {
@@ -40,7 +37,7 @@ const CreateRecipe = () => {
     const recipeData = {
       title: event.target.title.value,
       description: event.target.description.value,
-      ingredients: inputFields.map((field) => field.value),
+      ingredients: ingredients.map((field) => field.value),
       image: event.target.image.value,
       difficulty: difficulty,
       ownerId: firebaseAuth.currentUser().uid,
@@ -66,14 +63,14 @@ const CreateRecipe = () => {
         </div>
         <div className={styles.formGroup}>
           <label htmlFor="ingredients">Ingredients:</label>
-          {inputFields.map((inputField, index) => (
-            <div key={index} className={styles.ingredientGroup}>
+          {ingredients.map((inputField, index) => (
+            <div key={index} className={styles.listGroup}>
               <input
                 type="text"
                 value={inputField.value}
-                onChange={(e) => handleInputChange(index, e)}
+                onChange={(e) => handleIngredientsChange(index, e)}
               />
-              {inputFields.length > 1 && (
+              {ingredients.length > 1 && (
                 <i
                   onClick={() => deleteInputField(index)}
                   className="fa-solid fa-x"

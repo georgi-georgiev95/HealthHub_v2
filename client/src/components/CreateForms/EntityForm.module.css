@@ -93,22 +93,23 @@
   width: 100%;
 }
 
-.ingredientGroup i {
-  display: block;
-  order: -1;
-  padding-bottom: 5px;
-}
-
-.ingredientGroup i:hover {
-  cursor: pointer;
-}
-
-.ingredientGroup {
+.listGroup {
   display: flex;
   align-items: center;
   gap: 0.5em;
   width: 100%;
 }
+
+.listGroup i {
+  display: block;
+  order: -1;
+  padding-bottom: 5px;
+}
+
+.listGroup i:hover {
+  cursor: pointer;
+}
+
  
 
 @media (max-width: 600px) {

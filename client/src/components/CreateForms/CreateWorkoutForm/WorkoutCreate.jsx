@@ -5,23 +5,26 @@ import { useNavigate } from "react-router-dom";
 import { createWorkout } from "../../../services/workoutService";
 
 const CreateWorkout = () => {
-  const [inputFields, setInputFields] = useState([{value: ""}]);
-  const [difficulty, setDifficulty] = useState("-");
+  const [exercises, setExercises] = useState([{ value: "" }]);
+  
 
   const navigate = useNavigate();
 
   const addInputField = () => {
-    setInputFields([...inputFields, {value: ""}]);
+    if (exercises[exercises.length - 1].value === "") {
+      return;
+    }
+    setExercises([...exercises, {value: ""}]);
   };
 
-  const handleInputChange = (index, event) => {
-    const values = [...inputFields];
+  const handleNewExercise = (index, event) => {
+    const values = [...exercises];
     values[index].value = event.target.value;
-    setInputFields(values);
-  };
-
-  const handleNewExercise = (event) => {
-    setDifficulty(parseInt(event.target.value));
+    setExercises(values);
+  }
+  
+  const deleteExercise = (index) => {
+    setExercises(exercises.filter((exercise, i) => i !== index));
   }
 
   const handleSubmit = async (event) => {
@@ -30,7 +33,7 @@ const CreateWorkout = () => {
     const workoutData = {
       title: event.target.title.value,
       description: event.target.description.value,
-      exercises: inputFields.map((field) => field.value),
+      exercises: exercises.map((field) => field.value),
       ownerId: firebaseAuth.currentUser().uid,
       ownerName: firebaseAuth.currentUser().displayName,
     };
@@ -40,7 +43,7 @@ const CreateWorkout = () => {
     navigate("/catalog/workouts");
   }
 
-
+  
   return (
     <>
       <h2 className={styles.formTitle}>Create Workout</h2>
@@ -55,13 +58,19 @@ const CreateWorkout = () => {
         </div>
         <div className={styles.formGroup}>
           <label htmlFor="exercises">Exercises:</label>
-          {inputFields.map((inputField, index) => (
-            <div key={index} className={styles.formGroup}>
+          {exercises.map((inputField, index) => (
+            <div key={index} className={styles.listGroup}>
               <input
                 type="text"
                 value={inputField.value}
-                onChange={(e) => handleInputChange(index, e)}
+                onChange={(e) => handleNewExercise(index, e)}
               />
+              {exercises.length > 1 && (
+                <i
+                  onClick={() => deleteExercise(index)}
+                  className="fa-solid fa-x"
+                ></i>
+              )}
             </div>
           ))}
           <button
