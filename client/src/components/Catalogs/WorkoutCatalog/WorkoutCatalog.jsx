@@ -23,7 +23,7 @@ const WorkoutCatalog = () => {
         </div>
         <div className={styles.container}>
           {workouts.length === 0 && (
-            <p className={styles.noRecipes}>No recipes found.</p>
+            <p className={styles.noRecipes}>No workouts found.</p>
           )}
         </div>
       </>
