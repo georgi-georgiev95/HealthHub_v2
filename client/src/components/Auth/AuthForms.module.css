@@ -61,9 +61,9 @@
   border-color: rgba(133, 255, 122, 1);
 } 
 
-input[type="text"]:focus ~ label,
-input[type="email"]:focus ~ label, 
-input[type="password"]:focus  ~ label {
+.authForm input[type="text"]:focus ~ label,
+.authForm input[type="email"]:focus ~ label, 
+.authForm input[type="password"]:focus  ~ label {
   color: rgba(133, 255, 122, 1);
 } 
 

@@ -7,7 +7,7 @@ const RecipeProfileCard = ({ recipeData }) => {
     const difficulty = "⭐".repeat(recipeData.difficulty);
 
     return (
-        <Link to={`/catalog/recipes/${recipeData.id}`}>
+        <Link to={`/catalog/recipes/${recipeData.id}`} className={styles.link}>
             <div className={styles.recipeCard}>
                 <img src={recipeData.image} alt="recipe" />
                 <span>{difficulty}</span>

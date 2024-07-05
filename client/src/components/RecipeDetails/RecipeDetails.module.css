@@ -23,7 +23,7 @@
     object-fit: cover;
 }
 
-h2 {
+.detailsContainer h2 {
     text-align: center;
     padding: 0.3em 0 1em 0;
 }
