@@ -17,7 +17,9 @@
   transform: scale(0.9);
   animation: fadeIn 0.5s forwards;
   position: absolute;
-  left: 515px;
+  /* left: 515px; */
+  left: 50%;
+  margin-left: -125px;
 }
 
 .weatherWidget p {
@@ -78,17 +80,25 @@
     width: 100px;
     height: 80px;
     padding: 0;
+    margin-left: -50px;
   }
 
  .weatherTitle {
    font-size: 1em;
- }
+  }
 
  .cityName {
    font-size: 0.8em;
- }
+  }
 
  .temperature {
    font-size: 1.5em;
- }
+  }
+}
+
+
+@media (min-width: 601px) and (max-width: 799px) {
+  .weatherWidget {
+    left: 65%;
+  }
 }
