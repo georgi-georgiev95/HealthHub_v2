@@ -94,9 +94,12 @@ const Navigation = () => {
               Catalog
             </Link>
             {user.username && (
-              <Link onClick={collapseNav} to="create">
-                Add
-              </Link>
+              <>
+                <Link onClick={collapseNav} to="create">
+                  Add
+                </Link>
+                <Link onClick={collapseNav} to="users/profile">Profile</Link>
+              </>
             )}
             {user.email ? (
               <Link onClick={handleLogout}>Logout</Link>
