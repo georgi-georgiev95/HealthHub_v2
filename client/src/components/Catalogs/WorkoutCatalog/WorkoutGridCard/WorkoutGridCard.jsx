@@ -10,7 +10,7 @@ const WorkoutGridCard = ({
     difficulty,
     goal,
     ownerName,
-    id
+    id,
 }) => {
 
     const imageSrc = goal === "Weight Loss" ? fatLossImage : muscleGainImage;
@@ -45,7 +45,7 @@ const WorkoutGridCard = ({
 
 WorkoutGridCard.propTypes = {
     title: PropTypes.string.isRequired,
-    difficulty: PropTypes.number.isRequired,
+    difficulty: PropTypes.string.isRequired,
     goal: PropTypes.string.isRequired,
     ownerName: PropTypes.string.isRequired,
     id: PropTypes.string.isRequired

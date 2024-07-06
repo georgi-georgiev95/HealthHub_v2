@@ -1,33 +1,113 @@
 .container {
-    background: #fff;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    padding: 16px;
-    margin: 16px;
-    max-width: 400px;
-    transition: transform 0.2s;
-    text-align: left;
-}
-
-.container:hover {
-    transform: scale(1.05);
+  max-width: 800px;
+  margin: 2em auto;
+  padding: 20px;
+  background-color: #f9f9f9;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .title {
-    font-size: 1.8em;
-    margin-bottom: 8px;
-    color: #333;
+  font-size: 3rem;
+  color: #333;
+  margin-bottom: 10px;
+  text-align: center;
 }
 
 .description {
-    font-size: 1.2em;
-    margin-bottom: 12px;
-    color: #555;
+  font-size: 1.3rem;
+  color: #666;
+  margin-bottom: 20px;
+  text-align: justify;
+  text-align: center;
 }
 
 .difficulty, .goal, .owner {
-    font-size: 1em;
-    margin-bottom: 8px;
-    color: #777;
+  font-size: 1.2rem;
+  color: #444;
+  margin: 5px 0;
+  padding: 10px;
+  background-color: #fff;
+  border-left: 5px solid #007bff;
+  border-radius: 5px;
+}
+
+.difficulty {
+  border-left-color: #28a745;
+}
+
+.goal {
+  border-left-color: #ffc107;
+}
+
+.owner {
+  border-left-color: #dc3545;
+}
+
+.exercises {
+  margin-top: 20px;
+}
+
+.exercisesTitle {
+  font-size: 1.5rem;
+  color: #333;
+  margin-bottom: 10px;
+}
+
+.exercisesList {
+  list-style-type: none;
+  padding: 0;
+}
+
+.exerciseItem {
+  margin-bottom: 10px;
+  padding: 10px;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  display: flex;
+}
+
+.exerciseName,
+.exerciseSets,
+.exerciseReps {
+  font-weight: bold;
+  color: #333;
+  font-size: 1.2rem;
+  display: block;
+}
+
+.exerciseName {
+    flex-basis: 60%;
+}
+
+.exerciseSets {
+    flex-grow: 1;
+}
+
+
+@media (max-width: 600px) {
+  .container {
+    padding: 10px;
+  }
+
+  .title {
+    font-size: 1.8rem;
+  }
+
+  .description {
+    font-size: 1.1rem;
+  }
+
+  .difficulty, .goal, .owner {
+    font-size: 0.9rem;
+    padding: 8px;
+  }
+
+  .exercisesTitle,
+  .exerciseName,
+  .exerciseSets,
+  .exerciseReps {
+    font-size: 0.9rem;
+  }
 }
