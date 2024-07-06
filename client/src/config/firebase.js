@@ -4,7 +4,7 @@ import { getFirestore } from 'firebase/firestore';
 
 
 const firebaseConfig = {
-    apiKey: "AIzaSyBqmVfoEIdv7WdIQJBRJ_nBODHWeUQZ7Z4",
+    apiKey: import.meta.env.VITE_APP_FIREBASE_API_KEY,
     authDomain: "healthhub-ddadd.firebaseapp.com",
     projectId: "healthhub-ddadd",
     storageBucket: "healthhub-ddadd.appspot.com",
