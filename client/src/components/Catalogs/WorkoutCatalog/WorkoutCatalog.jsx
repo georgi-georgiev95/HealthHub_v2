@@ -10,7 +10,7 @@ const WorkoutCatalog = () => {
 
     useEffect(() => {
         (async () => {
-          getAllWorkouts(setWorkouts);
+          await getAllWorkouts(setWorkouts);
           setLoading(false);
         })();
     }, []);

@@ -1,4 +1,4 @@
-import { getDocs, getDoc, collection, setDoc, doc } from "firebase/firestore";
+import { getDocs, getDoc, collection, setDoc, doc, deleteDoc } from "firebase/firestore";
 import { firebaseAuth } from "../config/firebase";
 
 export const getAllWorkouts = async (setWorkout) => {
@@ -32,6 +32,16 @@ export const createWorkout = async (workoutData) => {
     try {
         const workoutDocRef = doc(collection(firebaseAuth.db(), "workouts"));
         await setDoc(workoutDocRef, workoutData);
+    } catch (error) {
+        console.log(error);
+    }
+};
+
+
+export const deleteWorkout = async (workoutId) => {
+    try {
+        const workoutDocRef = doc(firebaseAuth.db(), "workouts", workoutId);
+        await deleteDoc(workoutDocRef);
     } catch (error) {
         console.log(error);
     }
