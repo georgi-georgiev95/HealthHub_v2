@@ -96,6 +96,7 @@ const WorkoutDetails = () => {
         isOpen={showDeleteModal}
         onCancel={closeDeleteModalHandler}
         onConfirm={deleteHandler}
+        title={workout.title}
       />
     </div>
   );

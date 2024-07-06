@@ -94,6 +94,7 @@ const RecipeDetails = () => {
         isOpen={showDeleteModal}
         onCancel={closeDeleteModalHandler}
         onConfirm={deleteHandler}
+        title={recipe.title}
       />
     </div>
   );
