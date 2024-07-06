@@ -13,9 +13,9 @@ const RecipeDetails = () => {
     image: "",
     description: "",
     ingredients: [],
-    ownerId: "", 
+    ownerId: "",
   });
-  const [loading, setLoading] = useState(true); 
+  const [loading, setLoading] = useState(true);
   const [showDeleteModal, setShowDeleteModal] = useState(false);
   const { id } = useParams();
   const { user } = useUser();

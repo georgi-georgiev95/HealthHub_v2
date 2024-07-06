@@ -7,7 +7,7 @@ import styles from "../EntityForm.module.css";
 
 const CreateRecipe = () => {
   const [ingredients, setIngredients] = useState([{ value: "" }]);
-  const [difficulty, setDifficulty] = useState("-"); 
+  const [difficulty, setDifficulty] = useState("-");
 
   const navigate = useNavigate();
 
@@ -45,7 +45,13 @@ const CreateRecipe = () => {
       ownerName: firebaseAuth.currentUser().displayName,
     };
 
-    if (recipeData.title === "" || recipeData.description === "" || difficulty === "-" || recipeData.ingredients[0] === "" || recipeData.image === "") {
+    if (
+      recipeData.title === "" ||
+      recipeData.description === "" ||
+      difficulty === "-" ||
+      recipeData.ingredients[0] === "" ||
+      recipeData.image === ""
+    ) {
       return;
     }
 

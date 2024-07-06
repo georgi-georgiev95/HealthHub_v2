@@ -5,13 +5,13 @@ import { faChevronDown } from "@fortawesome/free-solid-svg-icons";
 import styles from "./Home.module.css";
 
 const Home = () => {
-     const catalogIntroRef = useRef(null);
+  const catalogIntroRef = useRef(null);
 
-     const handleScrollToCatalog = () => {
-       if (catalogIntroRef.current) {
-         catalogIntroRef.current.scrollIntoView({ behavior: "smooth" });
-       }
-     };
+  const handleScrollToCatalog = () => {
+    if (catalogIntroRef.current) {
+      catalogIntroRef.current.scrollIntoView({ behavior: "smooth" });
+    }
+  };
 
   return (
     <>
@@ -34,7 +34,7 @@ const Home = () => {
             Start Now
           </Link>
         </div>
-              <div className={styles.arrow} onClick={handleScrollToCatalog}>
+        <div className={styles.arrow} onClick={handleScrollToCatalog}>
           <p>Check out what other users have created</p>
           <FontAwesomeIcon icon={faChevronDown} />
         </div>

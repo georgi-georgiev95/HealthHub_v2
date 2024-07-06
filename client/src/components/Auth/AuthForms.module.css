@@ -1,6 +1,5 @@
 @import url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css");
 
-
 .authForm fieldset {
   padding: 1em 1.5em;
   border: 2px solid rgb(44, 63, 82);
@@ -11,7 +10,7 @@
 .authForm legend {
   padding: 0.5em;
   margin-left: -0.5em;
-  color: rgba(255,255,255, 0.8);
+  color: rgba(255, 255, 255, 0.8);
 }
 
 .authForm label,
@@ -45,7 +44,7 @@
 }
 
 .authForm input[type="text"],
-.authForm input[type="email"], 
+.authForm input[type="email"],
 .authForm input[type="password"] {
   border: 2px solid rgba(44, 63, 82, 1);
   border-radius: 0.4em;
@@ -54,32 +53,31 @@
   color: white;
 }
 
-
 .authForm input[type="text"]:focus,
-.authForm input[type="email"]:focus, 
+.authForm input[type="email"]:focus,
 .authForm input[type="password"]:focus {
   border-color: rgba(133, 255, 122, 1);
-} 
+}
 
 .authForm input[type="text"]:focus ~ label,
-.authForm input[type="email"]:focus ~ label, 
-.authForm input[type="password"]:focus  ~ label {
+.authForm input[type="email"]:focus ~ label,
+.authForm input[type="password"]:focus ~ label {
   color: rgba(133, 255, 122, 1);
-} 
+}
 
 .authForm input[type="text"]:focus ~ i,
-.authForm input[type="email"]:focus ~ i, 
+.authForm input[type="email"]:focus ~ i,
 .authForm input[type="password"]:focus ~ i {
   border-color: rgba(133, 255, 122, 1);
   background-color: rgba(133, 255, 122, 1);
   color: rgba(44, 63, 82, 1);
-} 
+}
 
 .authForm {
   max-width: 400px;
   margin: 3em auto;
   padding: 2em;
-  background-color: rgba(255,255,255,0.1);
+  background-color: rgba(255, 255, 255, 0.1);
   /* box-shadow: 0 0 20px 0 rgb(255,255,255,0.051); */
   border-radius: 0.5em;
 }
@@ -135,7 +133,7 @@
 }
 
 .field i {
-   order: 2;
+  order: 2;
   display: flex;
   align-items: center;
   padding: 0 1em;
@@ -153,7 +151,7 @@
   font-style: italic;
   font-weight: bold;
   letter-spacing: 0.01em;
-  order:4;
+  order: 4;
   width: 100%;
   padding-bottom: 0;
   margin-bottom: 0;

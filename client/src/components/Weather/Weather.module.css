@@ -83,19 +83,18 @@
     margin-left: -50px;
   }
 
- .weatherTitle {
-   font-size: 1em;
+  .weatherTitle {
+    font-size: 1em;
   }
 
- .cityName {
-   font-size: 0.8em;
+  .cityName {
+    font-size: 0.8em;
   }
 
- .temperature {
-   font-size: 1.5em;
+  .temperature {
+    font-size: 1.5em;
   }
 }
-
 
 @media (min-width: 601px) and (max-width: 799px) {
   .weatherWidget {

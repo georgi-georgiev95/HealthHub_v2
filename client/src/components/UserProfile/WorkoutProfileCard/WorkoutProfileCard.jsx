@@ -4,11 +4,9 @@ import { Link } from "react-router-dom";
 import fatLossImage from "../../Catalogs/WorkoutCatalog/WorkoutGridCard/assets/fatLoss.png";
 import muscleGainImage from "../../Catalogs/WorkoutCatalog/WorkoutGridCard/assets/muscleGain.png";
 
-
-
 const WorkoutProfileCard = ({ id, workoutTitle, workoutGoal }) => {
   const image = workoutGoal == "Weight Loss" ? fatLossImage : muscleGainImage;
-  
+
   return (
     <Link to={`/catalog/workouts/${id}`} className={styles.link}>
       <div className={styles.workoutCard}>

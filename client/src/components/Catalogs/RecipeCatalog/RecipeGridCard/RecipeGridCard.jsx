@@ -5,26 +5,26 @@ import { Link } from "react-router-dom";
 const RecipeGridCard = ({ recipeData }) => {
   const difficulty = "⭐".repeat(recipeData.difficulty);
 
-    return (
-      <Link to={`/catalog/recipes/${recipeData.id}`} key={recipeData.id}>
-        <div className={styles.flipCard} key={recipeData.id}>
-          <div className={styles.flipCardInner}>
-            <div
-              className={styles.flipCardFront}
-              style={{
-                backgroundImage: `url(${recipeData.image})`,
-                backgroundSize: `cover`,
-              }}
-            ></div>
-            <div className={styles.flipCardBack}>
-              <h2>{recipeData.title}</h2>
-              <p>Difficulty: {difficulty}</p>
-              <p>Added by: {recipeData.ownerName}</p>
-            </div>
+  return (
+    <Link to={`/catalog/recipes/${recipeData.id}`} key={recipeData.id}>
+      <div className={styles.flipCard} key={recipeData.id}>
+        <div className={styles.flipCardInner}>
+          <div
+            className={styles.flipCardFront}
+            style={{
+              backgroundImage: `url(${recipeData.image})`,
+              backgroundSize: `cover`,
+            }}
+          ></div>
+          <div className={styles.flipCardBack}>
+            <h2>{recipeData.title}</h2>
+            <p>Difficulty: {difficulty}</p>
+            <p>Added by: {recipeData.ownerName}</p>
           </div>
         </div>
-      </Link>
-    );
+      </div>
+    </Link>
+  );
 };
 
 RecipeGridCard.propTypes = {

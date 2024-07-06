@@ -3,7 +3,10 @@ import { useState } from "react";
 import { firebaseAuth } from "../../config/firebase";
 import { useNavigate, Link } from "react-router-dom";
 import { useUser } from "../../contexts/UserContext";
-import { validateEmail, validatePassword } from "../../utils/authInputValidator";
+import {
+  validateEmail,
+  validatePassword,
+} from "../../utils/authInputValidator";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -24,16 +27,17 @@ const Login = () => {
       const userCredential = await firebaseAuth.login(email, password);
       const user = userCredential.user;
 
-
-      setUser({ userId: user.uid, email: user.email, username: user.displayName });
+      setUser({
+        userId: user.uid,
+        email: user.email,
+        username: user.displayName,
+      });
       navigate("/");
     } catch (error) {
       setError({ ...error, email: "Invalid email or password!" });
       setPassword("");
     }
   };
-
-
 
   return (
     <form className={styles.authForm} onSubmit={submitHandler}>

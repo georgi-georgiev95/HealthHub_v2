@@ -1,30 +1,29 @@
 import PropTypes from "prop-types";
-import styles from "./RecipeProfileCard.module.css"
+import styles from "./RecipeProfileCard.module.css";
 import { Link } from "react-router-dom";
 
 const RecipeProfileCard = ({ recipeData }) => {
+  const difficulty = "⭐".repeat(recipeData.difficulty);
 
-    const difficulty = "⭐".repeat(recipeData.difficulty);
-
-    return (
-        <Link to={`/catalog/recipes/${recipeData.id}`} className={styles.link}>
-            <div className={styles.recipeCard}>
-                <img src={recipeData.image} alt="recipe" />
-                <span>{difficulty}</span>
-                <p>{recipeData.title}</p>
-            </div>
-        </Link>
-    );
+  return (
+    <Link to={`/catalog/recipes/${recipeData.id}`} className={styles.link}>
+      <div className={styles.recipeCard}>
+        <img src={recipeData.image} alt="recipe" />
+        <span>{difficulty}</span>
+        <p>{recipeData.title}</p>
+      </div>
+    </Link>
+  );
 };
 
 RecipeProfileCard.propTypes = {
-    recipeData: PropTypes.shape({
-        id: PropTypes.string.isRequired,
-        title: PropTypes.string.isRequired,
-        difficulty: PropTypes.number.isRequired,
-        ownerName: PropTypes.string.isRequired,
-        image: PropTypes.string.isRequired,
-    }).isRequired,
+  recipeData: PropTypes.shape({
+    id: PropTypes.string.isRequired,
+    title: PropTypes.string.isRequired,
+    difficulty: PropTypes.number.isRequired,
+    ownerName: PropTypes.string.isRequired,
+    image: PropTypes.string.isRequired,
+  }).isRequired,
 };
 
 export default RecipeProfileCard;

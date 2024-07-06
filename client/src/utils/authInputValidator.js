@@ -22,12 +22,12 @@ const validatePassword = (e, error, setError) => {
         return;
     }
 
-    if(e.target.value.length < 6) {
+    if (e.target.value.length < 6) {
         setError({ ...error, password: `Password must be at least 6 characters long!` });
         return;
     }
 
-    if(e.target.value.length > 20) {
+    if (e.target.value.length > 20) {
         setError({ ...error, password: `Password must be at most 20 characters long!` });
         return;
     }
@@ -41,7 +41,7 @@ const validateRePassword = (e, password, error, setError) => {
         return;
     }
 
-    if(password && e.target.value !== password) {
+    if (password && e.target.value !== password) {
         setError({ ...error, rePassword: `Passwords do not match!` });
         return;
     }
@@ -53,7 +53,7 @@ const validateUsername = (e, error, setError) => {
     if (!e.target.value) {
         setError({ ...error, username: `Username is required!` });
         return;
-    }    
+    }
 
     const usernameRegex = /^[^\s]+$/;
     const isValid = usernameRegex.test(e.target.value.trim());
@@ -62,7 +62,7 @@ const validateUsername = (e, error, setError) => {
         setError({ ...error, username: `Username can not include whitespaces!` });
         return;
     }
-    
+
 
     setError({ ...error, username: '' });
 }

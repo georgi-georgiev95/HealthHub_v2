@@ -22,7 +22,9 @@
   text-align: center;
 }
 
-.difficulty, .goal, .owner {
+.difficulty,
+.goal,
+.owner {
   font-size: 1.2rem;
   color: #444;
   margin: 5px 0;
@@ -78,41 +80,40 @@
 }
 
 .exerciseName {
-    flex-basis: 60%;
+  flex-basis: 60%;
 }
 
 .exerciseSets {
-    flex-basis: 25%;
+  flex-basis: 25%;
 }
 
 .exerciseReps {
-    flex-grow: 1;
+  flex-grow: 1;
 }
 
 .buttons {
-    display: flex;
-    justify-content: center;
-    gap: 1em;
+  display: flex;
+  justify-content: center;
+  gap: 1em;
 }
 
 .editButton,
 .likeButton,
 .deleteButton {
-    padding: 0.5em 2em;
-    border-radius: 5px;
-    background-color: #ff6347;
-    color: white;
-    border: none;
-    cursor: pointer;
-    transition: background-color 0.3s;
+  padding: 0.5em 2em;
+  border-radius: 5px;
+  background-color: #ff6347;
+  color: white;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s;
 }
 
 .editButton:hover,
 .likeButton:hover,
 .deleteButton:hover {
-    background-color: #e5533d;
-}  
-
+  background-color: #e5533d;
+}
 
 @media (max-width: 600px) {
   .container {
@@ -127,7 +128,9 @@
     font-size: 1.1rem;
   }
 
-  .difficulty, .goal, .owner {
+  .difficulty,
+  .goal,
+  .owner {
     font-size: 0.9rem;
     padding: 8px;
   }

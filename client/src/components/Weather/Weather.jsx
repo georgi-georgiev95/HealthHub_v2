@@ -9,46 +9,48 @@ const Weather = () => {
   const [error, setError] = useState("");
 
   useEffect(() => {
-    navigator.geolocation.getCurrentPosition(async (position) => {
-      const { latitude, longitude } = position.coords;
-      setLocation({ latitude, longitude });
+    navigator.geolocation.getCurrentPosition(
+      async (position) => {
+        const { latitude, longitude } = position.coords;
+        setLocation({ latitude, longitude });
 
-      try {
-        const locationKeyResponse = await fetch(
-          `https://dataservice.accuweather.com/locations/v1/cities/geoposition/search?apikey=uOtUB2HjqvccRseuDd3b9Yv3WG9krzT4&q=${latitude},${longitude}`
-        );
+        try {
+          const locationKeyResponse = await fetch(
+            `https://dataservice.accuweather.com/locations/v1/cities/geoposition/search?apikey=uOtUB2HjqvccRseuDd3b9Yv3WG9krzT4&q=${latitude},${longitude}`
+          );
 
-        if (!locationKeyResponse.ok) {
-          throw new Error("Failed to fetch location key");
+          if (!locationKeyResponse.ok) {
+            throw new Error("Failed to fetch location key");
+          }
+
+          const locationKeyData = await locationKeyResponse.json();
+          const locationKey = locationKeyData.Key;
+          setCityName(locationKeyData.LocalizedName);
+
+          const weatherResponse = await fetch(
+            `https://dataservice.accuweather.com/currentconditions/v1/${locationKey}?apikey=uOtUB2HjqvccRseuDd3b9Yv3WG9krzT4`
+          );
+
+          if (!weatherResponse.ok) {
+            throw new Error("Failed to fetch weather data");
+          }
+
+          const weatherData = await weatherResponse.json();
+          setWeather(weatherData[0]);
+
+          const currentTime = new Date();
+          const sunsetTime = new Date(weatherData[0].Sunset);
+          setIsDayTime(currentTime < sunsetTime);
+        } catch (error) {
+          console.error("Error fetching weather data:", error);
+          setError("Failed to load weather data.");
         }
-
-        const locationKeyData = await locationKeyResponse.json();
-        const locationKey = locationKeyData.Key;
-        setCityName(locationKeyData.LocalizedName);
-
-        const weatherResponse = await fetch(
-          `https://dataservice.accuweather.com/currentconditions/v1/${locationKey}?apikey=uOtUB2HjqvccRseuDd3b9Yv3WG9krzT4`
-        );
-
-        if (!weatherResponse.ok) {
-          throw new Error("Failed to fetch weather data");
-        }
-
-        const weatherData = await weatherResponse.json();
-        setWeather(weatherData[0]);
-
-        const currentTime = new Date();
-        const sunsetTime = new Date(weatherData[0].Sunset);
-        setIsDayTime(currentTime < sunsetTime);
-      } catch (error) {
-        console.error("Error fetching weather data:", error);
-        setError("Failed to load weather data.");
+      },
+      (err) => {
+        console.error("Error getting geolocation:", err);
+        setError("Geolocation is not enabled.");
       }
-    },
-    (err) => {
-          console.error("Error getting geolocation:", err);
-          setError("Geolocation is not enabled.");
-        });
+    );
   }, []);
 
   if (!weather || !location)

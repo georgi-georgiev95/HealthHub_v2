@@ -66,7 +66,7 @@ const CreateWorkout = () => {
   const handleSubmit = async (event) => {
     event.preventDefault();
 
-    if(
+    if (
       workout.title === "" ||
       workout.description === "" ||
       workout.difficulty === "-" ||

@@ -1,51 +1,51 @@
 .card {
-    background-color: #fff;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    padding: 16px;
-    margin: 16px;
-    width: 350px;
-    height: 150px;
-    transition: transform 0.2s;
-    display: flex;
-    justify-content: space-between;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 16px;
+  margin: 16px;
+  width: 350px;
+  height: 150px;
+  transition: transform 0.2s;
+  display: flex;
+  justify-content: space-between;
 }
 
 .card:hover {
-    transform: scale(1.05);
+  transform: scale(1.05);
 }
 
 .name {
-    font-size: 1.5em;
-    margin-bottom: 8px;
-    color: #333;
+  font-size: 1.5em;
+  margin-bottom: 8px;
+  color: #333;
 }
 
 .difficulty,
 .goal,
 .owner {
-    margin-bottom: 0;
-    padding-bottom: 0;
-    font-size: 1em;
-    color: #666
+  margin-bottom: 0;
+  padding-bottom: 0;
+  font-size: 1em;
+  color: #666;
 }
 
 .image {
-    width: 100px;
-    aspect-ratio: 1/1;
-    display: block;
+  width: 100px;
+  aspect-ratio: 1/1;
+  display: block;
 }
 
 .leftSide {
-    display: flex;
-    flex-direction: column;
-    flex-basis: 60%;
+  display: flex;
+  flex-direction: column;
+  flex-basis: 60%;
 }
 
 .leftSide h2 {
-    flex-grow: 1;
+  flex-grow: 1;
 }
 
 .link {
-    text-decoration: none;
+  text-decoration: none;
 }

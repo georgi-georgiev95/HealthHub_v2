@@ -3,7 +3,12 @@ import { useState } from "react";
 import { firebaseAuth } from "../../config/firebase";
 import { useNavigate, Link } from "react-router-dom";
 import { useUser } from "../../contexts/UserContext";
-import { validateEmail, validatePassword, validateRePassword, validateUsername } from "../../utils/authInputValidator";
+import {
+  validateEmail,
+  validatePassword,
+  validateRePassword,
+  validateUsername,
+} from "../../utils/authInputValidator";
 import { updateProfile } from "firebase/auth";
 
 const Register = () => {
@@ -11,7 +16,11 @@ const Register = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [rePassword, setRePassword] = useState("");
-  const [error, setError] = useState({ email: "", password: "", rePassword: "" });
+  const [error, setError] = useState({
+    email: "",
+    password: "",
+    rePassword: "",
+  });
 
   const navigate = useNavigate();
   const { setUser } = useUser();
@@ -36,7 +45,7 @@ const Register = () => {
       });
 
       setUser({ userId: user.uid, email: user.email, username: username });
-      
+
       navigate("/");
     } catch (error) {
       setError({ ...error, email: "Email already registered!" });
@@ -122,7 +131,9 @@ const Register = () => {
       </fieldset>
 
       <input className={styles.submit} type="submit" value="Register" />
-      <Link className={styles.link} to="/users/login">Already registered? Login here!</Link>
+      <Link className={styles.link} to="/users/login">
+        Already registered? Login here!
+      </Link>
     </form>
   );
 };

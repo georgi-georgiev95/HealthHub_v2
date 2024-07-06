@@ -9,13 +9,13 @@ const Navigation = () => {
   const navigate = useNavigate();
   const { user, setUser } = useUser();
   const [mobileNavStatus, setMobileNavStatus] = useState(false);
-  const [profileDetailsVisibility, setProfileDetailsVisibility] = useState(false);
-
+  const [profileDetailsVisibility, setProfileDetailsVisibility] =
+    useState(false);
 
   const handleLogout = async () => {
     await logoutHandler();
     collapseNav();
-  }
+  };
 
   const logoutHandler = async () => {
     await firebaseAuth.logout();
@@ -25,16 +25,16 @@ const Navigation = () => {
 
   const expandNav = () => {
     setMobileNavStatus(!mobileNavStatus);
-  }
+  };
 
   const collapseNav = () => {
     setMobileNavStatus(false);
     setProfileDetailsVisibility(false);
-  }
+  };
 
   const expandProfile = () => {
     setProfileDetailsVisibility(!profileDetailsVisibility);
-  }
+  };
 
   return (
     <div className={styles.navWrapper}>
@@ -98,7 +98,9 @@ const Navigation = () => {
                 <Link onClick={collapseNav} to="create">
                   Add
                 </Link>
-                <Link onClick={collapseNav} to="users/profile">Profile</Link>
+                <Link onClick={collapseNav} to="users/profile">
+                  Profile
+                </Link>
               </>
             )}
             {user.email ? (
@@ -122,7 +124,9 @@ const Navigation = () => {
         {profileDetailsVisibility && (
           <ul className={styles.profileMenu}>
             <p className={styles.username}>Welcome, {user.username}!</p>
-            <Link onClick={collapseNav} to="users/profile">Profile</Link>
+            <Link onClick={collapseNav} to="users/profile">
+              Profile
+            </Link>
             <Link onClick={handleLogout}>Logout</Link>
           </ul>
         )}

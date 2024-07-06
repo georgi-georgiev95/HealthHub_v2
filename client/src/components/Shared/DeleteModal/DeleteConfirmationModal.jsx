@@ -1,7 +1,6 @@
 import styles from "./DeleteConfirmationModal.module.css";
 import PropTypes from "prop-types";
 
-
 const DeleteConfirmationModal = ({ isOpen, onCancel, onConfirm }) => {
   return (
     isOpen && (

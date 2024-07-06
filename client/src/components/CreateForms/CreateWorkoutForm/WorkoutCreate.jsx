@@ -7,29 +7,30 @@ import { createWorkout } from "../../../services/workoutService";
 const CreateWorkout = () => {
   const difficultyLevels = ["-", "Beginner", "Intermediate", "Advanced"];
   const goals = ["-", "Weight Loss", "Muscle Gain"];
-  const [exercises, setExercises] = useState([{ 
-    exerciseName: "",
-    sets: "",
-    reps: "",
-   }]);
+  const [exercises, setExercises] = useState([
+    {
+      exerciseName: "",
+      sets: "",
+      reps: "",
+    },
+  ]);
   const [difficulty, setDifficulty] = useState("-");
   const [goal, setGoal] = useState("-");
-  
 
   const navigate = useNavigate();
 
   const addInputField = () => {
     if (
-      exercises[exercises.length - 1].sets === ""
-      || exercises[exercises.length - 1].reps === ""
-      || exercises[exercises.length - 1].exerciseName === ""
-      || exercises[exercises.length - 1].sets === undefined
-      || exercises[exercises.length - 1].reps === undefined
-      || exercises[exercises.length - 1].exerciseName === undefined
+      exercises[exercises.length - 1].sets === "" ||
+      exercises[exercises.length - 1].reps === "" ||
+      exercises[exercises.length - 1].exerciseName === "" ||
+      exercises[exercises.length - 1].sets === undefined ||
+      exercises[exercises.length - 1].reps === undefined ||
+      exercises[exercises.length - 1].exerciseName === undefined
     ) {
       return;
     }
-    setExercises([...exercises, {value: ""}]);
+    setExercises([...exercises, { value: "" }]);
   };
 
   const handleNewExercise = (index, field, value) => {
@@ -43,11 +44,11 @@ const CreateWorkout = () => {
 
   const handleDifficultyChange = (event) => {
     setDifficulty(event.target.value);
-  }
-  
+  };
+
   const deleteExercise = (index) => {
     setExercises(exercises.filter((exercise, i) => i !== index));
-  }
+  };
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -62,16 +63,21 @@ const CreateWorkout = () => {
       ownerName: firebaseAuth.currentUser().displayName,
     };
 
-    if (workoutData.title === "" || workoutData.description === "" || difficulty === "-" || goal === "-" || workoutData.exercises[0] === "") {
+    if (
+      workoutData.title === "" ||
+      workoutData.description === "" ||
+      difficulty === "-" ||
+      goal === "-" ||
+      workoutData.exercises[0] === ""
+    ) {
       return;
-    } 
-    
+    }
+
     await createWorkout(workoutData);
 
     navigate("/catalog/workouts");
-  }
+  };
 
-  
   return (
     <>
       <h2 className={styles.formTitle}>Create Workout</h2>

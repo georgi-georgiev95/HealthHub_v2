@@ -55,7 +55,12 @@ const UserProfile = () => {
         )}
         <ul className={styles.recipeList}>
           {workouts.map((workout) => (
-            <WorkoutProfileCard key={workout.id} id={workout.id} workoutTitle={workout.title} workoutGoal={workout.goal} />
+            <WorkoutProfileCard
+              key={workout.id}
+              id={workout.id}
+              workoutTitle={workout.title}
+              workoutGoal={workout.goal}
+            />
           ))}
         </ul>
       </div>

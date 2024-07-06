@@ -4,7 +4,6 @@ import { useEffect, useState } from "react";
 import { getOneRecipe, editRecipe } from "../../services/recipeService";
 import SecondaryLoader from "../Shared/SecondaryLoader/SecondaryLoader";
 
-
 const EditRecipe = () => {
   const [recipe, setRecipe] = useState({
     title: "",
