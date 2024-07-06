@@ -5,6 +5,7 @@ import { getOneWorkout, deleteWorkout } from "../../../services/workoutService";
 import { Link, useNavigate } from "react-router-dom";
 import { useUser } from "../../../contexts/UserContext";
 import DeleteConfirmationModal from "../../Shared/DeleteModal/DeleteConfirmationModal";
+import SecondaryLoader from "../../Shared/SecondaryLoader/SecondaryLoader";
 
 const WorkoutDetails = () => {
     const [workout, setWorkout] = useState({
@@ -17,13 +18,15 @@ const WorkoutDetails = () => {
         ownerName: "",
     });
   const [showDeleteModal, setShowDeleteModal] = useState(false);
+  const [loading, setLoading] = useState(true);
   const { id } = useParams();
   const { user } = useUser();
   const navigate = useNavigate();
 
     useEffect(() => {
         (async () => {
-            await getOneWorkout(id, setWorkout);
+          await getOneWorkout(id, setWorkout);
+          setLoading(false);
         })();
     }, [id]);
   
@@ -43,6 +46,10 @@ const WorkoutDetails = () => {
   const closeDeleteModalHandler = () => {
     setShowDeleteModal(false);
   };
+
+  if (loading) { 
+    return <SecondaryLoader/>
+  }
 
     return (
       <div className={styles.container}>
