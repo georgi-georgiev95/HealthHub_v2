@@ -58,9 +58,6 @@ const RecipeDetails = () => {
   return (
     <div className={styles.detailsContainer}>
       <h2>{recipe.title}</h2>
-      <Link to="/catalog/recipes">
-        <i className="fa-solid fa-left-long" style={{ color: "#ffffff" }}></i>
-      </Link>
       <div className={styles.details}>
         <img src={recipe.image} alt={recipe.title} className={styles.image} />
         <div className={styles.description}>
