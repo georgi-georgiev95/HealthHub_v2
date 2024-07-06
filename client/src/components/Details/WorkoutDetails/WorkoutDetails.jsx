@@ -34,7 +34,7 @@ const WorkoutDetails = () => {
           <ul className={styles.exercisesList}>
             {workout.exercises.map((exercise, index) => (
               <li key={index} className={styles.exerciseItem}>
-                <span className={styles.exerciseName}>{exercise}</span>
+                <span className={styles.exerciseName}>{exercise.exerciseName}</span>
                 <span className={styles.exerciseSets}>
                   Sets: {exercise.sets}
                 </span>
