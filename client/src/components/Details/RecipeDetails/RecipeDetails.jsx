@@ -72,7 +72,7 @@ const RecipeDetails = () => {
           </ul>
           <div className={styles.buttons}>
             {user.userId === recipe.ownerId && (
-              <Link to={`edit/${id}`}>
+              <Link to={`edit`}>
                 <button className={styles.editButton}>Edit</button>
               </Link>
             )}

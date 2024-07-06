@@ -7,7 +7,7 @@ const DeleteConfirmationModal = ({ isOpen, onCancel, onConfirm }) => {
     isOpen && (
       <div className={styles.modalOverlay}>
         <div className={styles.modal}>
-          <p>Are you sure you want to delete this recipe?</p>
+          <p>Are you sure you want to delete this entry?</p>
           <div className={styles.buttons}>
             <button className={styles.cancelButton} onClick={onCancel}>
               Cancel

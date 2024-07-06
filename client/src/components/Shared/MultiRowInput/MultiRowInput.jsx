@@ -9,7 +9,7 @@ const MultiRowInput = ({
   deleteEntity,
 }) => {
   return (
-    <li className={styles.listGroup}>
+    <li className={styles.listGroupRecipes}>
       <span>{index + 1}. </span>
       <input
         type="text"

@@ -82,7 +82,8 @@ const EditRecipe = () => {
         <div className={styles.formGroup}>
           <label htmlFor="ingredients">Ingredients:</label>
           {recipe.ingredients.map((ingredient, index) => (
-            <div key={index} className={styles.listGroup}>
+            <div key={index} className={styles.listGroupRecipes}>
+              <span>{index + 1}. </span>
               <input
                 type="text"
                 value={ingredient}
