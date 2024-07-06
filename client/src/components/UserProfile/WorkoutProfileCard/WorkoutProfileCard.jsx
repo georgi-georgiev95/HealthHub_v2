@@ -6,9 +6,9 @@ import muscleGainImage from "../../Catalogs/WorkoutCatalog/WorkoutGridCard/asset
 
 
 
-const WorkoutProfileCard = ({ id, workoutTitle, difficulty }) => {
-  const image = difficulty === "Fat Loss" ? fatLossImage : muscleGainImage;
-
+const WorkoutProfileCard = ({ id, workoutTitle, workoutGoal }) => {
+  const image = workoutGoal == "Weight Loss" ? fatLossImage : muscleGainImage;
+  
   return (
     <Link to={`/catalog/workouts/${id}`} className={styles.link}>
       <div className={styles.workoutCard}>
@@ -22,7 +22,7 @@ const WorkoutProfileCard = ({ id, workoutTitle, difficulty }) => {
 WorkoutProfileCard.propTypes = {
   id: PropTypes.string.isRequired,
   workoutTitle: PropTypes.string.isRequired,
-  difficulty: PropTypes.string.isRequired,
+  workoutGoal: PropTypes.string.isRequired,
 };
 
 export default WorkoutProfileCard;
