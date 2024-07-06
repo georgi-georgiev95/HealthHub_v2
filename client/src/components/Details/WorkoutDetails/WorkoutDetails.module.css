@@ -82,6 +82,10 @@
 }
 
 .exerciseSets {
+    flex-basis: 25%;
+}
+
+.exerciseReps {
     flex-grow: 1;
 }
 
