@@ -15,7 +15,6 @@ const WorkoutCatalog = () => {
         })();
     }, []);
   
-  console.log(workouts);
     
     if (loading) {
       return <SecondaryLoader />;

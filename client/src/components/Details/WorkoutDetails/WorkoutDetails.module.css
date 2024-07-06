@@ -1,0 +1,33 @@
+.container {
+    background: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 16px;
+    margin: 16px;
+    max-width: 400px;
+    transition: transform 0.2s;
+    text-align: left;
+}
+
+.container:hover {
+    transform: scale(1.05);
+}
+
+.title {
+    font-size: 1.8em;
+    margin-bottom: 8px;
+    color: #333;
+}
+
+.description {
+    font-size: 1.2em;
+    margin-bottom: 12px;
+    color: #555;
+}
+
+.difficulty, .goal, .owner {
+    font-size: 1em;
+    margin-bottom: 8px;
+    color: #777;
+}
