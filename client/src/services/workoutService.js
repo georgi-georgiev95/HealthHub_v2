@@ -1,4 +1,4 @@
-import { getDocs, getDoc, collection, setDoc, doc, deleteDoc } from "firebase/firestore";
+import { getDocs, getDoc, collection, setDoc, doc, deleteDoc, updateDoc } from "firebase/firestore";
 import { firebaseAuth } from "../config/firebase";
 
 export const getAllWorkouts = async (setWorkout) => {
@@ -47,3 +47,11 @@ export const deleteWorkout = async (workoutId) => {
     }
 };
 
+export const editWorkout = async (workoutId, workoutData) => {
+    try {
+        const workoutDocRef = doc(firebaseAuth.db(), "workouts", workoutId);
+        await updateDoc(workoutDocRef, workoutData);
+    } catch (error) {
+        console.log(error);
+    }
+};
