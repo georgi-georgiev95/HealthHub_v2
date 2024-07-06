@@ -36,3 +36,4 @@ export const createWorkout = async (workoutData) => {
         console.log(error);
     }
 };
+

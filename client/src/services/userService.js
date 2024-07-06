@@ -15,3 +15,18 @@ export const getUserRecipes = async (userId, setRecipes) => {
         console.log(error);
     }
 };
+
+export const getUserWorkouts = async (userId, setWorkouts) => {
+    try {
+        const workoutsCollection = collection(firebaseAuth.db(), "workouts");
+        const userWorkoutsQuery = query(workoutsCollection, where("ownerId", "==", userId));
+        const userWorkoutsSnapshot = await getDocs(userWorkoutsQuery);
+        const userWorkoutsList = userWorkoutsSnapshot.docs.map((doc) => ({
+            id: doc.id,
+            ...doc.data(),
+        }));
+        setWorkouts(userWorkoutsList);
+    } catch (error) {
+        console.log(error);
+    }
+}
