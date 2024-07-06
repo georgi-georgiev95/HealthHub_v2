@@ -1,0 +1,14 @@
+.workoutCard img {
+    display: block;
+    width: 100px;
+    height: 100px;
+    margin: 0 auto;
+    object-fit: cover;
+    border-radius: 50%;
+    box-shadow: 0 0 10px 2px rgba(0, 0, 0, 0.3);
+}
+
+.link {
+    text-decoration: none;
+    color: white;
+}
