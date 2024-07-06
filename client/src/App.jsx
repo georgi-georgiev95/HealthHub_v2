@@ -16,6 +16,7 @@ import RecipeDetails from "./components/Details/RecipeDetails/RecipeDetails";
 import EditRecipe from "./components/EditForms/EditRecipe";
 import UserProfile from "./components/UserProfile/UserProfile";
 import WorkoutDetails from "./components/Details/WorkoutDetails/WorkoutDetails";
+import EditWorkout from "./components/EditForms/EditWorkout";
 
 function App() {
   const { loading } = useUser();
@@ -35,6 +36,7 @@ function App() {
             <Route path="catalog/recipes/:id/edit" element={<EditRecipe />} />
             <Route path="catalog/workouts" element={<WorkoutCatalog />} />
             <Route path="catalog/workouts/:id" element={<WorkoutDetails />} />
+            <Route path="catalog/workouts/:id/edit" element={<EditWorkout />} />
             <Route path="create" element={<PreCreateFormView />} />
             <Route path="create/recipe" element={<CreateRecipe />} />
             <Route path="create/workout" element={<CreateWorkout />} />
