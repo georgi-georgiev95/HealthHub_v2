@@ -1,5 +1,5 @@
 .userProfileContainer {
-  max-width: 600px;
+  max-width: 1000px;
   border: 2px solid white;
   color: white;
   margin: 2em auto;
@@ -57,4 +57,29 @@
 .noRecipes {
   text-align: center;
   font-style: italic;
+}
+
+.liked, 
+.created {
+  width: 400px;
+}
+
+.container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  text-align: center;
+  gap: 2em;
+  padding: 1em;
+}
+
+@media (max-width: 900px) { 
+  .container {
+    flex-direction: column;
+  }
+
+  .liked, 
+  .created {
+    width: 100%;
+  } 
 }
