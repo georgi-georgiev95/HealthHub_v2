@@ -84,7 +84,7 @@ const RecipeDetails = () => {
             {user.userId !== recipe.ownerId &&
               user.userId !== "" &&
               user.userId !== undefined && (
-                <button className={styles.likeButton}>Like</button>
+                <button className={styles.likeButton}>Add to favorites</button>
               )}
           </div>
         </div>
