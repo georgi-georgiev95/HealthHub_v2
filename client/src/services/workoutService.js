@@ -55,3 +55,24 @@ export const editWorkout = async (workoutId, workoutData) => {
         console.log(error);
     }
 };
+
+export const setLikes = async (userId, workoutId) => {
+    try {
+        const workoutDocRef = doc(firebaseAuth.db(), "workouts", workoutId);
+        const workoutSnapshot = await getDoc(workoutDocRef);
+        const workoutData = workoutSnapshot.data();
+        const likes = workoutData.likes || [];
+
+        if (likes.includes(userId)) {
+            await updateDoc(workoutDocRef, {
+                likes: likes.filter((id) => id !== userId),
+            });
+        } else {
+            await updateDoc(workoutDocRef, {
+                likes: [...likes, userId],
+            });
+        }
+    } catch (error) {
+        console.log(error);
+    }
+};
