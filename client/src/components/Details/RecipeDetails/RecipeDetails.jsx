@@ -1,6 +1,6 @@
 import { useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
-import { getOneRecipe, deleteRecipe } from "../../../services/recipeService";
+import { getOneRecipe, deleteRecipe, setLikes } from "../../../services/recipeService";
 import { Link, useNavigate } from "react-router-dom";
 import { useUser } from "../../../contexts/UserContext";
 import styles from "./RecipeDetails.module.css";
@@ -12,6 +12,7 @@ const RecipeDetails = () => {
     title: "",
     image: "",
     description: "",
+    likes: [],
     ingredients: [],
     ownerId: "",
   });
@@ -51,6 +52,16 @@ const RecipeDetails = () => {
     setShowDeleteModal(false);
   };
 
+  const handleLikeAction = async () => {
+    try {
+      await setLikes(user.userId, id);
+      navigate("/catalog/recipes/" + id);
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+
   if (loading) {
     return <SecondaryLoader />;
   }
@@ -84,7 +95,11 @@ const RecipeDetails = () => {
             {user.userId !== recipe.ownerId &&
               user.userId !== "" &&
               user.userId !== undefined && (
-                <button className={styles.likeButton}>Add to favorites</button>
+                recipe.likes.includes(user.userId) ? 
+                  <button className={styles.likeButton} onClick={handleLikeAction}>Remove from favorites</button> 
+              : 
+                  <button className={styles.likeButton} onClick={handleLikeAction}>Add to favorites</button>
+                
               )}
           </div>
         </div>
