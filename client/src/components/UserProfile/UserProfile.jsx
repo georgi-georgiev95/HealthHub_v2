@@ -1,7 +1,7 @@
 import styles from "./UserProfile.module.css";
 import { useUser } from "../../contexts/UserContext";
 import { useState, useEffect } from "react";
-import { getUserRecipes, getUserWorkouts } from "../../services/userService";
+import { getUserRecipes, getUserWorkouts, getUserLikedRecipes, getUserLikedWorkouts } from "../../services/userService";
 import RecipeProfileCard from "./RecipeProfileCard/RecipeProfileCard";
 import SecondaryLoader from "../Shared/SecondaryLoader/SecondaryLoader";
 import WorkoutProfileCard from "./WorkoutProfileCard/WorkoutProfileCard";
@@ -9,6 +9,8 @@ import WorkoutProfileCard from "./WorkoutProfileCard/WorkoutProfileCard";
 const UserProfile = () => {
   const [recipes, setRecipes] = useState([]);
   const [workouts, setWorkouts] = useState([]);
+  const [likedRecipes, setLikedRecipes] = useState([]);
+  const [likedWorkouts, setLikedWorkouts] = useState([]);
   const [loading, setLoading] = useState(true);
   const { user } = useUser();
 
@@ -17,9 +19,14 @@ const UserProfile = () => {
       setLoading(true);
       await getUserRecipes(user.userId, setRecipes);
       await getUserWorkouts(user.userId, setWorkouts);
+      await getUserLikedRecipes(user.userId, setLikedRecipes);
+      await getUserLikedWorkouts(user.userId, setLikedWorkouts);
       setLoading(false);
     })();
   }, []);
+
+  console.log(likedRecipes);
+  console.log(likedWorkouts);
 
   if (loading) {
     return <SecondaryLoader />;
