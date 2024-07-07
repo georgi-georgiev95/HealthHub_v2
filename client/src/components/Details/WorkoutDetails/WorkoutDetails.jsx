@@ -1,7 +1,7 @@
 import styles from "./WorkoutDetails.module.css";
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { getOneWorkout, deleteWorkout } from "../../../services/workoutService";
+import { getOneWorkout, deleteWorkout, setLikes } from "../../../services/workoutService";
 import { Link, useNavigate } from "react-router-dom";
 import { useUser } from "../../../contexts/UserContext";
 import DeleteConfirmationModal from "../../Shared/DeleteModal/DeleteConfirmationModal";
@@ -14,6 +14,7 @@ const WorkoutDetails = () => {
     difficulty: "",
     goal: "",
     exercises: [],
+    likes: [],
     ownerId: "",
     ownerName: "",
   });
@@ -46,6 +47,15 @@ const WorkoutDetails = () => {
   const closeDeleteModalHandler = () => {
     setShowDeleteModal(false);
   };
+
+  const handleLikeAction = async () => {
+    try {
+      await setLikes(user.userId, id);
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
 
   if (loading) {
     return <SecondaryLoader />;
@@ -88,7 +98,10 @@ const WorkoutDetails = () => {
         {user.userId !== workout.ownerId &&
           user.userId !== "" &&
           user.userId !== undefined && (
-            <button className={styles.likeButton}>Like</button>
+            workout.likes.includes(user.userId) ? 
+            <button className={styles.likeButton} onClick={handleLikeAction}>Remove from favorites</button>
+            : 
+            <button className={styles.likeButton} onClick={handleLikeAction}>Add to favorites</button>
           )}
       </div>
 
