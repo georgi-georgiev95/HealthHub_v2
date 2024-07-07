@@ -54,3 +54,24 @@ export const deleteRecipe = async (recipeId) => {
         console.log(error);
     }
 };
+
+export const setLikes = async (userId, recipeId) => {
+    try {
+        const recipeDocRef = doc(firebaseAuth.db(), "recipes", recipeId);
+        const recipeSnapshot = await getDoc(recipeDocRef);
+        const recipeData = recipeSnapshot.data();
+        const likes = recipeData.likes || [];
+
+        if (likes.includes(userId)) {
+            await updateDoc(recipeDocRef, {
+                likes: likes.filter((id) => id !== userId),
+            });
+        } else {
+            await updateDoc(recipeDocRef, {
+                likes: [...likes, userId],
+            });
+        }
+    } catch (error) {
+        console.log(error);
+    }
+};
