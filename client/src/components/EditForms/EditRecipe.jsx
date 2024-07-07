@@ -43,6 +43,10 @@ const EditRecipe = () => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
+    if(recipe.ingredients[recipe.ingredients.length - 1] === "") {
+      return;
+    }
+
     const recipeData = recipe;
 
     await editRecipe(id, recipeData);
