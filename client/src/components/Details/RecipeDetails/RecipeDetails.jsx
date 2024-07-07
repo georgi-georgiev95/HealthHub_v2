@@ -55,11 +55,18 @@ const RecipeDetails = () => {
   const handleLikeAction = async () => {
     try {
       await setLikes(user.userId, id);
-      navigate("/catalog/recipes/" + id);
+      setRecipe((prevRecipe) => {
+        const userHasLiked = prevRecipe.likes.includes(user.userId);
+        const updatedLikes = userHasLiked
+          ? prevRecipe.likes.filter((like) => like !== user.userId)
+          : [...prevRecipe.likes, user.userId];
+
+        return { ...prevRecipe, likes: updatedLikes };
+      });
     } catch (error) {
       console.log(error);
     }
-  }
+  };
 
 
   if (loading) {

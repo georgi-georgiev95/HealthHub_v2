@@ -51,10 +51,18 @@ const WorkoutDetails = () => {
   const handleLikeAction = async () => {
     try {
       await setLikes(user.userId, id);
+      setWorkout((prevWorkout) => {
+        const userHasLiked = prevWorkout.likes.includes(user.userId);
+        const updatedLikes = userHasLiked
+          ? prevWorkout.likes.filter((like) => like !== user.userId)
+          : [...prevWorkout.likes, user.userId];
+
+        return { ...prevWorkout, likes: updatedLikes };
+      });
     } catch (error) {
       console.log(error);
     }
-  }
+  };
 
 
   if (loading) {
