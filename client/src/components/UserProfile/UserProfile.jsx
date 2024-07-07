@@ -71,6 +71,39 @@ const UserProfile = () => {
           ))}
         </ul>
       </div>
+
+      <div className={styles.entity}>
+        <h3>Your Liked Recipes:</h3>
+        {likedRecipes.length === 0 && (
+          <p className={styles.noRecipes}>
+            You haven&apos;t liked any recipes yet.
+          </p>
+        )}
+        <ul className={styles.recipeList}>
+          {likedRecipes.map((recipe) => (
+            <RecipeProfileCard key={recipe.id} recipeData={recipe} />
+          ))}
+        </ul>
+      </div>
+
+      <div className={styles.entity}>
+        <h3>Your Liked Workouts:</h3>
+        {likedWorkouts.length === 0 && (
+          <p className={styles.noRecipes}>
+            You haven&apos;t liked any workouts yet.
+          </p>
+        )}
+        <ul className={styles.recipeList}>
+          {likedWorkouts.map((workout) => (
+            <WorkoutProfileCard
+              key={workout.id}
+              id={workout.id}
+              workoutTitle={workout.title}
+              workoutGoal={workout.goal}
+            />
+          ))}
+        </ul>
+      </div>
     </div>
   );
 };
