@@ -17,6 +17,11 @@ import EditRecipe from "./components/EditForms/EditRecipe";
 import UserProfile from "./components/UserProfile/UserProfile";
 import WorkoutDetails from "./components/Details/WorkoutDetails/WorkoutDetails";
 import EditWorkout from "./components/EditForms/EditWorkout";
+import PageNotFound from "./components/BadRoutes/PageNotFound";
+import UnauthorizedRequest from "./components/BadRoutes/UnauthorizedRequest";
+import UserRoutesProtector from "./utils/UserRoutesProtector";
+import GuestRoutesProtector from "./utils/GuestRoutesProtector";
+import OwnerRoutesProtector from "./utils/OwnerRoutesProtector";
 
 function App() {
   const { loading } = useUser();
@@ -33,16 +38,29 @@ function App() {
             <Route path="catalog" element={<Catalog />} />
             <Route path="catalog/recipes" element={<RecipeCatalog />} />
             <Route path="catalog/recipes/:id" element={<RecipeDetails />} />
-            <Route path="catalog/recipes/:id/edit" element={<EditRecipe />} />
             <Route path="catalog/workouts" element={<WorkoutCatalog />} />
             <Route path="catalog/workouts/:id" element={<WorkoutDetails />} />
-            <Route path="catalog/workouts/:id/edit" element={<EditWorkout />} />
-            <Route path="create" element={<PreCreateFormView />} />
-            <Route path="create/recipe" element={<CreateRecipe />} />
-            <Route path="create/workout" element={<CreateWorkout />} />
-            <Route path="users/login" element={<Login />} />
-            <Route path="users/register" element={<Register />} />
-            <Route path="users/profile" element={<UserProfile />} />
+
+            <Route element={<OwnerRoutesProtector />}>
+              <Route path="catalog/recipes/:id/edit" element={<EditRecipe />} />
+              <Route path="catalog/workouts/:id/edit" element={<EditWorkout />}
+              />
+            </Route>
+
+            <Route element={<UserRoutesProtector />}>
+              <Route path="create" element={<PreCreateFormView />} />
+              <Route path="create/recipe" element={<CreateRecipe />} />
+              <Route path="create/workout" element={<CreateWorkout />} />
+              <Route path="users/profile" element={<UserProfile />} />
+            </Route>
+
+            <Route element={<GuestRoutesProtector />}>
+              <Route path="users/login" element={<Login />} />
+              <Route path="users/register" element={<Register />} />
+            </Route>
+
+            <Route path="400" element={<UnauthorizedRequest />} />
+            <Route path="*" element={<PageNotFound />} />
           </Routes>
         </div>
       </div>
