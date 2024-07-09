@@ -50,6 +50,8 @@ html {
   justify-content: space-around;
   padding: 2em 1em;
   background-color: #f9f9f9;
+  /* background: url('../../assets/background.avif') no-repeat center center fixed; */
+  /* background-size: cover; */
 }
 
 .feature {
