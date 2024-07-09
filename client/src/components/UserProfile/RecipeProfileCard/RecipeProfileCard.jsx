@@ -1,5 +1,5 @@
 import PropTypes from "prop-types";
-import styles from "./RecipeProfileCard.module.css";
+import styles from "../Card.module.css";
 import { Link } from "react-router-dom";
 
 const RecipeProfileCard = ({ recipeData }) => {
@@ -7,7 +7,7 @@ const RecipeProfileCard = ({ recipeData }) => {
 
   return (
     <Link to={`/catalog/recipes/${recipeData.id}`} className={styles.link}>
-      <div className={styles.recipeCard}>
+      <div className={styles.card}>
         <img src={recipeData.image} alt="recipe" />
         <span>{difficulty}</span>
         <p>{recipeData.title}</p>

@@ -1,5 +1,5 @@
 import PropTypes from "prop-types";
-import styles from "./WorkoutProfileCard.module.css";
+import styles from "../Card.module.css";
 import { Link } from "react-router-dom";
 import fatLossImage from "../../Catalogs/WorkoutCatalog/WorkoutGridCard/assets/fatLoss.png";
 import muscleGainImage from "../../Catalogs/WorkoutCatalog/WorkoutGridCard/assets/muscleGain.png";
@@ -9,7 +9,7 @@ const WorkoutProfileCard = ({ id, workoutTitle, workoutGoal }) => {
 
   return (
     <Link to={`/catalog/workouts/${id}`} className={styles.link}>
-      <div className={styles.workoutCard}>
+      <div className={styles.card}>
         <img src={image} alt="workout" />
         <p>{workoutTitle}</p>
       </div>

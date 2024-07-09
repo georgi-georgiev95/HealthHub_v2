@@ -22,6 +22,9 @@ export const getOneRecipe = async (recipeId, setRecipe) => {
         const recipeDocRef = doc(firebaseAuth.db(), "recipes", recipeId);
         const recipeSnapshot = await getDoc(recipeDocRef);
         const recipeData = recipeSnapshot.data();
+        if(recipeData.likes === undefined) {
+            recipeData.likes = [];
+        }
         setRecipe(recipeData);
     } catch (error) {
         console.log(error);

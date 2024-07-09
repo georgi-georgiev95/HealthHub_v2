@@ -51,7 +51,7 @@ const UserProfile = () => {
                 You haven&apos;t created any recipes yet.
               </p>
             )}
-            <ul className={styles.recipeList}>
+            <ul className={styles.entityList}>
               {recipes.map((recipe) => (
                 <RecipeProfileCard key={recipe.id} recipeData={recipe} />
               ))}
@@ -65,7 +65,7 @@ const UserProfile = () => {
                 You haven&apos;t created any workouts yet.
               </p>
             )}
-            <ul className={styles.recipeList}>
+            <ul className={styles.entityList}>
               {workouts.map((workout) => (
                 <WorkoutProfileCard
                   key={workout.id}
@@ -86,7 +86,7 @@ const UserProfile = () => {
                 You haven&apos;t liked any recipes yet.
               </p>
             )}
-            <ul className={styles.recipeList}>
+            <ul className={styles.entityList}>
               {likedRecipes.map((recipe) => (
                 <RecipeProfileCard key={recipe.id} recipeData={recipe} />
               ))}
@@ -100,7 +100,7 @@ const UserProfile = () => {
                 You haven&apos;t liked any workouts yet.
               </p>
             )}
-            <ul className={styles.recipeList}>
+            <ul className={styles.entityList}>
               {likedWorkouts.map((workout) => (
                 <WorkoutProfileCard
                   key={workout.id}

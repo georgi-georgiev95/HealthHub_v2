@@ -35,6 +35,7 @@ const RecipeDetails = () => {
     })();
   }, [id]);
 
+
   const deleteHandler = async () => {
     try {
       await deleteRecipe(id);

@@ -1,18 +1,16 @@
 .userProfileContainer {
   max-width: 1000px;
-  border: 2px solid white;
-  color: white;
+  border: 2px solid #e0e0e0;
+  border-radius: 1em;
+  color: white; /* Keep the white text color */
   margin: 2em auto;
   padding: 1em;
+  font-family: Arial, sans-serif;
 }
 
 .greeting {
   text-align: center;
   font-size: 1.3em;
-}
-
-.greeting h2 {
-  padding-bottom: 0;
 }
 
 .entity {
@@ -23,63 +21,56 @@
   padding: 1em;
 }
 
-.recipeList {
+.entityList {
   display: flex;
-  gap: 4em;
+  gap: 2em;
   padding: 1.5em;
   overflow-x: auto;
 }
 
-.recipeList::-webkit-scrollbar {
+.entityList::-webkit-scrollbar {
   width: 12px;
 }
 
-.recipeList::-webkit-scrollbar-track {
-  background: rgba(0, 0, 0, 0.1);
+.entityList::-webkit-scrollbar-track {
+  background: #333; /* Dark background for the track */
 }
 
-.recipeList::-webkit-scrollbar-thumb {
-  background-color: rgba(255, 255, 255, 0.5);
+.entityList::-webkit-scrollbar-thumb {
+  background-color: #888;
   border-radius: 6px;
 }
 
-.recipeList::-webkit-scrollbar-thumb:hover {
-  background-color: rgba(255, 255, 255, 0.7);
+.entityList::-webkit-scrollbar-thumb:hover {
+  background-color: #555;
 }
 
-.recipeList a {
+.entityList a {
   max-width: 150px;
   flex: 0 0 150px;
   text-align: center;
   overflow: hidden;
+  text-decoration: none;
+  color: white; /* White text color for consistency */
 }
 
 .noRecipes {
   text-align: center;
   font-style: italic;
+  color: #888;
 }
 
-.liked, 
+.liked,
 .created {
-  width: 400px;
+  width: 100%;
 }
 
-.container {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  text-align: center;
-  gap: 2em;
-  padding: 1em;
+.liked {
+  background-color: #444; 
+  border: 1px solid #555; 
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); 
 }
 
-@media (max-width: 900px) { 
-  .container {
-    flex-direction: column;
-  }
-
-  .liked, 
-  .created {
-    width: 100%;
-  } 
+.entity h3 {
+  font-size: 1.2em;
 }
