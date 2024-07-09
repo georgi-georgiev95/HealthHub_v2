@@ -19,9 +19,9 @@ import WorkoutDetails from "./components/Details/WorkoutDetails/WorkoutDetails";
 import EditWorkout from "./components/EditForms/EditWorkout";
 import PageNotFound from "./components/BadRoutes/PageNotFound";
 import UnauthorizedRequest from "./components/BadRoutes/UnauthorizedRequest";
-import UserRoutesProtector from "./utils/UserRoutesProtector";
-import GuestRoutesProtector from "./utils/GuestRoutesProtector";
-import OwnerRoutesProtector from "./utils/OwnerRoutesProtector";
+import UserRoutesProtector from "./components/Utils/UserRoutesProtector";
+import GuestRoutesProtector from "./components/Utils/GuestRoutesProtector";
+import OwnerRoutesProtector from "./components/Utils/OwnerRoutesProtector";
 
 function App() {
   const { loading } = useUser();

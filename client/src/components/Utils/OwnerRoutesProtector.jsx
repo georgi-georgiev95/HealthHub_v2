@@ -1,8 +1,8 @@
 import { Outlet, Navigate, useLocation, useParams } from "react-router-dom";
-import { useUser } from "../contexts/UserContext";
+import { useUser } from "../../contexts/UserContext";
 import { useEffect, useState } from "react";
-import { getOneRecipe } from "../services/recipeService";
-import { getOneWorkout } from "../services/workoutService";
+import { getOneRecipe } from "../../services/recipeService";
+import { getOneWorkout } from "../../services/workoutService";
 
 const UserRoutesProtector = () => {
   const [recipe, setRecipe] = useState({});
