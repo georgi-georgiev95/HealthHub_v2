@@ -22,8 +22,8 @@
 
 .image {
   display: block;
-  max-width: 500px;
-  max-height: 500px;
+  width: 500px;
+  height: 500px;
   border-radius: 1em;
   object-fit: cover;
 }
@@ -86,5 +86,10 @@
 
   .detailsContainer > a > i {
     display: none;
+  }
+
+  .image {
+    max-width: 300px;
+    max-height: 300px;
   }
 }

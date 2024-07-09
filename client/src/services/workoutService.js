@@ -22,6 +22,9 @@ export const getOneWorkout = async (workoutId, setWorkout) => {
         const workoutDocRef = doc(firebaseAuth.db(), "workouts", workoutId);
         const workoutSnapshot = await getDoc(workoutDocRef);
         const workoutData = workoutSnapshot.data();
+        if(workoutData.likes === undefined) {
+            workoutData.likes = [];
+        }
         setWorkout(workoutData);
     } catch (error) {
         console.log(error);
