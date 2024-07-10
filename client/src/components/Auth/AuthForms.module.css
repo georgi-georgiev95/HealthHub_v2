@@ -47,7 +47,8 @@
 .authForm input[type="email"],
 .authForm input[type="password"] {
   border: 2px solid rgba(44, 63, 82, 1);
-  border-radius: 0.4em;
+  border-top-right-radius: 0.4em;
+  border-bottom-right-radius: 0.4em;
   background-color: transparent;
   /* color: rgba(133, 255, 122, 1); */
   color: white;
