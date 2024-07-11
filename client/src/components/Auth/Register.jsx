@@ -1,5 +1,5 @@
 import styles from "./AuthForms.module.css";
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import { firebaseAuth } from "../../config/firebase";
 import { useNavigate, Link } from "react-router-dom";
 import { useUser } from "../../contexts/UserContext";
@@ -24,6 +24,12 @@ const Register = () => {
 
   const navigate = useNavigate();
   const { setUser } = useUser();
+
+  const inputRef = useRef();
+
+  useEffect(() => {
+    inputRef.current.focus();
+  }, [])
 
   const submitHandler = async (e) => {
     e.preventDefault();
@@ -69,6 +75,7 @@ const Register = () => {
           <input
             type="text"
             id="username"
+            ref={inputRef}
             value={username}
             onChange={(e) => setUsername(e.target.value)}
             onBlur={(e) => validateUsername(e, error, setError)}
