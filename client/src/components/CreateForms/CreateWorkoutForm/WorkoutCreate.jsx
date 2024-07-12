@@ -30,7 +30,7 @@ const CreateWorkout = () => {
     ) {
       return;
     }
-    setExercises([...exercises, { value: "" }]);
+    setExercises([...exercises, { exerciseName: "", sets: "", reps: "" }]);
   };
 
   const handleNewExercise = (index, field, value) => {
