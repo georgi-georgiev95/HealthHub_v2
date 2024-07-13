@@ -12,10 +12,12 @@ import {
 import { updateProfile } from "firebase/auth";
 
 const Register = () => {
-  const [username, setUsername] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [rePassword, setRePassword] = useState("");
+  const [userData, setUserData] = useState({
+    username: "",
+    email: "",
+    password: "",
+    rePassword: "",
+  })
   const [error, setError] = useState({
     email: "",
     password: "",
@@ -34,29 +36,28 @@ const Register = () => {
   const submitHandler = async (e) => {
     e.preventDefault();
 
-    if (!email || !password) {
+    if (!userData.email || !userData.password) {
       return;
     }
 
-    if (password !== rePassword) {
+    if (userData.password !== userData.rePassword) {
       console.log("Passwords do not match");
       return;
     }
 
     try {
-      const userCredential = await firebaseAuth.register(email, password);
+      const userCredential = await firebaseAuth.register(userData.email, userData.password);
       const user = userCredential.user;
       await updateProfile(user, {
-        displayName: username,
+        displayName: userData.username,
       });
 
-      setUser({ userId: user.uid, email: user.email, username: username });
+      setUser({ userId: user.uid, email: user.email, username: userData.username });
 
       navigate("/");
     } catch (error) {
       setError({ ...error, email: "Email already registered!" });
-      setPassword("");
-      setRePassword("");
+      setUserData({ ...userData, password: "", rePassword: "" });
       return;
     }
   };
@@ -76,8 +77,8 @@ const Register = () => {
             type="text"
             id="username"
             ref={inputRef}
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
+            value={userData.username}
+            onChange={(e) => setUserData({...userData, username: e.target.value})}
             onBlur={(e) => validateUsername(e, error, setError)}
             required
           />
@@ -90,8 +91,8 @@ const Register = () => {
           <input
             type="email"
             id="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
+            value={userData.email}
+            onChange={(e) => setUserData({...userData, email: e.target.value})}
             onBlur={(e) => validateEmail(e, error, setError)}
             required
           />
@@ -109,8 +110,8 @@ const Register = () => {
           <input
             type="password"
             id="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
+            value={userData.password}
+            onChange={(e) => setUserData({...userData, password: e.target.value})}
             onBlur={(e) => validatePassword(e, error, setError)}
             required
           />
@@ -125,9 +126,9 @@ const Register = () => {
           <input
             type="password"
             id="rePassword"
-            value={rePassword}
-            onChange={(e) => setRePassword(e.target.value)}
-            onBlur={(e) => validateRePassword(e, password, error, setError)}
+            value={userData.rePassword}
+            onChange={(e) => setUserData({...userData, rePassword: e.target.value})}
+            onBlur={(e) => validateRePassword(e, userData.password, error, setError)}
           />
           <i className="fa fa-key"></i>
           <label htmlFor="rePassword">Repeat Password:</label>
