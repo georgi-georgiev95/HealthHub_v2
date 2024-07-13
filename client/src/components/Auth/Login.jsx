@@ -9,8 +9,9 @@ import {
 } from "../../utils/authInputValidator";
 
 const Login = () => {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [userData, setUserData] = useState({ email: "", password: "" });
+  // const [email, setEmail] = useState("");
+  // const [password, setPassword] = useState("");
   const [error, setError] = useState({ email: "", password: "" });
 
   const navigate = useNavigate();
@@ -25,12 +26,12 @@ const Login = () => {
   const submitHandler = async (e) => {
     e.preventDefault();
 
-    if (!email || !password) {
+    if (!userData.email || !userData.password) {
       return;
     }
 
     try {
-      const userCredential = await firebaseAuth.login(email, password);
+      const userCredential = await firebaseAuth.login(userData.email, userData.password);
       const user = userCredential.user;
 
       setUser({
@@ -41,7 +42,7 @@ const Login = () => {
       navigate("/");
     } catch (error) {
       setError({ ...error, email: "Invalid email or password!" });
-      setPassword("");
+      setUserData({ ...userData, password: "" });
     }
   };
 
@@ -58,8 +59,8 @@ const Login = () => {
             type="email"
             id="email"
             ref={inputRef}
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
+            value={userData.email}  
+            onChange={(e) => setUserData({ ...userData, email: e.target.value })}
             onBlur={(e) => validateEmail(e, error, setError)}
             required
           />
@@ -74,8 +75,8 @@ const Login = () => {
           <input
             type="password"
             id="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
+            value={userData.password}
+            onChange={(e) => setUserData({ ...userData, password: e.target.value })}
             onBlur={(e) => validatePassword(e, error, setError)}
             required
           />
