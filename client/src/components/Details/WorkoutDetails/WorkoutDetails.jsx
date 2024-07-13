@@ -6,6 +6,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useUser } from "../../../contexts/UserContext";
 import DeleteConfirmationModal from "../../Shared/DeleteModal/DeleteConfirmationModal";
 import SecondaryLoader from "../../Shared/SecondaryLoader/SecondaryLoader";
+import isBackButtonClicked from "../../../utils/experimentalBackButton";
 
 const WorkoutDetails = () => {
   const [workout, setWorkout] = useState({
@@ -65,12 +66,19 @@ const WorkoutDetails = () => {
   };
 
 
+  const handleBackButtonClick = (e) => {
+    if (isBackButtonClicked(e)) {
+      navigate("/catalog/workouts");
+    }
+  };
+
+
   if (loading) {
     return <SecondaryLoader />;
   }
 
   return (
-    <div className={styles.container}>
+    <div className={styles.container} onClick={handleBackButtonClick}>
       <h2 className={styles.title}>{workout.title}</h2>
       <p className={styles.description}>{workout.description}</p>
       <p className={styles.difficulty}>Difficulty: {workout.difficulty}</p>

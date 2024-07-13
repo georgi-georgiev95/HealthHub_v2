@@ -6,6 +6,7 @@ import { useUser } from "../../../contexts/UserContext";
 import styles from "./RecipeDetails.module.css";
 import SecondaryLoader from "../../Shared/SecondaryLoader/SecondaryLoader";
 import DeleteConfirmationModal from "../../Shared/DeleteModal/DeleteConfirmationModal";
+import isBackButtonClicked from "../../../utils/experimentalBackButton";
 
 const RecipeDetails = () => {
   const [recipe, setRecipe] = useState({
@@ -21,6 +22,12 @@ const RecipeDetails = () => {
   const { id } = useParams();
   const { user } = useUser();
   const navigate = useNavigate();
+
+  const handleBackButtonClick = (e) => {
+    if(isBackButtonClicked(e)) {
+      navigate("/catalog/recipes");
+    }
+  };
 
   useEffect(() => {
     (async () => {
@@ -75,7 +82,7 @@ const RecipeDetails = () => {
   }
 
   return (
-    <div className={styles.detailsContainer}>
+    <div className={styles.detailsContainer} onClick={handleBackButtonClick}>
       <h2>{recipe.title}</h2>
       <div className={styles.details}>
         <img src={recipe.image} alt={recipe.title} className={styles.image} />

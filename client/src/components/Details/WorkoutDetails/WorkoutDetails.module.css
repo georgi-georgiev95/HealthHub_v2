@@ -5,6 +5,25 @@
   background-color: #f9f9f9;
   border-radius: 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  position: relative;
+}
+
+.container::before {
+  content: "Back";
+  display: block;
+  position: absolute;
+  padding: 0.5em;
+  top: -30px;
+  left: 30px;
+  width: 100px;
+  height: 35px;
+  border-top-left-radius: 0.5em;
+  border-top-right-radius: 0.5em;
+  text-align: center;
+  font-weight: bold;
+  background-color: #f9f9f9;
+  z-index: 1;
+  cursor: pointer;
 }
 
 .title {
