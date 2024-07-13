@@ -55,21 +55,25 @@
 .authForm input[type="text"]:focus,
 .authForm input[type="email"]:focus,
 .authForm input[type="password"]:focus {
-  border-color: rgba(133, 255, 122, 1);
+  /* border-color: rgba(133, 255, 122, 1); */
+  border-color: white;
 }
 
-.authForm input[type="text"]:focus ~ label,
+/* .authForm input[type="text"]:focus ~ label,
 .authForm input[type="email"]:focus ~ label,
 .authForm input[type="password"]:focus ~ label {
   color: rgba(133, 255, 122, 1);
-}
+} */
 
 .authForm input[type="text"]:focus ~ i,
 .authForm input[type="email"]:focus ~ i,
 .authForm input[type="password"]:focus ~ i {
-  border-color: rgba(133, 255, 122, 1);
-  background-color: rgba(133, 255, 122, 1);
-  color: rgba(44, 63, 82, 1);
+  /* border-color: rgba(133, 255, 122, 1); */
+  /* background-color: rgba(133, 255, 122, 1); */
+  /* color: rgba(44, 63, 82, 1); */
+  border-color: white;
+  background-color: white;
+  color: black;
 }
 
 .authForm {
@@ -146,7 +150,7 @@
 }
 
 .error {
-  color: rgba(255, 0, 0, 0.539);
+  color: rgb(255, 0, 0);
   font-style: italic;
   font-weight: bold;
   letter-spacing: 0.01em;
