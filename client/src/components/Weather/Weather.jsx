@@ -82,6 +82,8 @@ const weatherIcons = {
   43: mostlyCloudyWithSnowNight,
 };
 
+// const mainCities = ["Sofia", "Varna", "Plovdiv", "Burgas"];
+
 const Weather = () => {
   const [weather, setWeather] = useState(null);
   const [location, setLocation] = useState(null);
@@ -100,6 +102,15 @@ const Weather = () => {
           const locationKeyResponse = await fetch(
             `https://dataservice.accuweather.com/locations/v1/cities/geoposition/search?apikey=uOtUB2HjqvccRseuDd3b9Yv3WG9krzT4&q=${latitude},${longitude}`
           );
+
+          // for (const city of mainCities) {
+          //   const response = await fetch(
+          //     `https://dataservice.accuweather.com/locations/v1/cities/search?apikey=uOtUB2HjqvccRseuDd3b9Yv3WG9krzT4&q=${city}`
+          //   );
+          //   const cityData = (await response.json()).filter(x => x.Country.ID === 'BG')[0];
+          //   console.log(cityData);
+          // }
+          
 
           if (!locationKeyResponse.ok) {
             throw new Error("Failed to fetch location key");
@@ -132,6 +143,7 @@ const Weather = () => {
         setError("Geolocation is not enabled.");
       }
     );
+
   }, []);
 
   if (!weather || !location)
@@ -153,8 +165,8 @@ const Weather = () => {
       }`}
     >
       <div className={styles.weatherInfo}>
-        <p className={styles.cityName}>{cityName}</p>
         <img className={styles.weatherIcon} src={weatherIcons[weatherIcon]} alt="" />
+        <p className={styles.cityName}>{cityName}</p>
         <p className={styles.temperature}>
           {weather.Temperature.Metric.Value}°{weather.Temperature.Metric.Unit}
         </p>

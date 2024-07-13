@@ -100,11 +100,23 @@
   .temperature {
     font-size: 1.5em;
   }
+
+  .weatherIcon {
+    width: 60px;
+    height: 40px;
+    left: -10px;
+    top: 0;
+  }
 }
 
 @media (min-width: 601px) and (max-width: 799px) {
   .weatherWidget {
     width: 150px;
     left: 60%;
+  }
+
+  .weatherIcon {
+    width: 60px;
+    height: 40px;
   }
 }
