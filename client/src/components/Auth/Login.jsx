@@ -10,8 +10,6 @@ import {
 
 const Login = () => {
   const [userData, setUserData] = useState({ email: "", password: "" });
-  // const [email, setEmail] = useState("");
-  // const [password, setPassword] = useState("");
   const [error, setError] = useState({ email: "", password: "" });
 
   const navigate = useNavigate();
@@ -21,7 +19,7 @@ const Login = () => {
 
   useEffect(() => {
     inputRef.current.focus();
-  }, [])
+  }, []);
 
   const submitHandler = async (e) => {
     e.preventDefault();
@@ -31,7 +29,10 @@ const Login = () => {
     }
 
     try {
-      const userCredential = await firebaseAuth.login(userData.email, userData.password);
+      const userCredential = await firebaseAuth.login(
+        userData.email,
+        userData.password
+      );
       const user = userCredential.user;
 
       setUser({
@@ -59,8 +60,10 @@ const Login = () => {
             type="email"
             id="email"
             ref={inputRef}
-            value={userData.email}  
-            onChange={(e) => setUserData({ ...userData, email: e.target.value })}
+            value={userData.email}
+            onChange={(e) =>
+              setUserData({ ...userData, email: e.target.value })
+            }
             onBlur={(e) => validateEmail(e, error, setError)}
             required
           />
@@ -76,7 +79,9 @@ const Login = () => {
             type="password"
             id="password"
             value={userData.password}
-            onChange={(e) => setUserData({ ...userData, password: e.target.value })}
+            onChange={(e) =>
+              setUserData({ ...userData, password: e.target.value })
+            }
             onBlur={(e) => validatePassword(e, error, setError)}
             required
           />
