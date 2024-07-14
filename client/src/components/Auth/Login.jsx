@@ -63,9 +63,8 @@ const Login = () => {
             value={userData.email}
             onChange={(e) => {
               setUserData({ ...userData, email: e.target.value });
-              validateEmail(e, error, setError)
-            }
-            }
+              validateEmail(e, error, setError);
+            }}
             required
           />
           <i className="fa fa-envelope"></i>
@@ -81,10 +80,9 @@ const Login = () => {
             id="password"
             value={userData.password}
             onChange={(e) => {
-              setUserData({ ...userData, password: e.target.value })
-              validatePassword(e, error, setError)
-            }
-            }
+              setUserData({ ...userData, password: e.target.value });
+              validatePassword(e, error, setError);
+            }}
             required
           />
           <i className="fa fa-key"></i>

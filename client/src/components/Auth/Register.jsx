@@ -17,7 +17,7 @@ const Register = () => {
     email: "",
     password: "",
     rePassword: "",
-  })
+  });
   const [error, setError] = useState({
     email: "",
     password: "",
@@ -31,7 +31,7 @@ const Register = () => {
 
   useEffect(() => {
     inputRef.current.focus();
-  }, [])
+  }, []);
 
   const submitHandler = async (e) => {
     e.preventDefault();
@@ -46,13 +46,20 @@ const Register = () => {
     }
 
     try {
-      const userCredential = await firebaseAuth.register(userData.email, userData.password);
+      const userCredential = await firebaseAuth.register(
+        userData.email,
+        userData.password
+      );
       const user = userCredential.user;
       await updateProfile(user, {
         displayName: userData.username,
       });
 
-      setUser({ userId: user.uid, email: user.email, username: userData.username });
+      setUser({
+        userId: user.uid,
+        email: user.email,
+        username: userData.username,
+      });
 
       navigate("/");
     } catch (error) {
@@ -79,10 +86,9 @@ const Register = () => {
             ref={inputRef}
             value={userData.username}
             onChange={(e) => {
-              setUserData({ ...userData, username: e.target.value })
-              validateUsername(e, error, setError)
-            }
-            }
+              setUserData({ ...userData, username: e.target.value });
+              validateUsername(e, error, setError);
+            }}
             required
           />
           <i className="fa fa-user"></i>
@@ -96,10 +102,9 @@ const Register = () => {
             id="email"
             value={userData.email}
             onChange={(e) => {
-              setUserData({ ...userData, email: e.target.value })
-              validateEmail(e, error, setError)
-            }
-            } 
+              setUserData({ ...userData, email: e.target.value });
+              validateEmail(e, error, setError);
+            }}
             required
           />
           <i className="fa fa-envelope"></i>
@@ -118,10 +123,9 @@ const Register = () => {
             id="password"
             value={userData.password}
             onChange={(e) => {
-              setUserData({ ...userData, password: e.target.value })
-              validatePassword(e, error, setError)
-            }
-            }
+              setUserData({ ...userData, password: e.target.value });
+              validatePassword(e, error, setError);
+            }}
             required
           />
           <i className="fa fa-key"></i>
@@ -137,10 +141,9 @@ const Register = () => {
             id="rePassword"
             value={userData.rePassword}
             onChange={(e) => {
-              setUserData({ ...userData, rePassword: e.target.value })
-              validateRePassword(e, userData.password, error, setError)
-            }
-            } 
+              setUserData({ ...userData, rePassword: e.target.value });
+              validateRePassword(e, userData.password, error, setError);
+            }}
           />
           <i className="fa fa-key"></i>
           <label htmlFor="rePassword">Repeat Password:</label>
