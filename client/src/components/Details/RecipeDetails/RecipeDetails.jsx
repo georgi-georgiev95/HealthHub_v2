@@ -81,6 +81,11 @@ const RecipeDetails = () => {
     return <SecondaryLoader />;
   }
 
+  if (!loading && recipe.title === "") { 
+    navigate("/404");
+    return;
+  }
+
   return (
     <div className={styles.detailsContainer} onClick={handleBackButtonClick}>
       <h2>{recipe.title}</h2>

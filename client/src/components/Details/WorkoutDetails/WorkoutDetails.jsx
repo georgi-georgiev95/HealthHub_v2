@@ -77,6 +77,11 @@ const WorkoutDetails = () => {
     return <SecondaryLoader />;
   }
 
+  if (!loading && workout.title === "") { 
+    navigate("/404");
+    return;
+  }
+
   return (
     <div className={styles.container} onClick={handleBackButtonClick}>
       <h2 className={styles.title}>{workout.title}</h2>
