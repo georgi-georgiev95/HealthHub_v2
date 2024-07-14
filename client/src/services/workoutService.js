@@ -26,6 +26,7 @@ export const getOneWorkout = async (workoutId, setWorkout) => {
             workoutData.likes = [];
         }
         setWorkout(workoutData);
+        return workoutData;
     } catch (error) {
         console.log(error);
     }

@@ -26,6 +26,7 @@ export const getOneRecipe = async (recipeId, setRecipe) => {
             recipeData.likes = [];
         }
         setRecipe(recipeData);
+        return recipeData;
     } catch (error) {
         console.log(error);
     }

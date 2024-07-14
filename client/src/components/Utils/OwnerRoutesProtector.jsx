@@ -5,37 +5,31 @@ import { getOneRecipe } from "../../services/recipeService";
 import { getOneWorkout } from "../../services/workoutService";
 
 const UserRoutesProtector = () => {
-  const [recipe, setRecipe] = useState({});
-    const [workout, setWorkout] = useState({});
-    const [isOwner, setIsOwner] = useState(false);
-    
-    const { id } = useParams();
-    const location = useLocation();
-    const path = location.pathname;
-    const pathSegments = path.split("/");
+  const [isOwner, setIsOwner] = useState(false);
+  const [loading, setLoading] = useState(true);
 
-    useEffect(() => {
-      (async () => {
-          if(pathSegments.includes("recipes")){
-              await getOneRecipe(id, setRecipe);
-              if(recipe.ownerId === user.userId) {
-                  setIsOwner(true);
-              } else {
-                  setIsOwner(false);
-              }
-          } else {
-              await getOneWorkout(id, setWorkout);
-              if(workout.ownerId === user.userId) {
-                  setIsOwner(true);
-              } else {
-                  setIsOwner(false);
-              }
-          }
-      })();
-    }, [])
+  const { id } = useParams();
+  const location = useLocation();
+  const path = location.pathname;
+  const pathSegments = path.split("/");
+
+  useEffect(() => {
+    (async () => {
+      if (pathSegments.includes("recipes")) {
+        const recipeData = await getOneRecipe(id);
+        console.log(recipeData.ownerId === user.userId);
+        setIsOwner(recipeData.ownerId === user.userId);
+      } else {
+        const workoutData = await getOneWorkout(id);
+        setIsOwner(workoutData.ownerId === user.userId);
+      }
+      setLoading(false);
+    })();
+  }, []);
+
   const { user } = useUser();
-    
-  if (!isOwner) {
+
+  if (!isOwner && !loading) {
     return <Navigate to="/400" />;
   }
 
