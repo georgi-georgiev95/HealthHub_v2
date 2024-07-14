@@ -78,8 +78,11 @@ const Register = () => {
             id="username"
             ref={inputRef}
             value={userData.username}
-            onChange={(e) => setUserData({...userData, username: e.target.value})}
-            onBlur={(e) => validateUsername(e, error, setError)}
+            onChange={(e) => {
+              setUserData({ ...userData, username: e.target.value })
+              validateUsername(e, error, setError)
+            }
+            }
             required
           />
           <i className="fa fa-user"></i>
@@ -92,8 +95,11 @@ const Register = () => {
             type="email"
             id="email"
             value={userData.email}
-            onChange={(e) => setUserData({...userData, email: e.target.value})}
-            onBlur={(e) => validateEmail(e, error, setError)}
+            onChange={(e) => {
+              setUserData({ ...userData, email: e.target.value })
+              validateEmail(e, error, setError)
+            }
+            } 
             required
           />
           <i className="fa fa-envelope"></i>
@@ -111,8 +117,11 @@ const Register = () => {
             type="password"
             id="password"
             value={userData.password}
-            onChange={(e) => setUserData({...userData, password: e.target.value})}
-            onBlur={(e) => validatePassword(e, error, setError)}
+            onChange={(e) => {
+              setUserData({ ...userData, password: e.target.value })
+              validatePassword(e, error, setError)
+            }
+            }
             required
           />
           <i className="fa fa-key"></i>
@@ -127,8 +136,11 @@ const Register = () => {
             type="password"
             id="rePassword"
             value={userData.rePassword}
-            onChange={(e) => setUserData({...userData, rePassword: e.target.value})}
-            onBlur={(e) => validateRePassword(e, userData.password, error, setError)}
+            onChange={(e) => {
+              setUserData({ ...userData, rePassword: e.target.value })
+              validateRePassword(e, userData.password, error, setError)
+            }
+            } 
           />
           <i className="fa fa-key"></i>
           <label htmlFor="rePassword">Repeat Password:</label>

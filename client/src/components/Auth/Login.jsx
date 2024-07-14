@@ -61,10 +61,11 @@ const Login = () => {
             id="email"
             ref={inputRef}
             value={userData.email}
-            onChange={(e) =>
-              setUserData({ ...userData, email: e.target.value })
+            onChange={(e) => {
+              setUserData({ ...userData, email: e.target.value });
+              validateEmail(e, error, setError)
             }
-            onBlur={(e) => validateEmail(e, error, setError)}
+            }
             required
           />
           <i className="fa fa-envelope"></i>
@@ -79,10 +80,11 @@ const Login = () => {
             type="password"
             id="password"
             value={userData.password}
-            onChange={(e) =>
+            onChange={(e) => {
               setUserData({ ...userData, password: e.target.value })
+              validatePassword(e, error, setError)
             }
-            onBlur={(e) => validatePassword(e, error, setError)}
+            }
             required
           />
           <i className="fa fa-key"></i>
