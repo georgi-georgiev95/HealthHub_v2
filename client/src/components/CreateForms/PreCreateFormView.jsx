@@ -8,16 +8,9 @@ const PreCreateFormView = () => {
     <>
       <h2 className={styles.catalogIntro}>Create your own</h2>
       <div className={styles.createHomeView}>
-        <Link className={styles.groupLink} to="/create/recipe">
-          <LargeRecipesLink />
-        </Link>
+          <LargeRecipesLink destination={'/create/recipe'} />
         <div className={styles.logo}></div>
-        <Link
-          className={`${styles.groupLink} ${styles.reverse}`}
-          to="/create/workout"
-        >
-          <LargeWorkoutsLink />
-        </Link>
+          <LargeWorkoutsLink destination={'/create/workout'} />
       </div>
     </>
   );

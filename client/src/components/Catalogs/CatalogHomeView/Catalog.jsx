@@ -1,4 +1,3 @@
-import { Link } from "react-router-dom";
 import styles from "./Catalog.module.css";
 import { LargeRecipesLink } from "../../Shared/LargeLinks/LargeRecipesLink";
 import { LargeWorkoutsLink } from "../../Shared/LargeLinks/LargeWorkoutsLink";
@@ -8,16 +7,9 @@ const Catalog = () => {
     <>
       <h2 className={styles.catalogIntro}>Explore our catalog</h2>
       <div className={styles.createHomeView}>
-        <Link className={styles.groupLink} to="/catalog/recipes">
-          <LargeRecipesLink />
-        </Link>
+          <LargeRecipesLink destination={'/catalog/recipes'}/>
         <div className={styles.logo}></div>
-        <Link
-          className={`${styles.groupLink} ${styles.reverse}`}
-          to="/catalog/workouts"
-        >
-          <LargeWorkoutsLink />
-        </Link>
+          <LargeWorkoutsLink destination={'/catalog/workouts'} />
       </div>
     </>
   );
