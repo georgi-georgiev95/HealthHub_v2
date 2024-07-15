@@ -1,0 +1,12 @@
+.entity {
+    margin: 2em 0;
+}
+
+.entity h3 {
+    font-size: 1.2em;
+    padding: 1em;
+}
+
+.created {
+    width: 100%;
+}
