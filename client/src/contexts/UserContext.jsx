@@ -1,8 +1,9 @@
 import { createContext, useContext, useState, useEffect } from "react";
-import { firebaseAuth } from "../config/firebase";
+import { verifyUser } from "../services/userService";
 import PropTypes from "prop-types";
 
 const UserContext = createContext();
+export const useUser = () => useContext(UserContext);
 
 export const UserProvider = ({ children }) => {
   const [user, setUser] = useState({
@@ -13,23 +14,7 @@ export const UserProvider = ({ children }) => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const unsubscribe = firebaseAuth.onAuthStateChanged((firebaseUser) => {
-      if (firebaseUser) {
-        setUser({
-          userId: firebaseUser.uid,
-          email: firebaseUser.email,
-          username: firebaseUser.displayName,
-        });
-      } else {
-        setUser({
-          userId: "",
-          email: "",
-          username: "",
-        });
-      }
-      setLoading(false);
-    });
-
+    const unsubscribe = verifyUser(setUser, setLoading);
     return () => unsubscribe();
   }, []);
 
@@ -44,4 +29,3 @@ UserProvider.propTypes = {
   children: PropTypes.node.isRequired,
 };
 
-export const useUser = () => useContext(UserContext);

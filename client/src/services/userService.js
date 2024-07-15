@@ -60,3 +60,25 @@ export const getUserLikedWorkouts = async (userId, setLikedWorkouts) => {
         console.log(error);
     }
 };
+
+export const verifyUser = (setUser, setLoading) => {
+
+    const unsubcribe = firebaseAuth.onAuthStateChanged((firebaseUser) => {
+        if (firebaseUser) {
+          setUser({
+            userId: firebaseUser.uid,
+            email: firebaseUser.email,
+            username: firebaseUser.displayName,
+          });
+        } else {
+          setUser({
+            userId: "",
+            email: "",
+            username: "",
+          });
+        }
+        setLoading(false);
+      });
+  
+      return unsubcribe;
+}
