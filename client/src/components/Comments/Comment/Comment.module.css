@@ -4,6 +4,7 @@
     border: 1px solid black;
     position: relative;
     margin-bottom: 1em;
+    min-height: 150px;
 }
 
 .image {
