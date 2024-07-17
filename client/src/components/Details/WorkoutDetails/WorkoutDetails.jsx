@@ -7,6 +7,7 @@ import { useUser } from "../../../contexts/UserContext";
 import DeleteConfirmationModal from "../../Shared/DeleteModal/DeleteConfirmationModal";
 import SecondaryLoader from "../../Shared/SecondaryLoader/SecondaryLoader";
 import isBackButtonClicked from "../../../utils/experimentalBackButton";
+import CommentSection from "../../Comments/CommentSection/CommentSection";
 
 const WorkoutDetails = () => {
   const [workout, setWorkout] = useState({
@@ -77,62 +78,65 @@ const WorkoutDetails = () => {
     return <SecondaryLoader />;
   }
 
-  if (!loading && workout.title === "") { 
+  if (!loading && workout.title === "") {
     navigate("/404");
     return;
   }
 
   return (
-    <div className={styles.container} onClick={handleBackButtonClick}>
-      <h2 className={styles.title}>{workout.title}</h2>
-      <p className={styles.description}>{workout.description}</p>
-      <p className={styles.difficulty}>Difficulty: {workout.difficulty}</p>
-      <p className={styles.goal}>Goal: {workout.goal}</p>
-      <p className={styles.owner}>Created by: {workout.ownerName}</p>
+    <>
+      <div className={styles.container} onClick={handleBackButtonClick}>
+        <h2 className={styles.title}>{workout.title}</h2>
+        <p className={styles.description}>{workout.description}</p>
+        <p className={styles.difficulty}>Difficulty: {workout.difficulty}</p>
+        <p className={styles.goal}>Goal: {workout.goal}</p>
+        <p className={styles.owner}>Created by: {workout.ownerName}</p>
 
-      <div className={styles.exercises}>
-        <h3 className={styles.exercisesTitle}>Exercises:</h3>
-        <ul className={styles.exercisesList}>
-          {workout.exercises.map((exercise, index) => (
-            <li key={index} className={styles.exerciseItem}>
-              <span className={styles.exerciseName}>
-                {exercise.exerciseName}
-              </span>
-              <span className={styles.exerciseSets}>Sets: {exercise.sets}</span>
-              <span className={styles.exerciseReps}>Reps: {exercise.reps}</span>
-            </li>
-          ))}
-        </ul>
-      </div>
+        <div className={styles.exercises}>
+          <h3 className={styles.exercisesTitle}>Exercises:</h3>
+          <ul className={styles.exercisesList}>
+            {workout.exercises.map((exercise, index) => (
+              <li key={index} className={styles.exerciseItem}>
+                <span className={styles.exerciseName}>
+                  {exercise.exerciseName}
+                </span>
+                <span className={styles.exerciseSets}>Sets: {exercise.sets}</span>
+                <span className={styles.exerciseReps}>Reps: {exercise.reps}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
 
-      <div className={styles.buttons}>
-        {user.userId === workout.ownerId && (
-          <Link to={`edit`}>
-            <button className={styles.editButton}>Edit</button>
-          </Link>
-        )}
-        {user.userId === workout.ownerId && (
-          <button className={styles.deleteButton} onClick={openDeleteModal}>
-            Delete
-          </button>
-        )}
-        {user.userId !== workout.ownerId &&
-          user.userId !== "" &&
-          user.userId !== undefined && (
-            workout.likes.includes(user.userId) ? 
-            <button className={styles.likeButton} onClick={handleLikeAction}>Remove from favorites</button>
-            : 
-            <button className={styles.likeButton} onClick={handleLikeAction}>Add to favorites</button>
+        <div className={styles.buttons}>
+          {user.userId === workout.ownerId && (
+            <Link to={`edit`}>
+              <button className={styles.editButton}>Edit</button>
+            </Link>
           )}
-      </div>
+          {user.userId === workout.ownerId && (
+            <button className={styles.deleteButton} onClick={openDeleteModal}>
+              Delete
+            </button>
+          )}
+          {user.userId !== workout.ownerId &&
+            user.userId !== "" &&
+            user.userId !== undefined && (
+              workout.likes.includes(user.userId) ?
+                <button className={styles.likeButton} onClick={handleLikeAction}>Remove from favorites</button>
+                :
+                <button className={styles.likeButton} onClick={handleLikeAction}>Add to favorites</button>
+            )}
+        </div>
 
-      <DeleteConfirmationModal
-        isOpen={showDeleteModal}
-        onCancel={closeDeleteModalHandler}
-        onConfirm={deleteHandler}
-        title={workout.title}
-      />
-    </div>
+        <DeleteConfirmationModal
+          isOpen={showDeleteModal}
+          onCancel={closeDeleteModalHandler}
+          onConfirm={deleteHandler}
+          title={workout.title}
+        />
+      </div>
+      <CommentSection />
+    </>
   );
 };
 
