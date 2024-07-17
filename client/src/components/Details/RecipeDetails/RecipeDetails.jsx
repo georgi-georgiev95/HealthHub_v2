@@ -7,6 +7,7 @@ import styles from "./RecipeDetails.module.css";
 import SecondaryLoader from "../../Shared/SecondaryLoader/SecondaryLoader";
 import DeleteConfirmationModal from "../../Shared/DeleteModal/DeleteConfirmationModal";
 import isBackButtonClicked from "../../../utils/experimentalBackButton";
+import CommentSection from "../../Comments/CommentSection/CommentSection";
 
 const RecipeDetails = () => {
   const [recipe, setRecipe] = useState({
@@ -24,7 +25,7 @@ const RecipeDetails = () => {
   const navigate = useNavigate();
 
   const handleBackButtonClick = (e) => {
-    if(isBackButtonClicked(e)) {
+    if (isBackButtonClicked(e)) {
       navigate("/catalog/recipes");
     }
   };
@@ -81,57 +82,61 @@ const RecipeDetails = () => {
     return <SecondaryLoader />;
   }
 
-  if (!loading && recipe.title === "") { 
+  if (!loading && recipe.title === "") {
     navigate("/404");
     return;
   }
 
   return (
-    <div className={styles.detailsContainer} onClick={handleBackButtonClick}>
-      <h2>{recipe.title}</h2>
-      <div className={styles.details}>
-        <img src={recipe.image} alt={recipe.title} className={styles.image} />
-        <div className={styles.description}>
-          <p>{recipe.description}</p>
-          <p>
-            <i className="fa-solid fa-utensils"></i> Ingredients:
-          </p>
-          <ul className={styles.ingredientList}>
-            {recipe.ingredients.map((ingredient, index) => (
-              <li key={index}>{ingredient}</li>
-            ))}
-          </ul>
-          <div className={styles.buttons}>
-            {user.userId === recipe.ownerId && (
-              <Link to={`edit`}>
-                <button className={styles.editButton}>Edit</button>
-              </Link>
-            )}
-            {user.userId === recipe.ownerId && (
-              <button className={styles.deleteButton} onClick={openDeleteModal}>
-                Delete
-              </button>
-            )}
-            {user.userId !== recipe.ownerId &&
-              user.userId !== "" &&
-              user.userId !== undefined && (
-                recipe.likes.includes(user.userId) ? 
-                  <button className={styles.likeButton} onClick={handleLikeAction}>Remove from favorites</button> 
-              : 
-                  <button className={styles.likeButton} onClick={handleLikeAction}>Add to favorites</button>
-                
+    <>
+      <div className={styles.detailsContainer} onClick={handleBackButtonClick}>
+        <h2>{recipe.title}</h2>
+        <div className={styles.details}>
+          <img src={recipe.image} alt={recipe.title} className={styles.image} />
+          <div className={styles.description}>
+            <p>{recipe.description}</p>
+            <p>
+              <i className="fa-solid fa-utensils"></i> Ingredients:
+            </p>
+            <ul className={styles.ingredientList}>
+              {recipe.ingredients.map((ingredient, index) => (
+                <li key={index}>{ingredient}</li>
+              ))}
+            </ul>
+            <div className={styles.buttons}>
+              {user.userId === recipe.ownerId && (
+                <Link to={`edit`}>
+                  <button className={styles.editButton}>Edit</button>
+                </Link>
               )}
+              {user.userId === recipe.ownerId && (
+                <button className={styles.deleteButton} onClick={openDeleteModal}>
+                  Delete
+                </button>
+              )}
+              {user.userId !== recipe.ownerId &&
+                user.userId !== "" &&
+                user.userId !== undefined && (
+                  recipe.likes.includes(user.userId) ?
+                    <button className={styles.likeButton} onClick={handleLikeAction}>Remove from favorites</button>
+                    :
+                    <button className={styles.likeButton} onClick={handleLikeAction}>Add to favorites</button>
+
+                )}
+            </div>
           </div>
         </div>
-      </div>
 
-      <DeleteConfirmationModal
-        isOpen={showDeleteModal}
-        onCancel={closeDeleteModalHandler}
-        onConfirm={deleteHandler}
-        title={recipe.title}
-      />
-    </div>
+
+        <DeleteConfirmationModal
+          isOpen={showDeleteModal}
+          onCancel={closeDeleteModalHandler}
+          onConfirm={deleteHandler}
+          title={recipe.title}
+        />
+      </div>
+      <CommentSection />
+    </>
   );
 };
 
