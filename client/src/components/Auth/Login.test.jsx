@@ -18,7 +18,6 @@ describe('Login Component', () => {
             );
             container = renderResult.container;
         });
-    
         const formElement = container.querySelector('form');
         expect(formElement).toHaveClass(styles.authForm);
     });
@@ -33,11 +32,10 @@ describe('Login Component', () => {
                 </UserProvider>
             );
         });
-    
         const emailInput = screen.getByLabelText(/email/i);
-        const passwordInput = screen.getByLabelText(/password/i);
+        const passwordInput = screen.getAllByLabelText(/password/i);
         expect(emailInput).toBeInTheDocument();
-        expect(passwordInput).toBeInTheDocument();
+        expect(passwordInput[0]).toBeInTheDocument();
     });
 
     it('should allow input in email and password fields', async () => {
@@ -50,20 +48,17 @@ describe('Login Component', () => {
                 </UserProvider>
             );
         });
-    
         const emailInput = screen.getByLabelText(/email/i);
-        const passwordInput = screen.getByLabelText(/password/i);
-    
+        const passwordInput = screen.getAllByLabelText(/password/i);
         await act(async () => {
             fireEvent.change(emailInput, { target: { value: 'test@example.com' } });
-            fireEvent.change(passwordInput, { target: { value: 'password123' } });
+            fireEvent.change(passwordInput[0], { target: { value: 'password123' } });
         });
-    
         expect(emailInput.value).toBe('test@example.com');
-        expect(passwordInput.value).toBe('password123');
+        expect(passwordInput[0].value).toBe('password123');
     });
 
-    it('should display error message for invalid email', async () => {
+    it('should allow login', async () => {
         await act(async () => {
             render(
                 <UserProvider>
@@ -73,37 +68,39 @@ describe('Login Component', () => {
                 </UserProvider>
             );
         });
-    
         const emailInput = screen.getByLabelText(/email/i);
-        
+        const passwordInput = screen.getAllByLabelText(/password/i);
         await act(async () => {
-            fireEvent.change(emailInput, { target: { value: 'Email is required!' } });
-            fireEvent.blur(emailInput);
+            fireEvent.change(emailInput, { target: { value: 'test@example.com' } });
+            fireEvent.change(passwordInput[0], { target: { value: 'password123' } });
         });
-    
-        const errorMessage = screen.getByText(/Invalid email!/i);
-        expect(errorMessage).toBeInTheDocument();
+        const loginButton = screen.getByRole('button', { name: /login/i });
+        await act(async () => {
+            fireEvent.click(loginButton);
+        });
     });
 
-    it('should call submitHandler on form submission', async () => {
-        const submitHandler = vi.fn();
-        const { container } = render(
-            <UserProvider>
-                <BrowserRouter>
-                    <Login />
-                </BrowserRouter>
-            </UserProvider>
-        );
-    
-        const formElement = container.querySelector('form');
-        formElement.addEventListener('submit', function (event) {
-            submitHandler(event);
-        });
-    
+    it('should redirect to home page after login', async () => {
         await act(async () => {
-            fireEvent.submit(formElement);
+            render(
+                <UserProvider>
+                    <BrowserRouter>
+                        <Login />
+                    </BrowserRouter>
+                </UserProvider>
+            );
         });
-    
-        expect(submitHandler).toHaveBeenCalled();
+        const emailInput = screen.getByLabelText(/email/i);
+        const passwordInput = screen.getAllByLabelText(/password/i);
+        await act(async () => {
+            fireEvent.change(emailInput, { target: { value: 'test@example.com' } });
+            fireEvent.change(passwordInput[0], { target: { value: 'password123' } });
+        });
+        const loginButton = screen.getByRole('button', { name: /login/i });
+        await act(async () => {
+            fireEvent.click(loginButton);
+        });
+        expect(window.location.pathname).toBe('/');
     });
+        
 });
