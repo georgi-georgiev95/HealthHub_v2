@@ -7,7 +7,7 @@
 .commentForm::before {
     display: block;
     content: "";
-    background-image: url('/profile.jpg');
+    background-image: url('/images/profile.jpg');
     background-size: cover;
     border-radius: 50%;
     width: 30px;
