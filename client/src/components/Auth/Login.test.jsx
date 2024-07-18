@@ -5,18 +5,21 @@ import UserProvider from '../../contexts/UserProvider'
 import Login from './Login';
 import styles from './AuthForms.module.css';
 
+const renderLoginComponent = () => {
+    return render(
+        <UserProvider>
+            <BrowserRouter>
+                <Login />
+            </BrowserRouter>
+        </UserProvider>
+    );
+};
+
 describe('Login Component', () => {
     it('should import styles correctly', async () => {
         let container;
         await act(async () => {
-            const renderResult = render(
-                <UserProvider>
-                    <BrowserRouter>
-                        <Login />
-                    </BrowserRouter>
-                </UserProvider>
-            );
-            container = renderResult.container;
+            container = renderLoginComponent().container;
         });
         const formElement = container.querySelector('form');
         expect(formElement).toHaveClass(styles.authForm);
