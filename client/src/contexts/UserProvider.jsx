@@ -10,6 +10,7 @@ const UserProvider = ({ children }) => {
         username: "",
     });
     const [loading, setLoading] = useState(true);
+    const [isCommentCreated, setIsCommentCreated] = useState(false);
 
     useEffect(() => {
         const unsubscribe = verifyUser(setUser, setLoading);
@@ -17,7 +18,7 @@ const UserProvider = ({ children }) => {
     }, []);
 
     return (
-        <UserContext.Provider value={{ user, setUser, loading, setLoading }}>
+        <UserContext.Provider value={{ user, setUser, loading, setLoading, isCommentCreated, setIsCommentCreated }}>
             {children}
         </UserContext.Provider>
     );

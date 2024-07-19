@@ -15,7 +15,7 @@ const CreateComment = () => {
         editAt: '',
     });
 
-    const { user } = useUser();
+    const { user, setIsCommentCreated } = useUser();
     const { id } = useParams();
 
     const formSubmitHandler = async (e) => {
@@ -23,7 +23,7 @@ const CreateComment = () => {
         if (comment.text === '') {
             return;
         }
-
+        setIsCommentCreated(true);
         await createComment(comment);
         setComment({ text: '', ownerId: '', ownerName: '', entityId: '' });
     };

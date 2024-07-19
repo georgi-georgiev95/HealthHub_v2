@@ -23,7 +23,7 @@ const RecipeDetails = () => {
   const [loading, setLoading] = useState(true);
   const [showDeleteModal, setShowDeleteModal] = useState(false);
   const { id } = useParams();
-  const { user } = useUser();
+  const { user, isCommentCreated, setIsCommentCreated } = useUser();
   const navigate = useNavigate();
 
   const handleBackButtonClick = (e) => {
@@ -36,6 +36,7 @@ const RecipeDetails = () => {
     (async () => {
       try {
         setLoading(true);
+        setIsCommentCreated(false);
         await getOneRecipe(id, setRecipe);
         await getAllComments(id, setComments);
       } catch (error) {
@@ -44,7 +45,7 @@ const RecipeDetails = () => {
         setLoading(false);
       }
     })();
-  }, [id]);
+  }, [id, isCommentCreated]);
 
 
   const deleteHandler = async () => {
