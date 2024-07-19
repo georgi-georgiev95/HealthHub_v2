@@ -1,7 +1,11 @@
 import styles from './Comment.module.css';
+import { useState } from 'react';
 import { useUser } from '../../../contexts/UserContext';
+import EditCommentModal from '../EditCommentModal/EditCommentModal';
+import { editComment } from '../../../services/commentService';
 
 const Comment = ({ commentData }) => {
+    const [isOpen, setIsOpen] = useState(false);
     const { user } = useUser();
     let createdAt;
     let editAt;
@@ -15,7 +19,12 @@ const Comment = ({ commentData }) => {
         }
     }
 
+    const onClose = () => {
+        setIsOpen(false);
+    }
+
     return (
+        <>
         <div className={styles.comment}>
             <img src={"/images/profile.jpg"} className={styles.image} alt="profile-photo" />
             <div>
@@ -28,13 +37,16 @@ const Comment = ({ commentData }) => {
             <div className={styles.buttons}>
                 {user.userId !== "" && user.userId === commentData.ownerId && (
                     <>
-                        <button>Edit</button>
+                        <button onClick={() => setIsOpen(true)}>Edit</button>
                         <button>Delete</button>
                     </>
                 )}
                 {user.userId !== "" && user.userId !== commentData.ownerId && <button>Like</button>}
             </div>
         </div>
+
+        <EditCommentModal isOpen={isOpen} commentData={commentData} onClose={onClose} />       
+        </>
     )
 };
 

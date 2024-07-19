@@ -25,17 +25,18 @@ const WorkoutDetails = () => {
   const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [loading, setLoading] = useState(true);
   const { id } = useParams();
-  const { user, isCommentCreated, setIsCommentCreated } = useUser();
+  const { user, isCommentCreated, setIsCommentCreated, isCommentEdited, setIsCommentEdited } = useUser();
   const navigate = useNavigate();
 
   useEffect(() => {
     (async () => {
       setIsCommentCreated(false);
+      setIsCommentEdited(false);
       await getOneWorkout(id, setWorkout);
       await getAllComments(id, setComments);
       setLoading(false);
     })();
-  }, [id, isCommentCreated]);
+  }, [id, isCommentCreated, isCommentEdited]);
 
   const deleteHandler = async () => {
     try {
