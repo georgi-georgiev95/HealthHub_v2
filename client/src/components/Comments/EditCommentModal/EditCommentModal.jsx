@@ -3,19 +3,12 @@ import { useState } from "react";
 import { editComment } from "../../../services/commentService";
 import { useUser } from "../../../contexts/UserContext";
 
-const EditCommentModal = ({ isOpen, onClose, commentData }) => {
-    const [comment, setComment] = useState({
-        text: commentData.text,
-        ownerId: commentData.ownerId,
-        ownerName: commentData.ownerName,
-        entityId: commentData.entityId,
-        createdAt: commentData.createdAt,
-        editAt: commentData.editAt,
-    });
+const EditCommentModal = ({ isOpen, onClose, commentData, setCommentData }) => {
+
     const { setIsCommentEdited } = useUser();
 
     const onConfirm = async () => {
-        await editComment(commentData.id, {...comment, editAt: new Date()});
+        await editComment(commentData.id, {...commentData, editAt: new Date()});
         setIsCommentEdited(true);
         onClose();
     }
@@ -27,8 +20,8 @@ const EditCommentModal = ({ isOpen, onClose, commentData }) => {
                     <h2>Edit Comment</h2>
                     <textarea
                         className={styles.textarea}
-                        defaultValue={commentData.text}
-                        onChange={(e) => setComment({ ...comment, text: e.target.value })}
+                        value={commentData.text}
+                        onChange={(e) => setCommentData({ ...commentData, text: e.target.value })}
                     />
                     <div className={styles.buttons}>
                         <button

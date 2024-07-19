@@ -4,8 +4,7 @@ import { useUser } from '../../../contexts/UserContext';
 import EditCommentModal from '../EditCommentModal/EditCommentModal';
 import { editComment } from '../../../services/commentService';
 
-const Comment = ({ commentData }) => {
-    const [isOpen, setIsOpen] = useState(false);
+const Comment = ({ commentData, setIsOpen, setComment }) => {
     const { user } = useUser();
     let createdAt;
     let editAt;
@@ -17,10 +16,6 @@ const Comment = ({ commentData }) => {
         if (commentData.editAt !== "" && commentData.editAt !== undefined) {
             editAt = new Date(commentData.editAt.seconds * 1000 + commentData.editAt.nanoseconds / 1000000);
         }
-    }
-
-    const onClose = () => {
-        setIsOpen(false);
     }
 
     return (
@@ -37,15 +32,16 @@ const Comment = ({ commentData }) => {
             <div className={styles.buttons}>
                 {user.userId !== "" && user.userId === commentData.ownerId && (
                     <>
-                        <button onClick={() => setIsOpen(true)}>Edit</button>
+                        <button onClick={() => {
+                            setIsOpen(true);
+                            setComment(commentData);
+                        }}>Edit</button>
                         <button>Delete</button>
                     </>
                 )}
                 {user.userId !== "" && user.userId !== commentData.ownerId && <button>Like</button>}
             </div>
         </div>
-
-        <EditCommentModal isOpen={isOpen} commentData={commentData} onClose={onClose} />       
         </>
     )
 };
