@@ -2,7 +2,7 @@ import styles from './Comment.module.css';
 import { useUser } from '../../../contexts/UserContext';
 import { deleteComment } from '../../../services/commentService';
 
-const Comment = ({ commentData, setIsOpen, setComment }) => {
+const Comment = ({ commentData, setIsOpenEditModal, setComment, setIsOpenDeleteModal }) => {
     const { user, setIsCommentDeleted } = useUser();
     let createdAt;
     let editAt;
@@ -31,12 +31,12 @@ const Comment = ({ commentData, setIsOpen, setComment }) => {
                     {user.userId !== "" && user.userId === commentData.ownerId && (
                         <>
                             <button onClick={() => {
-                                setIsOpen(true);
+                                setIsOpenEditModal(true);
                                 setComment(commentData);
                             }}>Edit</button>
-                            <button onClick={async () => {
-                                await deleteComment(commentData.id);
-                                setIsCommentDeleted(true);
+                            <button onClick={() => {
+                                setIsOpenDeleteModal(true)
+                                setComment(commentData)
                             }}>Delete</button>
                         </>
                     )}

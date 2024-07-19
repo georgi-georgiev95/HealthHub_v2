@@ -1,12 +1,14 @@
 import Comment from '../Comment/Comment';
 import CreateComment from '../CreateComment/CreateComment';
+import DeleteCommentModal from '../DeleteCommentModal/DeleteCommentModal';
 import EditCommentModal from '../EditCommentModal/EditCommentModal';
 import styles from './CommentSection.module.css';
 
 import {useState} from 'react';
 
 const CommentSection = ({comments}) => {
-    const [isOpen, setIsOpen] = useState(false);
+    const [isOpenEditModal, setIsOpenEditModal] = useState(false);
+    const [isOpenDeleteModal, setIsOpenDeleteModal] = useState(false);
     const [comment, setComment] = useState({
         text: '',
         ownerId: '',
@@ -22,10 +24,11 @@ const CommentSection = ({comments}) => {
             <h3>{comments.length} comments</h3>
             <CreateComment />
             {comments.map((comment) => (
-                <Comment key={comment.id} commentData={comment} setIsOpen={setIsOpen} setComment={setComment} />
+                <Comment key={comment.id} commentData={comment} setIsOpenEditModal={setIsOpenEditModal} setIsOpenDeleteModal={setIsOpenDeleteModal} setComment={setComment} />
             ))}
         </div>
-        <EditCommentModal isOpen={isOpen} onClose={() => setIsOpen(false)} commentData={comment} setCommentData={setComment} />
+        <EditCommentModal isOpen={isOpenEditModal} onClose={() => setIsOpenEditModal(false)} commentData={comment} setCommentData={setComment} />
+        <DeleteCommentModal isOpen={isOpenDeleteModal} onClose={() => setIsOpenDeleteModal(false)} commentData={comment} setCommentData={setComment} />
         </>
     )
 };

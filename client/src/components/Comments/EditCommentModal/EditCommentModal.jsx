@@ -1,5 +1,4 @@
 import styles from "./EditCommentModal.module.css";
-import { useState } from "react";
 import { editComment } from "../../../services/commentService";
 import { useUser } from "../../../contexts/UserContext";
 
