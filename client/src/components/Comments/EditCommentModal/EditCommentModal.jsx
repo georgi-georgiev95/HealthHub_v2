@@ -1,10 +1,19 @@
+import {useRef, useEffect} from "react";
+
 import styles from "./EditCommentModal.module.css";
 import { editComment } from "../../../services/commentService";
 import { useUser } from "../../../contexts/UserContext";
 
 const EditCommentModal = ({ isOpen, onClose, commentData, setCommentData }) => {
-
+    const textareaRef = useRef(null);
     const { setIsCommentEdited } = useUser();
+
+    useEffect(() => {
+        if (isOpen) {
+            textareaRef.current.focus();
+            textareaRef.current.setSelectionRange(textareaRef.current.value.length, textareaRef.current.value.length);
+        }
+    }, [isOpen]);
 
     const onConfirm = async () => {
         await editComment(commentData.id, {...commentData, editAt: new Date()});
@@ -20,6 +29,7 @@ const EditCommentModal = ({ isOpen, onClose, commentData, setCommentData }) => {
                     <textarea
                         className={styles.textarea}
                         value={commentData.text}
+                        ref={textareaRef}
                         onChange={(e) => setCommentData({ ...commentData, text: e.target.value })}
                     />
                     <div className={styles.buttons}>
