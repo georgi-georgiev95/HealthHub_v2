@@ -8,6 +8,7 @@ import SecondaryLoader from "../../Shared/SecondaryLoader/SecondaryLoader";
 import DeleteConfirmationModal from "../../Shared/DeleteModal/DeleteConfirmationModal";
 import isBackButtonClicked from "../../../utils/experimentalBackButton";
 import CommentSection from "../../Comments/CommentSection/CommentSection";
+import { getAllComments } from "../../../services/commentService";
 
 const RecipeDetails = () => {
   const [recipe, setRecipe] = useState({
@@ -18,6 +19,7 @@ const RecipeDetails = () => {
     ingredients: [],
     ownerId: "",
   });
+  const [comments, setComments] = useState([]);
   const [loading, setLoading] = useState(true);
   const [showDeleteModal, setShowDeleteModal] = useState(false);
   const { id } = useParams();
@@ -35,6 +37,7 @@ const RecipeDetails = () => {
       try {
         setLoading(true);
         await getOneRecipe(id, setRecipe);
+        await getAllComments(id, setComments);
       } catch (error) {
         console.error("Error fetching recipe:", error);
       } finally {
@@ -135,7 +138,7 @@ const RecipeDetails = () => {
           title={recipe.title}
         />
       </div>
-      <CommentSection />
+      <CommentSection comments={comments} />
     </>
   );
 };

@@ -8,6 +8,7 @@ import DeleteConfirmationModal from "../../Shared/DeleteModal/DeleteConfirmation
 import SecondaryLoader from "../../Shared/SecondaryLoader/SecondaryLoader";
 import isBackButtonClicked from "../../../utils/experimentalBackButton";
 import CommentSection from "../../Comments/CommentSection/CommentSection";
+import { getAllComments } from "../../../services/commentService";
 
 const WorkoutDetails = () => {
   const [workout, setWorkout] = useState({
@@ -20,6 +21,7 @@ const WorkoutDetails = () => {
     ownerId: "",
     ownerName: "",
   });
+  const [comments, setComments] = useState([]);
   const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [loading, setLoading] = useState(true);
   const { id } = useParams();
@@ -29,6 +31,7 @@ const WorkoutDetails = () => {
   useEffect(() => {
     (async () => {
       await getOneWorkout(id, setWorkout);
+      await getAllComments(id, setComments);
       setLoading(false);
     })();
   }, [id]);
@@ -135,7 +138,7 @@ const WorkoutDetails = () => {
           title={workout.title}
         />
       </div>
-      <CommentSection />
+      <CommentSection comments={comments}/>
     </>
   );
 };
