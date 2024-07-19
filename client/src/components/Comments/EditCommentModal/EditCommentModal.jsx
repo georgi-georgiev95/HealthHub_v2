@@ -16,7 +16,7 @@ const EditCommentModal = ({ isOpen, onClose, commentData, setCommentData }) => {
         isOpen && (
             <div className={styles.modalOverlay}>
                 <div className={styles.modal}>
-                    <h2>Edit Comment</h2>
+                    <h3>Edit Comment</h3>
                     <textarea
                         className={styles.textarea}
                         value={commentData.text}
@@ -24,13 +24,13 @@ const EditCommentModal = ({ isOpen, onClose, commentData, setCommentData }) => {
                     />
                     <div className={styles.buttons}>
                         <button
-                            className={styles.button}
+                            className={styles.cancelButton}
                             onClick={onClose}
                         >
                             Close
                         </button>
                         <button
-                            className={styles.button}
+                            className={styles.confirmButton}
                             onClick={onConfirm}
                         >
                             Save

@@ -16,16 +16,16 @@ const DeleteCommentModal = ({ isOpen, onClose, commentData, setCommentData }) =>
         isOpen && (
             <div className={styles.modalOverlay}>
                 <div className={styles.modal}>
-                    <h2>Are you sure you want to delete this comment?</h2>
+                    <h3>Are you sure you want to delete this comment?</h3>
                     <div className={styles.buttons}>
                         <button
-                            className={styles.button}
+                            className={styles.cancelButton}
                             onClick={onClose}
                         >
                             Cancel
                         </button>
                         <button
-                            className={styles.button}
+                            className={styles.confirmButton}
                             onClick={() => {
                                 setCommentData(commentData)
                                 onConfirm()

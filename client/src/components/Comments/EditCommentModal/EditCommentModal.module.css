@@ -28,6 +28,7 @@
     display: flex;
     justify-content: center;
     gap: 10px;
+    margin-top: 2em;
   }
   
   .cancelButton {
@@ -53,3 +54,15 @@
     opacity: 0.8;
   }
   
+  .textarea {
+    width: 100%;
+    height: 100px;
+    padding: 12px 20px;
+    box-sizing: border-box;
+    border: 2px solid #ccc;
+    border-radius: 4px;
+    background-color: #f8f8f8;
+    font-size: 16px;
+    resize: none;
+    margin-top: 1em;
+  }

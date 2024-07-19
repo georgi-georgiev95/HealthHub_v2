@@ -30,11 +30,11 @@ const Comment = ({ commentData, setIsOpenEditModal, setComment, setIsOpenDeleteM
                 <div className={styles.buttons}>
                     {user.userId !== "" && user.userId === commentData.ownerId && (
                         <>
-                            <button onClick={() => {
+                            <button className={styles.button} onClick={() => {
                                 setIsOpenEditModal(true);
                                 setComment(commentData);
                             }}>Edit</button>
-                            <button onClick={() => {
+                            <button className={styles.button} onClick={() => {
                                 setIsOpenDeleteModal(true)
                                 setComment(commentData)
                             }}>Delete</button>
