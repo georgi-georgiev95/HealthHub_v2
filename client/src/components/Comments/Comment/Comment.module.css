@@ -39,7 +39,7 @@
 
 .buttons {
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
     width: 200px;
     position: absolute;
     bottom: 0;
@@ -47,10 +47,18 @@
     margin: 0.5em;
 }
 
-.buttons button {
-    flex-basis: 60px;
+.buttons .ownerButton {
+    flex-basis: 70px;
     background-color: #e5533d;
     color: white;
-    padding: 0.2em 1em;
     border-radius: 5px;
+}
+
+.reactionButton {
+    color: black;
+    border-radius: 5px;
+}
+
+.reactionButton i {
+    padding-right: 5px;
 }

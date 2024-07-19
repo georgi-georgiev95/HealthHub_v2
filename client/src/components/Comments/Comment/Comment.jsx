@@ -15,6 +15,23 @@ const Comment = ({ commentData, setIsOpenEditModal, setComment, setIsOpenDeleteM
         }
     }
 
+    const likeComment = () => {
+        console.log("like comment");
+    };
+
+    const hateComment = () => {
+        console.log("hate comment");
+    };
+
+    const sadComment = () => {
+        console.log("sad comment");
+    };
+
+    const laughComment = () => {
+        console.log("laugh comment");
+    };
+
+
     return (
         <>
             <div className={styles.comment}>
@@ -29,17 +46,24 @@ const Comment = ({ commentData, setIsOpenEditModal, setComment, setIsOpenDeleteM
                 <div className={styles.buttons}>
                     {user.userId !== "" && user.userId === commentData.ownerId && (
                         <>
-                            <button className={styles.button} onClick={() => {
+                            <button className={styles.ownerButton} onClick={() => {
                                 setIsOpenEditModal(true);
                                 setComment(commentData);
                             }}>Edit</button>
-                            <button className={styles.button} onClick={() => {
+                            <button className={styles.ownerButton} onClick={() => {
                                 setIsOpenDeleteModal(true)
                                 setComment(commentData)
                             }}>Delete</button>
                         </>
                     )}
-                    {user.userId !== "" && user.userId !== commentData.ownerId && <button>Like</button>}
+                    {user.userId !== "" && user.userId !== commentData.ownerId &&
+                        <>
+                            <button onClick={likeComment} className={styles.reactionButton}><i className="fa-solid fa-heart"></i>(5)</button>
+                            <button onClick={hateComment} className={styles.reactionButton}><i className="fa-solid fa-face-angry"></i>(10)</button>
+                            <button onClick={sadComment} className={styles.reactionButton}><i className="fa-solid fa-face-sad-tear"></i>(3)</button>
+                            <button onClick={laughComment} className={styles.reactionButton}><i className="fa-solid fa-face-laugh"></i>(14)</button>
+                        </>
+                    }
                 </div>
             </div>
         </>
