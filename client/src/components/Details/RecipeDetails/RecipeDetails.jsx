@@ -35,7 +35,6 @@ const RecipeDetails = () => {
   useEffect(() => {
     (async () => {
       try {
-        setLoading(true);
         setIsCommentCreated(false);
         await getOneRecipe(id, setRecipe);
         await getAllComments(id, setComments);
@@ -46,7 +45,6 @@ const RecipeDetails = () => {
       }
     })();
   }, [id, isCommentCreated]);
-
 
   const deleteHandler = async () => {
     try {
@@ -139,9 +137,9 @@ const RecipeDetails = () => {
           title={recipe.title}
         />
       </div>
-      <CommentSection comments={comments} />
+      <CommentSection comments={comments}/>
     </>
-  );
+  );  
 };
 
 export default RecipeDetails;
