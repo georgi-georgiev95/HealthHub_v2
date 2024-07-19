@@ -24,3 +24,12 @@ export const getAllComments = async (entityId, setComments) => {
         console.log(error);
     }
 };
+
+export const editComment = async (commentId, commentData) => {
+    try {
+        const commentDocRef = doc(firebaseAuth.db(), "comments", commentId);
+        await updateDoc(commentDocRef, commentData);
+    } catch (error) {
+        console.log(error);
+    }
+};

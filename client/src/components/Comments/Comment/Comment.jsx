@@ -1,13 +1,16 @@
-import styles from './Comment.module.css'
+import styles from './Comment.module.css';
+import { useUser } from '../../../contexts/UserContext';
 
-const Comment = ({commentData}) => {
+const Comment = ({ commentData }) => {
+    const { user } = useUser();
     let createdAt;
     let editAt;
-    
-    if(commentData.createdAt !== "" && commentData.createdAt !== undefined) {
+
+
+    if (commentData.createdAt !== "" && commentData.createdAt !== undefined) {
         createdAt = new Date(commentData.createdAt.seconds * 1000 + commentData.createdAt.nanoseconds / 1000000);
-    
-        if(commentData.editAt !== "" && commentData.editAt !== undefined) {
+
+        if (commentData.editAt !== "" && commentData.editAt !== undefined) {
             editAt = new Date(commentData.editAt.seconds * 1000 + commentData.editAt.nanoseconds / 1000000);
         }
     }
@@ -23,9 +26,13 @@ const Comment = ({commentData}) => {
             </div>
 
             <div className={styles.buttons}>
-                <button>Edit</button>
-                <button>Delete</button>
-                <button>Like</button>
+                {user.userId !== "" && user.userId === commentData.ownerId && (
+                    <>
+                        <button>Edit</button>
+                        <button>Delete</button>
+                    </>
+                )}
+                {user.userId !== "" && user.userId !== commentData.ownerId && <button>Like</button>}
             </div>
         </div>
     )
