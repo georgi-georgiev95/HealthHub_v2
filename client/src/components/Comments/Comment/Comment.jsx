@@ -1,11 +1,9 @@
 import styles from './Comment.module.css';
-import { useState } from 'react';
 import { useUser } from '../../../contexts/UserContext';
-import EditCommentModal from '../EditCommentModal/EditCommentModal';
-import { editComment } from '../../../services/commentService';
+import { deleteComment } from '../../../services/commentService';
 
 const Comment = ({ commentData, setIsOpen, setComment }) => {
-    const { user } = useUser();
+    const { user, setIsCommentDeleted } = useUser();
     let createdAt;
     let editAt;
 
@@ -20,28 +18,31 @@ const Comment = ({ commentData, setIsOpen, setComment }) => {
 
     return (
         <>
-        <div className={styles.comment}>
-            <img src={"/images/profile.jpg"} className={styles.image} alt="profile-photo" />
-            <div>
-                <span>by {commentData.ownerName}</span>
-                <p>{commentData.text}</p>
-                <p>Posted at: {createdAt.toLocaleString()}</p>
-                {editAt && <p>Edited at: {editAt.toLocaleString()}</p>}
-            </div>
+            <div className={styles.comment}>
+                <img src={"/images/profile.jpg"} className={styles.image} alt="profile-photo" />
+                <div>
+                    <span>by {commentData.ownerName}</span>
+                    <p>{commentData.text}</p>
+                    <p>Posted at: {createdAt.toLocaleString()}</p>
+                    {editAt && <p>Edited at: {editAt.toLocaleString()}</p>}
+                </div>
 
-            <div className={styles.buttons}>
-                {user.userId !== "" && user.userId === commentData.ownerId && (
-                    <>
-                        <button onClick={() => {
-                            setIsOpen(true);
-                            setComment(commentData);
-                        }}>Edit</button>
-                        <button>Delete</button>
-                    </>
-                )}
-                {user.userId !== "" && user.userId !== commentData.ownerId && <button>Like</button>}
+                <div className={styles.buttons}>
+                    {user.userId !== "" && user.userId === commentData.ownerId && (
+                        <>
+                            <button onClick={() => {
+                                setIsOpen(true);
+                                setComment(commentData);
+                            }}>Edit</button>
+                            <button onClick={async () => {
+                                await deleteComment(commentData.id);
+                                setIsCommentDeleted(true);
+                            }}>Delete</button>
+                        </>
+                    )}
+                    {user.userId !== "" && user.userId !== commentData.ownerId && <button>Like</button>}
+                </div>
             </div>
-        </div>
         </>
     )
 };

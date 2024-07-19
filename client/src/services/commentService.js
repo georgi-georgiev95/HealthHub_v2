@@ -33,3 +33,12 @@ export const editComment = async (commentId, commentData) => {
         console.log(error);
     }
 };
+
+export const deleteComment = async (commentId) => {
+    try {
+        const commentDocRef = doc(firebaseAuth.db(), "comments", commentId);
+        await deleteDoc(commentDocRef);
+    } catch (error) {
+        console.log(error);
+    }
+};
