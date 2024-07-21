@@ -1,19 +1,11 @@
-import { useEffect, useState } from "react";
 import { getAllRecipes } from "../../../services/recipeService";
 import styles from "./RecipeCatalog.module.css";
 import RecipeGridCard from "./RecipeGridCard/RecipeGridCard";
 import SecondaryLoader from "../../Shared/SecondaryLoader/SecondaryLoader";
+import useFetch from "../../../hooks/useFetch";
 
 const RecipeCatalog = () => {
-  const [recipes, setRecipes] = useState([]);
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    (async () => {
-      await getAllRecipes(setRecipes);
-      setLoading(false);
-    })();
-  }, []);
+  const {data: recipes, loading} = useFetch(getAllRecipes);
 
   if (loading) {
     return <SecondaryLoader />;

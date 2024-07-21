@@ -1,19 +1,11 @@
 import styles from "./WorkoutCatalog.module.css";
-import { useEffect, useState } from "react";
 import { getAllWorkouts } from "../../../services/workoutService";
 import WorkoutGridCard from "./WorkoutGridCard/WorkoutGridCard";
 import SecondaryLoader from "../../Shared/SecondaryLoader/SecondaryLoader";
+import useFetch from "../../../hooks/useFetch";
 
 const WorkoutCatalog = () => {
-  const [workouts, setWorkouts] = useState([]);
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    (async () => {
-      await getAllWorkouts(setWorkouts);
-      setLoading(false);
-    })();
-  }, []);
+  const { data: workouts, loading } = useFetch(getAllWorkouts);
 
   if (loading) {
     return <SecondaryLoader />;
