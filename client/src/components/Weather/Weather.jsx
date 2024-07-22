@@ -101,7 +101,7 @@ const Weather = () => {
 
         try {
           const locationKeyResponse = await fetch(
-            `https://dataservice.accuweather.com/locations/v1/cities/geoposition/search?apikey=OU88uVEA4TXy4IigSQiw8X9dyfBWIkVA&q=${latitude},${longitude}`
+            `https://dataservice.accuweather.com/locations/v1/cities/geoposition/search?apikey=VUxwPyAAN6UISAK8xcCBLlEGbjQq1MpA&q=${latitude},${longitude}`
           );
 
           // for (const city of mainCities) {
@@ -121,7 +121,7 @@ const Weather = () => {
           setCityName(locationKeyData.LocalizedName);
 
           const weatherResponse = await fetch(
-            `https://dataservice.accuweather.com/currentconditions/v1/${locationKey}?apikey=OU88uVEA4TXy4IigSQiw8X9dyfBWIkVA`
+            `https://dataservice.accuweather.com/currentconditions/v1/${locationKey}?apikey=VUxwPyAAN6UISAK8xcCBLlEGbjQq1MpA`
           );
 
           if (!weatherResponse.ok) {
