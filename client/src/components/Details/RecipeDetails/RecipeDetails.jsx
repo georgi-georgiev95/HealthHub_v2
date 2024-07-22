@@ -1,55 +1,28 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useParams } from "react-router-dom";
 import { Link, useNavigate } from "react-router-dom";
 
 import styles from "./RecipeDetails.module.css";
-import { getOneRecipe, deleteRecipe, setLikes } from "../../../services/recipeService";
 import { useUser } from "../../../contexts/UserContext";
+import useFetchOne from "../../../hooks/useFetchOne";
+import { getOneRecipe, deleteRecipe, setLikes } from "../../../services/recipeService";
 import SecondaryLoader from "../../Shared/SecondaryLoader/SecondaryLoader";
 import DeleteConfirmationModal from "../../Shared/DeleteModal/DeleteConfirmationModal";
 import isBackButtonClicked from "../../../utils/experimentalBackButton";
 import CommentSection from "../../Comments/CommentSection/CommentSection";
-import { getAllComments } from "../../../services/commentService";
-import { useComments } from "../../../contexts/CommentsContext";
 
 const RecipeDetails = () => {
-  const [recipe, setRecipe] = useState({
-    title: "",
-    image: "",
-    description: "",
-    likes: [],
-    ingredients: [],
-    ownerId: "",
-  });
-  const [comments, setComments] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [showDeleteModal, setShowDeleteModal] = useState(false);
   const { id } = useParams();
   const { user } = useUser();
-  const { isCommentCreated, isCommentEdited, isCommentDeleted, createCommentHandler, editCommentHandler, deleteCommentHandler } = useComments();
   const navigate = useNavigate();
+  const { data: recipe, comments, loading, setDataHandler } = useFetchOne(id, user.userId, getOneRecipe);
+  const [showDeleteModal, setShowDeleteModal] = useState(false);
 
   const handleBackButtonClick = (e) => {
     if (isBackButtonClicked(e)) {
       navigate("/catalog/recipes");
     }
   };
-
-  useEffect(() => {
-    (async () => {
-      try {
-        createCommentHandler(false);
-        editCommentHandler(false);
-        deleteCommentHandler(false);
-        await getOneRecipe(id, setRecipe);
-        await getAllComments(id, setComments);
-      } catch (error) {
-        console.error("Error fetching recipe:", error);
-      } finally {
-        setLoading(false);
-      }
-    })();
-  }, [id, isCommentCreated, isCommentEdited, isCommentDeleted]);
 
   const deleteHandler = async () => {
     try {
@@ -71,14 +44,7 @@ const RecipeDetails = () => {
   const handleLikeAction = async () => {
     try {
       await setLikes(user.userId, id);
-      setRecipe((prevRecipe) => {
-        const userHasLiked = prevRecipe.likes.includes(user.userId);
-        const updatedLikes = userHasLiked
-          ? prevRecipe.likes.filter((like) => like !== user.userId)
-          : [...prevRecipe.likes, user.userId];
-
-        return { ...prevRecipe, likes: updatedLikes };
-      });
+      setDataHandler(recipe);
     } catch (error) {
       console.log(error);
     }

@@ -1,46 +1,22 @@
 import { useParams } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
 import styles from "./WorkoutDetails.module.css";
-import { getOneWorkout, deleteWorkout, setLikes } from "../../../services/workoutService";
 import { useUser } from "../../../contexts/UserContext";
+import useFetchOne from "../../../hooks/useFetchOne";
+import { getOneWorkout, deleteWorkout, setLikes } from "../../../services/workoutService";
 import DeleteConfirmationModal from "../../Shared/DeleteModal/DeleteConfirmationModal";
 import SecondaryLoader from "../../Shared/SecondaryLoader/SecondaryLoader";
 import isBackButtonClicked from "../../../utils/experimentalBackButton";
 import CommentSection from "../../Comments/CommentSection/CommentSection";
-import { getAllComments } from "../../../services/commentService";
-import { useComments } from "../../../contexts/CommentsContext";
 
 const WorkoutDetails = () => {
-  const [workout, setWorkout] = useState({
-    title: "",
-    description: "",
-    difficulty: "",
-    goal: "",
-    exercises: [],
-    likes: [],
-    ownerId: "",
-    ownerName: "",
-  });
-  const [comments, setComments] = useState([]);
-  const [showDeleteModal, setShowDeleteModal] = useState(false);
-  const [loading, setLoading] = useState(true);
   const { id } = useParams();
   const { user } = useUser();
-  const { isCommentCreated, isCommentEdited, isCommentDeleted, createCommentHandler, editCommentHandler, deleteCommentHandler } = useComments();
   const navigate = useNavigate();
-
-  useEffect(() => {
-    (async () => {
-      createCommentHandler(false);
-      editCommentHandler(false);
-      deleteCommentHandler(false);
-      await getOneWorkout(id, setWorkout);
-      await getAllComments(id, setComments);
-      setLoading(false);
-    })();
-  }, [id, isCommentCreated, isCommentEdited, isCommentDeleted]);
+  const { data: workout, comments, loading, setDataHandler } = useFetchOne(id, user.userId, getOneWorkout);
+  const [showDeleteModal, setShowDeleteModal] = useState(false);
 
   const deleteHandler = async () => {
     try {
@@ -62,14 +38,7 @@ const WorkoutDetails = () => {
   const handleLikeAction = async () => {
     try {
       await setLikes(user.userId, id);
-      setWorkout((prevWorkout) => {
-        const userHasLiked = prevWorkout.likes.includes(user.userId);
-        const updatedLikes = userHasLiked
-          ? prevWorkout.likes.filter((like) => like !== user.userId)
-          : [...prevWorkout.likes, user.userId];
-
-        return { ...prevWorkout, likes: updatedLikes };
-      });
+      setDataHandler(workout);
     } catch (error) {
       console.log(error);
     }
