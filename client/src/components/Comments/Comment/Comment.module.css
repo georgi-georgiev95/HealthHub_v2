@@ -39,8 +39,9 @@
 
 .buttons {
     display: flex;
-    justify-content: space-between;
-    width: 200px;
+    justify-content: end;
+    gap: 0.5em;
+    width: 280px;
     position: absolute;
     bottom: 0;
     right: 0;
@@ -57,8 +58,14 @@
 .reactionButton {
     color: black;
     border-radius: 5px;
+    padding: 0.3em 0.5em;
 }
 
 .reactionButton i {
     padding-right: 5px;
+}
+
+.liked {
+    background-color: #e5533d;
+    color: white;
 }

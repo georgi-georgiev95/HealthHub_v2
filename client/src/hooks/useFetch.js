@@ -6,7 +6,7 @@ const useFetch = (callback, id, userId) => {
     const [data, setData] = useState(id ? {} : []);
     const [comments, setComments] = useState([]);
     const [loading, setLoading] = useState(true);
-    const { isCommentCreated, isCommentEdited, isCommentDeleted, createCommentHandler, editCommentHandler, deleteCommentHandler } = useComments();
+    const { isCommentCreated, isCommentEdited, isCommentDeleted, isReacted, createCommentHandler, editCommentHandler, deleteCommentHandler } = useComments();
 
     useEffect(() => {
         (async () => {
@@ -26,7 +26,7 @@ const useFetch = (callback, id, userId) => {
                 setLoading(false);
             }
         })();
-    }, [id, isCommentCreated, isCommentEdited, isCommentDeleted]);
+    }, [id, isCommentCreated, isCommentEdited, isCommentDeleted, isReacted]);
 
     const setDataHandler = (prevData) => {
         const userHasLiked = prevData.likes.includes(userId);

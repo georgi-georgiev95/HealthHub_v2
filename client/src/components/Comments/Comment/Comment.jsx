@@ -1,10 +1,23 @@
 import styles from './Comment.module.css';
 import { useUser } from '../../../contexts/userContext/UserContext';
+import { useComments } from '../../../contexts/commentsContext/CommentsContext';
+import { setReaction } from '../../../services/commentService';
 
 const Comment = ({ commentData, setIsOpenEditModal, setComment, setIsOpenDeleteModal }) => {
-    const { user, setIsCommentDeleted } = useUser();
+    const { user } = useUser();
+    const { handleReaction } = useComments();
     let createdAt;
     let editAt;
+
+    const likes = commentData.reactions?.filter((reaction) => reaction.reaction === "like") || [];
+    const hates = commentData.reactions?.filter((reaction) => reaction.reaction === "hate") || [];
+    const sads = commentData.reactions?.filter((reaction) => reaction.reaction === "sad") || [];
+    const laughs = commentData.reactions?.filter((reaction) => reaction.reaction === "laugh") || [];
+
+    const isLiked = likes.some((like) => like.userId === user.userId);
+    const isHated = hates.some((hate) => hate.userId === user.userId);
+    const isSad = sads.some((sad) => sad.userId === user.userId);
+    const isLaugh = laughs.some((laugh) => laugh.userId === user.userId);
 
 
     if (commentData.createdAt !== "" && commentData.createdAt !== undefined) {
@@ -15,20 +28,24 @@ const Comment = ({ commentData, setIsOpenEditModal, setComment, setIsOpenDeleteM
         }
     }
 
-    const likeComment = () => {
-        console.log("like comment");
+    const likeComment = async () => {
+        await setReaction(user.userId, commentData.id, "like");
+        handleReaction();
     };
 
-    const hateComment = () => {
-        console.log("hate comment");
+    const hateComment = async () => {
+        await setReaction(user.userId, commentData.id, "hate");
+        handleReaction();
     };
 
-    const sadComment = () => {
-        console.log("sad comment");
+    const sadComment = async () => {
+        await setReaction(user.userId, commentData.id, "sad");
+        handleReaction();
     };
 
-    const laughComment = () => {
-        console.log("laugh comment");
+    const laughComment = async () => {
+        await setReaction(user.userId, commentData.id, "laugh");
+        handleReaction();
     };
 
 
@@ -58,10 +75,10 @@ const Comment = ({ commentData, setIsOpenEditModal, setComment, setIsOpenDeleteM
                     )}
                     {user.userId !== "" && user.userId !== commentData.ownerId &&
                         <>
-                            <button onClick={likeComment} className={styles.reactionButton}><i className="fa-solid fa-heart"></i>(5)</button>
-                            <button onClick={hateComment} className={styles.reactionButton}><i className="fa-solid fa-face-angry"></i>(10)</button>
-                            <button onClick={sadComment} className={styles.reactionButton}><i className="fa-solid fa-face-sad-tear"></i>(3)</button>
-                            <button onClick={laughComment} className={styles.reactionButton}><i className="fa-solid fa-face-laugh"></i>(14)</button>
+                            <button onClick={likeComment} className={`${styles.reactionButton} ${isLiked && styles.liked}`}><i className="fa-solid fa-heart"></i>({likes.length})</button>
+                            <button onClick={hateComment} className={`${styles.reactionButton} ${isHated && styles.liked}`}><i className="fa-solid fa-face-angry"></i>({hates.length})</button>
+                            <button onClick={sadComment} className={`${styles.reactionButton} ${isSad && styles.liked}`}><i className="fa-solid fa-face-sad-tear"></i>({sads.length})</button>
+                            <button onClick={laughComment} className={`${styles.reactionButton} ${isLaugh && styles.liked}`}><i className="fa-solid fa-face-laugh"></i>({laughs.length})</button>
                         </>
                     }
                 </div>
