@@ -4,7 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 
 import styles from "./RecipeDetails.module.css";
 import { useUser } from "../../../contexts/UserContext";
-import useFetchOne from "../../../hooks/useFetchOne";
+import useFetch from "../../../hooks/useFetch";
 import { getOneRecipe, deleteRecipe, setLikes } from "../../../services/recipeService";
 import SecondaryLoader from "../../Shared/SecondaryLoader/SecondaryLoader";
 import DeleteConfirmationModal from "../../Shared/DeleteModal/DeleteConfirmationModal";
@@ -15,7 +15,7 @@ const RecipeDetails = () => {
   const { id } = useParams();
   const { user } = useUser();
   const navigate = useNavigate();
-  const { data: recipe, comments, loading, setDataHandler } = useFetchOne(id, user.userId, getOneRecipe);
+  const { data: recipe, comments, loading, setDataHandler } = useFetch(getOneRecipe, id, user.userId, );
   const [showDeleteModal, setShowDeleteModal] = useState(false);
 
   const handleBackButtonClick = (e) => {

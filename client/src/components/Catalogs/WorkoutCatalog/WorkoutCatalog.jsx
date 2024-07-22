@@ -2,10 +2,10 @@ import styles from "./WorkoutCatalog.module.css";
 import { getAllWorkouts } from "../../../services/workoutService";
 import WorkoutGridCard from "./WorkoutGridCard/WorkoutGridCard";
 import SecondaryLoader from "../../Shared/SecondaryLoader/SecondaryLoader";
-import useFetchAll from "../../../hooks/useFetchAll";
+import useFetch from "../../../hooks/useFetch";
 
 const WorkoutCatalog = () => {
-  const { data: workouts, loading } = useFetchAll(getAllWorkouts);
+  const { data: workouts, loading } = useFetch(getAllWorkouts);
 
   if (loading) {
     return <SecondaryLoader />;

@@ -4,7 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 
 import styles from "./WorkoutDetails.module.css";
 import { useUser } from "../../../contexts/UserContext";
-import useFetchOne from "../../../hooks/useFetchOne";
+import useFetch from "../../../hooks/useFetch";
 import { getOneWorkout, deleteWorkout, setLikes } from "../../../services/workoutService";
 import DeleteConfirmationModal from "../../Shared/DeleteModal/DeleteConfirmationModal";
 import SecondaryLoader from "../../Shared/SecondaryLoader/SecondaryLoader";
@@ -15,7 +15,7 @@ const WorkoutDetails = () => {
   const { id } = useParams();
   const { user } = useUser();
   const navigate = useNavigate();
-  const { data: workout, comments, loading, setDataHandler } = useFetchOne(id, user.userId, getOneWorkout);
+  const { data: workout, comments, loading, setDataHandler } = useFetch(getOneWorkout, id, user.userId);
   const [showDeleteModal, setShowDeleteModal] = useState(false);
 
   const deleteHandler = async () => {
