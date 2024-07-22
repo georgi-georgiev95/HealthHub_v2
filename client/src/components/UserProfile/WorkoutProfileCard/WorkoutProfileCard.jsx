@@ -2,8 +2,8 @@ import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 
 import styles from "../Card.module.css";
-import fatLossImage from "../../Catalogs/WorkoutCatalog/WorkoutGridCard/assets/fatLoss.png";
-import muscleGainImage from "../../Catalogs/WorkoutCatalog/WorkoutGridCard/assets/muscleGain.png";
+import fatLossImage from "/images/fatLoss.png";
+import muscleGainImage from "/images/muscleGain.png";
 
 const WorkoutProfileCard = ({ id, workoutTitle, workoutGoal }) => {
   const image = workoutGoal == "Weight Loss" ? fatLossImage : muscleGainImage;
