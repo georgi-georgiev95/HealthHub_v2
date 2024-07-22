@@ -1,3 +1,5 @@
+import {useNavigate} from 'react-router-dom';
+
 import styles from './ReactionSection.module.css';
 import { useComments } from '../../../contexts/commentsContext/CommentsContext';
 import { setReaction } from '../../../services/commentService';
@@ -7,6 +9,7 @@ const ReactionSection = ({
     userId
 }) => {
     const { handleReaction } = useComments();
+    const navigate = useNavigate();
 
     const likes = commentData.reactions?.filter((reaction) => reaction.reaction === "like") || [];
     const hates = commentData.reactions?.filter((reaction) => reaction.reaction === "hate") || [];
@@ -19,21 +22,37 @@ const ReactionSection = ({
     const isLaugh = laughs.some((laugh) => laugh.userId === userId);
 
     const likeComment = async () => {
+        if(userId === "" || userId === undefined) {
+            navigate('/users/login');
+            return;
+        }
         await setReaction(userId, commentData.id, "like");
         handleReaction();
     };
 
     const hateComment = async () => {
+        if(userId === "" || userId === undefined) {
+            navigate('/users/login');
+            return;
+        }
         await setReaction(userId, commentData.id, "hate");
         handleReaction();
     };
 
     const sadComment = async () => {
+        if(userId === "" || userId === undefined) {
+            navigate('/users/login');
+            return;
+        }
         await setReaction(userId, commentData.id, "sad");
         handleReaction();
     };
 
     const laughComment = async () => {
+        if(userId === "" || userId === undefined) {
+            navigate('/users/login');
+            return;
+        }
         await setReaction(userId, commentData.id, "laugh");
         handleReaction();
     };
