@@ -1,14 +1,16 @@
-import styles from "./WorkoutDetails.module.css";
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { getOneWorkout, deleteWorkout, setLikes } from "../../../services/workoutService";
 import { Link, useNavigate } from "react-router-dom";
+
+import styles from "./WorkoutDetails.module.css";
+import { getOneWorkout, deleteWorkout, setLikes } from "../../../services/workoutService";
 import { useUser } from "../../../contexts/UserContext";
 import DeleteConfirmationModal from "../../Shared/DeleteModal/DeleteConfirmationModal";
 import SecondaryLoader from "../../Shared/SecondaryLoader/SecondaryLoader";
 import isBackButtonClicked from "../../../utils/experimentalBackButton";
 import CommentSection from "../../Comments/CommentSection/CommentSection";
 import { getAllComments } from "../../../services/commentService";
+import { useComments } from "../../../contexts/CommentsContext";
 
 const WorkoutDetails = () => {
   const [workout, setWorkout] = useState({
@@ -25,14 +27,15 @@ const WorkoutDetails = () => {
   const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [loading, setLoading] = useState(true);
   const { id } = useParams();
-  const { user, isCommentCreated, setIsCommentCreated, isCommentEdited, setIsCommentEdited, isCommentDeleted, setIsCommentDeleted } = useUser();
+  const { user } = useUser();
+  const { isCommentCreated, isCommentEdited, isCommentDeleted, createCommentHandler, editCommentHandler, deleteCommentHandler } = useComments();
   const navigate = useNavigate();
 
   useEffect(() => {
     (async () => {
-      setIsCommentCreated(false);
-      setIsCommentEdited(false);
-      setIsCommentDeleted(false);
+      createCommentHandler(false);
+      editCommentHandler(false);
+      deleteCommentHandler(false);
       await getOneWorkout(id, setWorkout);
       await getAllComments(id, setComments);
       setLoading(false);
@@ -141,7 +144,7 @@ const WorkoutDetails = () => {
           title={workout.title}
         />
       </div>
-      <CommentSection comments={comments}/>
+      <CommentSection comments={comments} />
     </>
   );
 };
