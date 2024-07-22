@@ -1,0 +1,14 @@
+.reactionButton {
+    color: black;
+    border-radius: 5px;
+    padding: 0.3em 0.5em;
+}
+
+.reactionButton i {
+    padding-right: 5px;
+}
+
+.liked {
+    background-color: #e5533d;
+    color: white;
+}
