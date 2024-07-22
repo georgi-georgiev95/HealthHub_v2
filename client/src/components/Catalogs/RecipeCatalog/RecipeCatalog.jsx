@@ -2,10 +2,10 @@ import styles from "./RecipeCatalog.module.css";
 import { getAllRecipes } from "../../../services/recipeService";
 import RecipeGridCard from "./RecipeGridCard/RecipeGridCard";
 import SecondaryLoader from "../../Shared/SecondaryLoader/SecondaryLoader";
-import useFetch from "../../../hooks/useFetch";
+import useFetchAll from "../../../hooks/useFetchAll";
 
 const RecipeCatalog = () => {
-  const {data: recipes, loading} = useFetch(getAllRecipes);
+  const {data: recipes, loading} = useFetchAll(getAllRecipes);
 
   if (loading) {
     return <SecondaryLoader />;

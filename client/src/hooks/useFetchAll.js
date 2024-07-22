@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 
-const useFetch = (callback) => {
+const useFetchAll = (callback) => {
     const [data, setData] = useState([]);
     const [loading, setLoading] = useState(true);
 
@@ -14,4 +14,4 @@ const useFetch = (callback) => {
     return { data, loading };
 };
 
-export default useFetch;
+export default useFetchAll;
