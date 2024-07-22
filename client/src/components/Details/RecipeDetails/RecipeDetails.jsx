@@ -1,7 +1,8 @@
-import { useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
-import { getOneRecipe, deleteRecipe, setLikes } from "../../../services/recipeService";
+import { useParams } from "react-router-dom";
 import { Link, useNavigate } from "react-router-dom";
+
+import { getOneRecipe, deleteRecipe, setLikes } from "../../../services/recipeService";
 import { useUser } from "../../../contexts/UserContext";
 import styles from "./RecipeDetails.module.css";
 import SecondaryLoader from "../../Shared/SecondaryLoader/SecondaryLoader";
@@ -9,6 +10,7 @@ import DeleteConfirmationModal from "../../Shared/DeleteModal/DeleteConfirmation
 import isBackButtonClicked from "../../../utils/experimentalBackButton";
 import CommentSection from "../../Comments/CommentSection/CommentSection";
 import { getAllComments } from "../../../services/commentService";
+import { useComments } from "../../../contexts/CommentsContext";
 
 const RecipeDetails = () => {
   const [recipe, setRecipe] = useState({
@@ -23,7 +25,8 @@ const RecipeDetails = () => {
   const [loading, setLoading] = useState(true);
   const [showDeleteModal, setShowDeleteModal] = useState(false);
   const { id } = useParams();
-  const { user, isCommentCreated, setIsCommentCreated, isCommentEdited, setIsCommentEdited, isCommentDeleted, setIsCommentDeleted } = useUser();
+  const { user } = useUser();
+  const { isCommentCreated, isCommentEdited, isCommentDeleted, createCommentHandler, editCommentHandler, deleteCommentHandler } = useComments();
   const navigate = useNavigate();
 
   const handleBackButtonClick = (e) => {
@@ -35,9 +38,9 @@ const RecipeDetails = () => {
   useEffect(() => {
     (async () => {
       try {
-        setIsCommentCreated(false);
-        setIsCommentEdited(false);
-        setIsCommentDeleted(false);
+        createCommentHandler(false);
+        editCommentHandler(false);
+        deleteCommentHandler(false);
         await getOneRecipe(id, setRecipe);
         await getAllComments(id, setComments);
       } catch (error) {
@@ -139,9 +142,9 @@ const RecipeDetails = () => {
           title={recipe.title}
         />
       </div>
-      <CommentSection comments={comments}/>
+      <CommentSection comments={comments} />
     </>
-  );  
+  );
 };
 
 export default RecipeDetails;

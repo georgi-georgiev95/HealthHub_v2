@@ -1,16 +1,21 @@
 import React from "react";
 import { BrowserRouter } from "react-router-dom";
-import UserProvider from "./contexts/UserProvider.jsx";
 import ReactDOM from "react-dom/client";
+
+
 import App from "./App.jsx";
 import "./index.css";
+import UserProvider from "./contexts/UserProvider.jsx";
+import CommentsProvider from "./contexts/CommentsProvired.jsx";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <UserProvider>
-      <BrowserRouter>
-        <App />
-      </BrowserRouter>
+      <CommentsProvider>
+        <BrowserRouter>
+          <App />
+        </BrowserRouter>
+      </CommentsProvider>
     </UserProvider>
   </React.StrictMode>
 );

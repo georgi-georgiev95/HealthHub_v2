@@ -1,12 +1,12 @@
-import {useRef, useEffect} from "react";
+import { useRef, useEffect } from "react";
 
 import styles from "./EditCommentModal.module.css";
 import { editComment } from "../../../services/commentService";
-import { useUser } from "../../../contexts/UserContext";
+import { useComments } from "../../../contexts/CommentsContext";
 
 const EditCommentModal = ({ isOpen, onClose, commentData, setCommentData }) => {
     const textareaRef = useRef(null);
-    const { setIsCommentEdited } = useUser();
+    const { editCommentHandler } = useComments();
 
     useEffect(() => {
         if (isOpen) {
@@ -16,8 +16,8 @@ const EditCommentModal = ({ isOpen, onClose, commentData, setCommentData }) => {
     }, [isOpen]);
 
     const onConfirm = async () => {
-        await editComment(commentData.id, {...commentData, editAt: new Date()});
-        setIsCommentEdited(true);
+        await editComment(commentData.id, { ...commentData, editAt: new Date() });
+        editCommentHandler(true);
         onClose();
     }
 

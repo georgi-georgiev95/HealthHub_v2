@@ -4,6 +4,7 @@ import { useParams } from 'react-router-dom';
 import styles from './CreateComment.module.css'
 import { useUser } from "../../../contexts/UserContext";
 import { createComment } from "../../../services/commentService";
+import { useComments } from '../../../contexts/CommentsContext';
 
 const CreateComment = () => {
     const [comment, setComment] = useState({
@@ -15,7 +16,8 @@ const CreateComment = () => {
         editAt: '',
     });
 
-    const { user, setIsCommentCreated } = useUser();
+    const { user } = useUser();
+    const { createCommentHandler } = useComments();
     const { id } = useParams();
 
     const formSubmitHandler = async (e) => {
@@ -23,7 +25,7 @@ const CreateComment = () => {
         if (comment.text === '') {
             return;
         }
-        setIsCommentCreated(true);
+        createCommentHandler(true);
         await createComment(comment);
         setComment({ text: '', ownerId: '', ownerName: '', entityId: '' });
     };

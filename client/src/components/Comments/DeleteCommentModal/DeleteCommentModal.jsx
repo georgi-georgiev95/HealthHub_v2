@@ -1,14 +1,14 @@
 import styles from "./DeleteCommentModal.module.css";
-import { useUser } from "../../../contexts/UserContext";
 import { deleteComment } from "../../../services/commentService";
+import { useComments } from "../../../contexts/CommentsContext";
 
 const DeleteCommentModal = ({ isOpen, onClose, commentData, setCommentData }) => {
 
-    const { setIsCommentDeleted } = useUser();
+    const { deleteCommentHandler } = useComments();
 
     const onConfirm = async () => {
         await deleteComment(commentData.id);
-        setIsCommentDeleted(true);
+        deleteCommentHandler(true);
         onClose();
     }
 
@@ -29,7 +29,7 @@ const DeleteCommentModal = ({ isOpen, onClose, commentData, setCommentData }) =>
                             onClick={() => {
                                 setCommentData(commentData)
                                 onConfirm()
-                                }
+                            }
                             }
                         >
                             Delete
