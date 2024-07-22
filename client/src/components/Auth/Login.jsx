@@ -3,7 +3,7 @@ import { useNavigate, Link } from "react-router-dom";
 
 import styles from "./AuthForms.module.css";
 import { firebaseAuth } from "../../config/firebase";
-import { useUser } from "../../contexts/UserContext";
+import { useUser } from "../../contexts/userContext/UserContext";
 import {
   validateEmail,
   validatePassword,

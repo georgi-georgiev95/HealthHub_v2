@@ -1,6 +1,6 @@
 import { Outlet, Navigate } from "react-router-dom";
 
-import { useUser } from "../../contexts/UserContext";
+import { useUser } from "../../contexts/userContext/UserContext";
 
 const UserRoutesProtector = () => {
     const { user } = useUser();

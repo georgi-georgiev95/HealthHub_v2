@@ -2,7 +2,7 @@ import { useRef, useEffect } from "react";
 
 import styles from "./EditCommentModal.module.css";
 import { editComment } from "../../../services/commentService";
-import { useComments } from "../../../contexts/CommentsContext";
+import { useComments } from "../../../contexts/commentsContext/CommentsContext";
 
 const EditCommentModal = ({ isOpen, onClose, commentData, setCommentData }) => {
     const textareaRef = useRef(null);

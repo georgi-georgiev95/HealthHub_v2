@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import PropTypes from "prop-types";
 
-import { verifyUser } from "../services/userService";
+import { verifyUser } from "../../services/userService";
 import UserContext from './UserContext';
 
 const UserProvider = ({ children }) => {

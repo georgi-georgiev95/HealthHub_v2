@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { useComments } from '../contexts/CommentsContext';
+import { useComments } from '../contexts/commentsContext/CommentsContext';
 import { getAllComments } from '../services/commentService';
 
 const useFetch = (callback, id, userId) => {

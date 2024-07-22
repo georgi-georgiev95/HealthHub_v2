@@ -1,6 +1,6 @@
 import styles from "./DeleteCommentModal.module.css";
 import { deleteComment } from "../../../services/commentService";
-import { useComments } from "../../../contexts/CommentsContext";
+import { useComments } from "../../../contexts/commentsContext/CommentsContext";
 
 const DeleteCommentModal = ({ isOpen, onClose, commentData, setCommentData }) => {
 

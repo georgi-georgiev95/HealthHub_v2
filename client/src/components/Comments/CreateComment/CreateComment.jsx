@@ -2,9 +2,9 @@ import { useState } from 'react';
 import { useParams } from 'react-router-dom';
 
 import styles from './CreateComment.module.css'
-import { useUser } from "../../../contexts/UserContext";
+import { useUser } from "../../../contexts/userContext/UserContext";
 import { createComment } from "../../../services/commentService";
-import { useComments } from '../../../contexts/CommentsContext';
+import { useComments } from '../../../contexts/commentsContext/CommentsContext';
 
 const CreateComment = () => {
     const [comment, setComment] = useState({

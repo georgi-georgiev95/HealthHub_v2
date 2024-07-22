@@ -3,7 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 
 import styles from "./Navigation.module.css";
 import { firebaseAuth } from "../../config/firebase";
-import { useUser } from "../../contexts/UserContext";
+import { useUser } from "../../contexts/userContext/UserContext";
 import Weather from "../Weather/Weather";
 
 const Navigation = () => {

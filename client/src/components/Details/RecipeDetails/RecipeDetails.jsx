@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom";
 import { Link, useNavigate } from "react-router-dom";
 
 import styles from "./RecipeDetails.module.css";
-import { useUser } from "../../../contexts/UserContext";
+import { useUser } from "../../../contexts/userContext/UserContext";
 import useFetch from "../../../hooks/useFetch";
 import { getOneRecipe, deleteRecipe, setLikes } from "../../../services/recipeService";
 import SecondaryLoader from "../../Shared/SecondaryLoader/SecondaryLoader";

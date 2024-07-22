@@ -1,5 +1,5 @@
 import styles from './Comment.module.css';
-import { useUser } from '../../../contexts/UserContext';
+import { useUser } from '../../../contexts/userContext/UserContext';
 
 const Comment = ({ commentData, setIsOpenEditModal, setComment, setIsOpenDeleteModal }) => {
     const { user, setIsCommentDeleted } = useUser();

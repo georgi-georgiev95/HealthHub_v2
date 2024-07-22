@@ -3,7 +3,7 @@ import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
 import styles from "./WorkoutDetails.module.css";
-import { useUser } from "../../../contexts/UserContext";
+import { useUser } from "../../../contexts/userContext/UserContext";
 import useFetch from "../../../hooks/useFetch";
 import { getOneWorkout, deleteWorkout, setLikes } from "../../../services/workoutService";
 import DeleteConfirmationModal from "../../Shared/DeleteModal/DeleteConfirmationModal";

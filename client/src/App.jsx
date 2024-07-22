@@ -4,7 +4,7 @@ import { Suspense, lazy } from "react";
 import Navigation from "./components/Navigation/Navigation";
 import Home from "./components/Home/Home";
 import Loader from "./components/Shared/PrimaryLoader/Loader";
-import { useUser } from "./contexts/UserContext";
+import { useUser } from "./contexts/userContext/UserContext";
 import PageNotFound from "./components/BadRoutes/PageNotFound";
 import UnauthorizedRequest from "./components/BadRoutes/UnauthorizedRequest";
 import UserRoutesProtector from "./components/Utils/UserRoutesProtector";

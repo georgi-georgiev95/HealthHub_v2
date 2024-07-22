@@ -5,8 +5,8 @@ import ReactDOM from "react-dom/client";
 
 import App from "./App.jsx";
 import "./index.css";
-import UserProvider from "./contexts/UserProvider.jsx";
-import CommentsProvider from "./contexts/CommentsProvired.jsx";
+import UserProvider from "./contexts/userContext/UserProvider.jsx";
+import CommentsProvider from "./contexts/commentsContext/CommentsProvired.jsx";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
