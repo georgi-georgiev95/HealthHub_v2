@@ -1,5 +1,6 @@
-import styles from "../../CreateForms/EntityForm.module.css";
 import PropTypes from "prop-types";
+
+import styles from "../../CreateForms/EntityForm.module.css";
 
 const MultiRowInput = ({
   inputField,

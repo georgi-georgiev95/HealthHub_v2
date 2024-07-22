@@ -1,6 +1,7 @@
-import { Outlet, Navigate, useLocation, useParams } from "react-router-dom";
-import { useUser } from "../../contexts/UserContext";
 import { useEffect, useState } from "react";
+import { Outlet, Navigate, useLocation, useParams } from "react-router-dom";
+
+import { useUser } from "../../contexts/UserContext";
 import { getOneRecipe } from "../../services/recipeService";
 import { getOneWorkout } from "../../services/workoutService";
 

@@ -1,4 +1,4 @@
-import { getDocs, getDoc, collection, setDoc, doc, updateDoc, deleteDoc, query, where } from "firebase/firestore";
+import { getDocs, collection, setDoc, doc, updateDoc, deleteDoc, query, where } from "firebase/firestore";
 import { firebaseAuth } from "../config/firebase";
 
 export const createComment = async (commentData) => {

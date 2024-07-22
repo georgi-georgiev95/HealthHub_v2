@@ -1,8 +1,9 @@
+import { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+
 import styles from "./Navigation.module.css";
 import { firebaseAuth } from "../../config/firebase";
 import { useUser } from "../../contexts/UserContext";
-import { Link, useNavigate } from "react-router-dom";
-import { useState } from "react";
 import Weather from "../Weather/Weather";
 
 const Navigation = () => {

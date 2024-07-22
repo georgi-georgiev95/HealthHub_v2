@@ -1,5 +1,6 @@
-import styles from "./DeleteConfirmationModal.module.css";
 import PropTypes from "prop-types";
+
+import styles from "./DeleteConfirmationModal.module.css";
 
 const DeleteConfirmationModal = ({ isOpen, onCancel, onConfirm, title }) => {
   return (

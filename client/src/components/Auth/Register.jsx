@@ -1,7 +1,9 @@
-import styles from "./AuthForms.module.css";
 import { useState, useRef, useEffect } from "react";
-import { firebaseAuth } from "../../config/firebase";
 import { useNavigate, Link } from "react-router-dom";
+
+import styles from "./AuthForms.module.css";
+import { firebaseAuth } from "../../config/firebase";
+import { updateProfile } from "firebase/auth";
 import { useUser } from "../../contexts/UserContext";
 import {
   validateEmail,
@@ -9,7 +11,6 @@ import {
   validateRePassword,
   validateUsername,
 } from "../../utils/authInputValidator";
-import { updateProfile } from "firebase/auth";
 
 const Register = () => {
   const [userData, setUserData] = useState({

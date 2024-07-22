@@ -1,7 +1,8 @@
-import styles from "../EntityForm.module.css";
 import { useState } from "react";
-import { firebaseAuth } from "../../../config/firebase";
 import { useNavigate } from "react-router-dom";
+
+import styles from "../EntityForm.module.css";
+import { firebaseAuth } from "../../../config/firebase";
 import { createWorkout } from "../../../services/workoutService";
 
 const CreateWorkout = () => {

@@ -1,6 +1,7 @@
-import styles from './BadRoutes.module.css';
 import { useEffect } from 'react';
-import {useNavigate} from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+
+import styles from './BadRoutes.module.css';
 
 const PageNotFound = () => {
     const navigate = useNavigate();

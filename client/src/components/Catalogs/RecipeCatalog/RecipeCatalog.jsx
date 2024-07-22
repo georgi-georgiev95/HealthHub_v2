@@ -1,5 +1,5 @@
-import { getAllRecipes } from "../../../services/recipeService";
 import styles from "./RecipeCatalog.module.css";
+import { getAllRecipes } from "../../../services/recipeService";
 import RecipeGridCard from "./RecipeGridCard/RecipeGridCard";
 import SecondaryLoader from "../../Shared/SecondaryLoader/SecondaryLoader";
 import useFetch from "../../../hooks/useFetch";

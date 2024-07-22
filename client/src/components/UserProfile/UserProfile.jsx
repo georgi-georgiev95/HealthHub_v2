@@ -1,6 +1,7 @@
+import { useState, useEffect } from "react";
+
 import styles from "./UserProfile.module.css";
 import { useUser } from "../../contexts/UserContext";
-import { useState, useEffect } from "react";
 import {
   getUserRecipes,
   getUserWorkouts,

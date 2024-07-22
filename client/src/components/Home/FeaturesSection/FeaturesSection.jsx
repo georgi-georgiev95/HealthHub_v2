@@ -1,5 +1,5 @@
-import HomeFeatureCard from "./HomeFeature/HomeFeatureCard";
 import styles from "./FeaturesSection.module.css"
+import HomeFeatureCard from "./HomeFeature/HomeFeatureCard";
 import Advice from "../AdviceSection/Advice";
 
 const FeaturesSection = () => {

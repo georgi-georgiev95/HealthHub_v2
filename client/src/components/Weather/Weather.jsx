@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+
 import styles from "./Weather.module.css";
 import sunny from "/images/weatherIcons/01-s.png";
 import mostlySunny from "/images/weatherIcons/02-s.png";

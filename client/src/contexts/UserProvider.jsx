@@ -1,7 +1,8 @@
 import { useState, useEffect } from 'react';
+import PropTypes from "prop-types";
+
 import { verifyUser } from "../services/userService";
 import UserContext from './UserContext';
-import PropTypes from "prop-types";
 
 const UserProvider = ({ children }) => {
     const [user, setUser] = useState({
@@ -24,12 +25,12 @@ const UserProvider = ({ children }) => {
             user,
             setUser,
             loading,
-            setLoading, 
-            isCommentCreated, 
-            setIsCommentCreated, 
-            isCommentEdited, 
-            setIsCommentEdited, 
-            isCommentDeleted, 
+            setLoading,
+            isCommentCreated,
+            setIsCommentCreated,
+            isCommentEdited,
+            setIsCommentEdited,
+            isCommentDeleted,
             setIsCommentDeleted
         }}>
             {children}

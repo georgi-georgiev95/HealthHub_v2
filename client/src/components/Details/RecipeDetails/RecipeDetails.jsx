@@ -2,9 +2,9 @@ import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { Link, useNavigate } from "react-router-dom";
 
+import styles from "./RecipeDetails.module.css";
 import { getOneRecipe, deleteRecipe, setLikes } from "../../../services/recipeService";
 import { useUser } from "../../../contexts/UserContext";
-import styles from "./RecipeDetails.module.css";
 import SecondaryLoader from "../../Shared/SecondaryLoader/SecondaryLoader";
 import DeleteConfirmationModal from "../../Shared/DeleteModal/DeleteConfirmationModal";
 import isBackButtonClicked from "../../../utils/experimentalBackButton";

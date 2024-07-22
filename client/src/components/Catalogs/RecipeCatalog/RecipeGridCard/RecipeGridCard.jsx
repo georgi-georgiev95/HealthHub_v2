@@ -1,6 +1,7 @@
-import styles from "../RecipeCatalog.module.css";
-import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
+import PropTypes from "prop-types";
+
+import styles from "../RecipeCatalog.module.css";
 
 const RecipeGridCard = ({ recipeData }) => {
   const difficulty = "⭐".repeat(recipeData.difficulty);

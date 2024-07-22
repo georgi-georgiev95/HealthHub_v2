@@ -1,8 +1,9 @@
-import styles from "./WorkoutGridCard.module.css";
-import PropTypes from "prop-types";
-import fatLossImage from "./assets/fatLoss.png";
-import muscleGainImage from "./assets/muscleGain.png";
 import { Link } from "react-router-dom";
+import PropTypes from "prop-types";
+
+import styles from "./WorkoutGridCard.module.css";
+import fatLossImage from "/images/fatLoss.png";
+import muscleGainImage from "/images/muscleGain.png";
 
 const WorkoutGridCard = ({ title, difficulty, goal, ownerName, id }) => {
   const imageSrc = goal === "Weight Loss" ? fatLossImage : muscleGainImage;

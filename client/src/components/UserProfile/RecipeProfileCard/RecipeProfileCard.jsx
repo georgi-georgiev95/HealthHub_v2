@@ -1,6 +1,7 @@
-import PropTypes from "prop-types";
-import styles from "../Card.module.css";
 import { Link } from "react-router-dom";
+import PropTypes from "prop-types";
+
+import styles from "../Card.module.css";
 
 const RecipeProfileCard = ({ recipeData }) => {
   const difficulty = "⭐".repeat(recipeData.difficulty);
