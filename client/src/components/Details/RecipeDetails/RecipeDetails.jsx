@@ -15,7 +15,7 @@ const RecipeDetails = () => {
   const { id } = useParams();
   const { user } = useUser();
   const navigate = useNavigate();
-  const { data: recipe, comments, loading, setDataHandler } = useFetch(getOneRecipe, id, user.userId, );
+  const { data: recipe, comments, loading, setDataHandler } = useFetch(getOneRecipe, id, user.userId,);
   const [showDeleteModal, setShowDeleteModal] = useState(false);
 
   const handleBackButtonClick = (e) => {
@@ -94,7 +94,6 @@ const RecipeDetails = () => {
                     <button className={styles.likeButton} onClick={handleLikeAction}>Remove from favorites</button>
                     :
                     <button className={styles.likeButton} onClick={handleLikeAction}>Add to favorites</button>
-
                 )}
             </div>
           </div>

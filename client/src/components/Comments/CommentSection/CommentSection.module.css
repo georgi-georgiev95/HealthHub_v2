@@ -25,6 +25,18 @@
     margin-bottom: 1em;
 }
 
+.sort {
+    display: flex;
+    align-items: center;
+    justify-content: end;
+    margin-bottom: 1em;
+}
+
+.sort p {
+    margin-right: 0.5em;
+    padding: 0;
+}
+
 @media (max-width: 600px) {
     .container::before {
         top: -25px;
