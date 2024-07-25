@@ -2,7 +2,7 @@ import { render, screen } from '@testing-library/react';
 import { BrowserRouter } from 'react-router-dom';
 
 import RecipeGridCard from './RecipeGridCard';
-import UserProvider from '../../../../contexts/UserProvider';
+import UserProvider from '../../../../contexts/userContext/UserProvider';
 
 const renderRecipeGridCard = () => {
     render(

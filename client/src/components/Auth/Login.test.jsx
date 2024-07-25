@@ -1,7 +1,7 @@
 import { render, screen, fireEvent, act } from '@testing-library/react';
 import { describe, it, expect } from 'vitest';
 import { BrowserRouter } from 'react-router-dom';
-import UserProvider from '../../contexts/UserProvider'
+import UserProvider from '../../contexts/userContext/UserProvider'
 import Login from './Login';
 import styles from './AuthForms.module.css';
 

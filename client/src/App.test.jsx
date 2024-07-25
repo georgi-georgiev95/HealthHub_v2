@@ -2,7 +2,7 @@ import { render, screen, act } from '@testing-library/react'
 import { BrowserRouter } from 'react-router-dom'
 import { vi } from 'vitest';
 
-import UserProvider from './contexts/UserProvider'
+import UserProvider from './contexts/userContext/UserProvider'
 import App from './App'
 
 beforeAll(() => {
@@ -30,6 +30,6 @@ describe('App', () => {
         );
     });
 
-        screen.debug(); // prints out the jsx in the App component unto the command line
+        screen.debug();
     })
 });
