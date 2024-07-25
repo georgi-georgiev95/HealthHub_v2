@@ -1,7 +1,5 @@
 import styles from './Comment.module.css';
 import { useUser } from '../../../contexts/userContext/UserContext';
-import { useComments } from '../../../contexts/commentsContext/CommentsContext';
-import { setReaction } from '../../../services/commentService';
 import ReactionSection from '../ReactionSection/ReactionSection';
 
 const Comment = ({ commentData, setIsOpenEditModal, setComment, setIsOpenDeleteModal }) => {
