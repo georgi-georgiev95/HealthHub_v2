@@ -1,7 +1,7 @@
 import { getDocs, collection, query, where } from "firebase/firestore";
 import { firebaseAuth } from "../config/firebase";
 
-export const getUserRecipes = async (userId, setRecipes) => {
+export const getUserRecipes = async (userId) => {
     try {
         const recipesCollection = collection(firebaseAuth.db(), "recipes");
         const userRecipesQuery = query(recipesCollection, where("ownerId", "==", userId));
@@ -10,13 +10,13 @@ export const getUserRecipes = async (userId, setRecipes) => {
             id: doc.id,
             ...doc.data(),
         }));
-        setRecipes(userRecipesList);
+        return userRecipesList;
     } catch (error) {
         console.log(error);
     }
 };
 
-export const getUserWorkouts = async (userId, setWorkouts) => {
+export const getUserWorkouts = async (userId) => {
     try {
         const workoutsCollection = collection(firebaseAuth.db(), "workouts");
         const userWorkoutsQuery = query(workoutsCollection, where("ownerId", "==", userId));
@@ -25,13 +25,13 @@ export const getUserWorkouts = async (userId, setWorkouts) => {
             id: doc.id,
             ...doc.data(),
         }));
-        setWorkouts(userWorkoutsList);
+        return userWorkoutsList;
     } catch (error) {
         console.log(error);
     }
 };
 
-export const getUserLikedRecipes = async (userId, setLikedRecipes) => {
+export const getUserLikedRecipes = async (userId) => {
     try {
         const recipesCollection = collection(firebaseAuth.db(), "recipes");
         const userLikedRecipesQuery = query(recipesCollection, where("likes", "array-contains", userId));
@@ -40,13 +40,13 @@ export const getUserLikedRecipes = async (userId, setLikedRecipes) => {
             id: doc.id,
             ...doc.data(),
         }));
-        setLikedRecipes(userLikedRecipesList);
+        return userLikedRecipesList;
     } catch (error) {
         console.log(error);
     }
 };
 
-export const getUserLikedWorkouts = async (userId, setLikedWorkouts) => {
+export const getUserLikedWorkouts = async (userId) => {
     try {
         const workoutsCollection = collection(firebaseAuth.db(), "workouts");
         const userLikedWorkoutsQuery = query(workoutsCollection, where("likes", "array-contains", userId));
@@ -55,7 +55,7 @@ export const getUserLikedWorkouts = async (userId, setLikedWorkouts) => {
             id: doc.id,
             ...doc.data(),
         }));
-        setLikedWorkouts(userLikedWorkoutsList);
+        return userLikedWorkoutsList;
     } catch (error) {
         console.log(error);
     }
@@ -65,20 +65,20 @@ export const verifyUser = (setUser, setLoading) => {
 
     const unsubcribe = firebaseAuth.onAuthStateChanged((firebaseUser) => {
         if (firebaseUser) {
-          setUser({
-            userId: firebaseUser.uid,
-            email: firebaseUser.email,
-            username: firebaseUser.displayName,
-          });
+            setUser({
+                userId: firebaseUser.uid,
+                email: firebaseUser.email,
+                username: firebaseUser.displayName,
+            });
         } else {
-          setUser({
-            userId: "",
-            email: "",
-            username: "",
-          });
+            setUser({
+                userId: "",
+                email: "",
+                username: "",
+            });
         }
         setLoading(false);
-      });
-  
-      return unsubcribe;
+    });
+
+    return unsubcribe;
 }

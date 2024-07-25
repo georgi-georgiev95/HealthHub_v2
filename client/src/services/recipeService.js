@@ -1,7 +1,7 @@
 import { getDocs, getDoc, collection, setDoc, doc, updateDoc, deleteDoc } from "firebase/firestore";
 import { firebaseAuth } from "../config/firebase";
 
-export const getAllRecipes = async (setRecipe) => {
+export const getAllRecipes = async () => {
     try {
         const recipesCollection = collection(firebaseAuth.db(), "recipes");
         const recipesSnapshot = await getDocs(recipesCollection);
@@ -11,13 +11,13 @@ export const getAllRecipes = async (setRecipe) => {
                 ...doc.data(),
             }
         });
-        setRecipe(recipesList);
+        return recipesList;
     } catch (error) {
         console.log(error);
     }
 };
 
-export const getOneRecipe = async (recipeId, setRecipe) => {
+export const getOneRecipe = async (recipeId) => {
     try {
         const recipeDocRef = doc(firebaseAuth.db(), "recipes", recipeId);
         const recipeSnapshot = await getDoc(recipeDocRef);
@@ -25,7 +25,6 @@ export const getOneRecipe = async (recipeId, setRecipe) => {
         if(recipeData.likes === undefined) {
             recipeData.likes = [];
         }
-        setRecipe(recipeData);
         return recipeData;
     } catch (error) {
         console.log(error);

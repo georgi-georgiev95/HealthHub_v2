@@ -15,10 +15,13 @@ const useFetch = (callback, id, userId) => {
                 editCommentHandler(false);
                 deleteCommentHandler(false);
                 if (id) {
-                    await callback(id, setData);
-                    await getAllComments(id, setComments);
+                    const data = await callback(id);
+                    const comments = await getAllComments(id);
+                    setData(data);
+                    setComments(comments);
                 } else {
-                    await callback(setData);
+                    const data = await callback(setData);
+                    setData(data);
                 }
             } catch (error) {
                 console.error("Error fetching data:", error);

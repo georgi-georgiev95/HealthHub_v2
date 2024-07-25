@@ -10,7 +10,7 @@ export const createComment = async (commentData) => {
     }
 };
 
-export const getAllComments = async (entityId, setComments) => {
+export const getAllComments = async (entityId) => {
     try {
         const commentsCollection = collection(firebaseAuth.db(), "comments");
         const commentsQuery = query(commentsCollection, where("entityId", "==", entityId));
@@ -19,7 +19,7 @@ export const getAllComments = async (entityId, setComments) => {
             id: doc.id,
             ...doc.data(),
         }));
-        setComments(commentsList);
+        return commentsList;
     } catch (error) {
         console.log(error);
     }

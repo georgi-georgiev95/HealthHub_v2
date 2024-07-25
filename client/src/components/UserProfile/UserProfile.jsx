@@ -23,14 +23,17 @@ const UserProfile = () => {
   useEffect(() => {
     (async () => {
       setLoading(true);
-      await getUserRecipes(user.userId, setRecipes);
-      await getUserWorkouts(user.userId, setWorkouts);
-      await getUserLikedRecipes(user.userId, setLikedRecipes);
-      await getUserLikedWorkouts(user.userId, setLikedWorkouts);
+      const recipes = await getUserRecipes(user.userId);
+      const workouts = await getUserWorkouts(user.userId);
+      const likedRecipes = await getUserLikedRecipes(user.userId);
+      const likedWorkouts = await getUserLikedWorkouts(user.userId);
+      setRecipes(recipes);
+      setWorkouts(workouts);
+      setLikedRecipes(likedRecipes);
+      setLikedWorkouts(likedWorkouts);
       setLoading(false);
     })();
   }, []);
-
 
   if (loading) {
     return <SecondaryLoader />;
@@ -44,7 +47,10 @@ const UserProfile = () => {
       </div>
       <div className={styles.container}>
         <CreatedSection recipes={recipes} workouts={workouts} />
-        <LikedSection likedRecipes={likedRecipes} likedWorkouts={likedWorkouts} />
+        <LikedSection
+          likedRecipes={likedRecipes}
+          likedWorkouts={likedWorkouts}
+        />
       </div>
     </div>
   );

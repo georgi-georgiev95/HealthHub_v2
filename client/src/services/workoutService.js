@@ -1,7 +1,7 @@
 import { getDocs, getDoc, collection, setDoc, doc, deleteDoc, updateDoc } from "firebase/firestore";
 import { firebaseAuth } from "../config/firebase";
 
-export const getAllWorkouts = async (setWorkout) => {
+export const getAllWorkouts = async () => {
     try {
         const workoutsCollection = collection(firebaseAuth.db(), "workouts");
         const workoutsSnapshot = await getDocs(workoutsCollection);
@@ -11,21 +11,20 @@ export const getAllWorkouts = async (setWorkout) => {
                 ...doc.data(),
             }
         });
-        setWorkout(workoutsList);
+        return workoutsList;
     } catch (error) {
         console.log(error);
     }
 };
 
-export const getOneWorkout = async (workoutId, setWorkout) => {
+export const getOneWorkout = async (workoutId) => {
     try {
         const workoutDocRef = doc(firebaseAuth.db(), "workouts", workoutId);
         const workoutSnapshot = await getDoc(workoutDocRef);
         const workoutData = workoutSnapshot.data();
-        if(workoutData.likes === undefined) {
+        if (workoutData.likes === undefined) {
             workoutData.likes = [];
         }
-        setWorkout(workoutData);
         return workoutData;
     } catch (error) {
         console.log(error);
