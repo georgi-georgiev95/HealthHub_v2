@@ -8,7 +8,7 @@ const PreCreateFormView = () => {
       <h2 className={styles.catalogIntro}>Create your own</h2>
       <div className={styles.createHomeView}>
           <LargeRecipesLink destination={'/create/recipe'} />
-        <div className={styles.logo}></div>
+        <div className={styles.logo} role='logo'></div>
           <LargeWorkoutsLink destination={'/create/workout'} />
       </div>
     </>
