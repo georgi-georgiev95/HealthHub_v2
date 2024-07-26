@@ -16,13 +16,15 @@ const renderRecipeCreate = () => {
 };
 
 describe("RecipeCreate Component", () => {
-  it("renders the title", () => {
+  beforeEach(() => {
     renderRecipeCreate();
+  });
+
+  it("renders the title", () => {
     expect(screen.getByText("Create Recipe")).toBeInTheDocument();
   });
 
   it("renders the form", () => {
-    renderRecipeCreate();
     expect(screen.getByText("Title:")).toBeInTheDocument();
     expect(screen.getByText("Description:")).toBeInTheDocument();
     expect(screen.getByText("Ingredients:")).toBeInTheDocument();
@@ -31,12 +33,10 @@ describe("RecipeCreate Component", () => {
   });
 
   it("renders the button", () => {
-    renderRecipeCreate();
     expect(screen.getByText("Add Recipe")).toBeInTheDocument();
   });
 
   it("renders the dropdown", () => {
-    renderRecipeCreate();
     const dropdown = screen.getByRole("combobox");
     fireEvent.click(dropdown);
     expect(screen.getByText("1")).toBeInTheDocument();
