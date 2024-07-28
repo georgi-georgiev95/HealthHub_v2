@@ -1,19 +1,17 @@
 import { useState, useEffect } from 'react';
-import { useComments } from '../contexts/commentsContext/CommentsContext';
+import { useSelector } from 'react-redux';
+
 import { getAllComments } from '../services/commentService';
 
 const useFetch = (callback, id, userId) => {
     const [data, setData] = useState(id ? {} : []);
     const [comments, setComments] = useState([]);
     const [loading, setLoading] = useState(true);
-    const { isCommentCreated, isCommentEdited, isCommentDeleted, isReacted, createCommentHandler, editCommentHandler, deleteCommentHandler } = useComments();
+    const isCommentInteracted = useSelector(state => state.comments.isCommentInteracted);
 
     useEffect(() => {
         (async () => {
             try {
-                createCommentHandler(false);
-                editCommentHandler(false);
-                deleteCommentHandler(false);
                 if (id) {
                     const data = await callback(id);
                     const comments = await getAllComments(id);
@@ -29,7 +27,7 @@ const useFetch = (callback, id, userId) => {
                 setLoading(false);
             }
         })();
-    }, [id, isCommentCreated, isCommentEdited, isCommentDeleted, isReacted]);
+    }, [id, isCommentInteracted]);
 
     const setDataHandler = (prevData) => {
         const userHasLiked = prevData.likes.includes(userId);
