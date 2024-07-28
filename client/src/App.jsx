@@ -1,15 +1,17 @@
-import "./App.css";
 import { Routes, Route } from "react-router-dom";
+import { useSelector } from "react-redux";
 import { Suspense, lazy } from "react";
+
 import Navigation from "./components/Navigation/Navigation";
 import Home from "./components/Home/Home";
 import Loader from "./components/Shared/PrimaryLoader/Loader";
-import { useUser } from "./contexts/userContext/UserContext";
 import PageNotFound from "./components/BadRoutes/PageNotFound";
 import UnauthorizedRequest from "./components/BadRoutes/UnauthorizedRequest";
 import UserRoutesProtector from "./components/Utils/UserRoutesProtector";
 import GuestRoutesProtector from "./components/Utils/GuestRoutesProtector";
 import OwnerRoutesProtector from "./components/Utils/OwnerRoutesProtector";
+import { selectLoading } from "./store/slices/authSlice";
+import useVerifyUserSession from "./hooks/useVerifyUserSession";
 
 const Catalog = lazy(() => import("./components/Catalogs/CatalogHomeView/Catalog"));
 const RecipeCatalog = lazy(() => import("./components/Catalogs/RecipeCatalog/RecipeCatalog"));
@@ -26,7 +28,8 @@ const Login = lazy(() => import("./components/Auth/Login"));
 const Register = lazy(() => import("./components/Auth/Register"));
 
 function App() {
-  const { loading } = useUser();
+  useVerifyUserSession();
+  const loading = useSelector(selectLoading);
 
   if (loading) return <Loader />;
 
@@ -40,8 +43,9 @@ function App() {
               <Route path="/" element={<Home />} />
               <Route path="catalog" element={<Catalog />} />
               <Route path="catalog/recipes" element={<RecipeCatalog />} />
-              <Route path="catalog/recipes/:id" element={<RecipeDetails />} />
               <Route path="catalog/workouts" element={<WorkoutCatalog />} />
+
+              <Route path="catalog/recipes/:id" element={<RecipeDetails />} />
               <Route path="catalog/workouts/:id" element={<WorkoutDetails />} />
 
               <Route element={<OwnerRoutesProtector />}>
