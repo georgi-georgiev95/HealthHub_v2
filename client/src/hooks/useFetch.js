@@ -35,7 +35,7 @@ const useFetch = (callback, id, userId) => {
             ? prevData.likes.filter((like) => like !== userId)
             : [...prevData.likes, userId];
 
-        return { ...prevData, likes: updatedLikes };
+        setData({ ...prevData, likes: updatedLikes });
     };
 
     return { data, comments, loading, setDataHandler };
