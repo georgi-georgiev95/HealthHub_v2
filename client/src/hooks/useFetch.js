@@ -18,7 +18,7 @@ const useFetch = (callback, id, userId) => {
                     setData(data);
                     setComments(comments);
                 } else {
-                    const data = await callback(setData);
+                    const data = await callback();
                     setData(data);
                 }
             } catch (error) {
