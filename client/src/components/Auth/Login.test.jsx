@@ -1,17 +1,19 @@
 import { render, screen, fireEvent, act } from "@testing-library/react";
 import { describe, it, expect } from "vitest";
 import { BrowserRouter } from "react-router-dom";
-import UserProvider from "../../contexts/userContext/UserProvider";
+import { Provider } from "react-redux";
+
 import Login from "./Login";
 import styles from "./AuthForms.module.css";
+import store from "../../store/store";
 
 const renderLoginComponent = () => {
   return render(
-    <UserProvider>
+    <Provider store={store}>
       <BrowserRouter>
         <Login />
       </BrowserRouter>
-    </UserProvider>
+    </Provider>
   );
 };
 
@@ -28,11 +30,11 @@ describe("Login Component", () => {
   it("should render email and password input fields", async () => {
     await act(async () => {
       render(
-        <UserProvider>
+        <Provider store={store}>
           <BrowserRouter>
             <Login />
           </BrowserRouter>
-        </UserProvider>
+        </Provider>
       );
     });
     const emailInput = screen.getByLabelText(/email/i);
@@ -44,11 +46,11 @@ describe("Login Component", () => {
   it("should allow input in email and password fields", async () => {
     await act(async () => {
       render(
-        <UserProvider>
+        <Provider store={store}>
           <BrowserRouter>
             <Login />
           </BrowserRouter>
-        </UserProvider>
+        </Provider>
       );
     });
     const emailInput = screen.getByLabelText(/email/i);
@@ -64,11 +66,11 @@ describe("Login Component", () => {
   it("should allow login", async () => {
     await act(async () => {
       render(
-        <UserProvider>
+        <Provider store={store}>
           <BrowserRouter>
             <Login />
           </BrowserRouter>
-        </UserProvider>
+        </Provider>
       );
     });
     const emailInput = screen.getByLabelText(/email/i);
@@ -86,11 +88,11 @@ describe("Login Component", () => {
   it("should redirect to home page after login", async () => {
     await act(async () => {
       render(
-        <UserProvider>
+        <Provider store={store}>
           <BrowserRouter>
             <Login />
           </BrowserRouter>
-        </UserProvider>
+        </Provider>
       );
     });
     const emailInput = screen.getByLabelText(/email/i);

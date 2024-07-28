@@ -28,7 +28,7 @@ const Comment = ({ commentData, setIsOpenEditModal, setComment, setIsOpenDeleteM
                 </div>
 
                 <div className={styles.buttons}>
-                    {user.userId !== "" && user.userId === commentData.ownerId && (
+                    {user !== null && user.userId === commentData.ownerId && (
                         <>
                             <button className={styles.ownerButton} onClick={() => {
                                 setIsOpenEditModal(true);
@@ -40,7 +40,7 @@ const Comment = ({ commentData, setIsOpenEditModal, setComment, setIsOpenDeleteM
                             }}>Delete</button>
                         </>
                     )}
-                    {user.userId !== "" && user.userId !== commentData.ownerId &&
+                    {user !== null && user.userId !== commentData.ownerId &&
                         <>
                             <ReactionSection commentData={commentData} userId={user.userId} />
                         </>

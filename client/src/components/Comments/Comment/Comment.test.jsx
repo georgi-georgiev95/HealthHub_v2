@@ -1,14 +1,13 @@
 import { render, screen } from "@testing-library/react";
 import { BrowserRouter } from "react-router-dom";
+import { Provider } from "react-redux";
 
 import Comment from "./Comment";
-import UserProvider from "../../../contexts/userContext/UserProvider";
-import CommentsProvider from "../../../contexts/commentsContext/CommentsProvired";
+import store from "../../../store/store";
 
 const renderComment = () => {
   return render(
-    <UserProvider>
-      <CommentsProvider>
+    <Provider store={store}>
         <BrowserRouter>
           <Comment
             commentData={{
@@ -23,8 +22,7 @@ const renderComment = () => {
             setIsOpenDeleteModal={vi.fn()}
           />
         </BrowserRouter>
-      </CommentsProvider>
-    </UserProvider>
+    </Provider>
   );
 };
 

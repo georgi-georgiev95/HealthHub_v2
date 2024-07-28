@@ -1,20 +1,22 @@
 import { render, screen, fireEvent, act } from "@testing-library/react";
 import { BrowserRouter } from "react-router-dom";
-import Register from "./Register";
-import UserProvider from "../../contexts/userContext/UserProvider";
-import styles from "./AuthForms.module.css";
+import { Provider } from "react-redux";
 import { it } from "vitest";
+
+import Register from "./Register";
+import styles from "./AuthForms.module.css";
+import store from "../../store/store";
 
 describe("Register Component", () => {
   it("should import styles correctly", async () => {
     let container;
     await act(async () => {
       const renderResult = render(
-        <UserProvider>
+        <Provider store={store}>
           <BrowserRouter>
             <Register />
           </BrowserRouter>
-        </UserProvider>
+        </Provider>
       );
       container = renderResult.container;
     });
@@ -26,11 +28,11 @@ describe("Register Component", () => {
   it("should render email and password input fields", async () => {
     await act(async () => {
       render(
-        <UserProvider>
+        <Provider store={store}>
           <BrowserRouter>
             <Register />
           </BrowserRouter>
-        </UserProvider>
+        </Provider>
       );
     });
 
@@ -44,11 +46,11 @@ describe("Register Component", () => {
   it("should allow input in email and password fields", async () => {
     await act(async () => {
       render(
-        <UserProvider>
+        <Provider store={store}>
           <BrowserRouter>
             <Register />
           </BrowserRouter>
-        </UserProvider>
+        </Provider>
       );
     });
 
@@ -69,11 +71,11 @@ describe("Register Component", () => {
   it("should allow login", async () => {
     await act(async () => {
       render(
-        <UserProvider>
+        <Provider store={store}>
           <BrowserRouter>
             <Register />
           </BrowserRouter>
-        </UserProvider>
+        </Provider>
       );
     });
 
@@ -87,11 +89,11 @@ describe("Register Component", () => {
   it("should redirect to home page after register", async () => {
     await act(async () => {
       render(
-        <UserProvider>
+        <Provider store={store}>
           <BrowserRouter>
             <Register />
           </BrowserRouter>
-        </UserProvider>
+        </Provider>
       );
     });
 
@@ -107,11 +109,11 @@ describe("Register Component", () => {
   it("should display error message for invalid email", async () => {
     await act(async () => {
       render(
-        <UserProvider>
+        <Provider store={store}>
           <BrowserRouter>
             <Register />
           </BrowserRouter>
-        </UserProvider>
+        </Provider>
       );
     });
 
@@ -128,11 +130,11 @@ describe("Register Component", () => {
   it("should display error message for not matching password", async () => {
     await act(async () => {
       render(
-        <UserProvider>
+        <Provider store={store}>
           <BrowserRouter>
             <Register />
           </BrowserRouter>
-        </UserProvider>
+        </Provider>
       );
     });
 
@@ -151,11 +153,11 @@ describe("Register Component", () => {
   it("should disply error if password is less than 6 characters", async () => {
     await act(async () => {
       render(
-        <UserProvider>
+        <Provider store={store}>
           <BrowserRouter>
             <Register />
           </BrowserRouter>
-        </UserProvider>
+        </Provider>
       );
     });
 
@@ -176,11 +178,11 @@ describe("Register Component", () => {
   it("should disply error if password is more than 20 characters", async () => {
     await act(async () => {
       render(
-        <UserProvider>
+        <Provider store={store}>
           <BrowserRouter>
             <Register />
           </BrowserRouter>
-        </UserProvider>
+        </Provider>
       );
     });
 
@@ -205,11 +207,11 @@ describe("Register Component", () => {
   it("should disply error if username includes whitespaces", async () => {
     await act(async () => {
       render(
-        <UserProvider>
+        <Provider store={store}>
           <BrowserRouter>
             <Register />
           </BrowserRouter>
-        </UserProvider>
+        </Provider>
       );
     });
 

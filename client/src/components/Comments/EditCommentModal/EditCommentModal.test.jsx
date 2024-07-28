@@ -1,14 +1,13 @@
 import {render, screen} from '@testing-library/react';
 import { BrowserRouter } from 'react-router-dom';
+import { Provider } from 'react-redux';
 
 import EditCommentModal from './EditCommentModal';
-import UserProvider from '../../../contexts/userContext/UserProvider';
-import CommentsProvider from '../../../contexts/commentsContext/CommentsProvired';
+import store from '../../../store/store';
 
 const renderEditCommentModal = () => {
     render(
-        <UserProvider>
-            <CommentsProvider>
+        <Provider store={store}>
                 <BrowserRouter>
                     <EditCommentModal
                         isOpen={true}
@@ -17,8 +16,7 @@ const renderEditCommentModal = () => {
                         setCommentData={() => {}}
                     />
                 </BrowserRouter>
-            </CommentsProvider>
-        </UserProvider>
+        </Provider>
     );
 };
 
