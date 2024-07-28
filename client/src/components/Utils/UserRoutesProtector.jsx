@@ -1,15 +1,14 @@
 import { Outlet, Navigate } from "react-router-dom";
-
-import { useUser } from "../../contexts/userContext/UserContext";
+import { useSelector } from "react-redux";
 
 const UserRoutesProtector = () => {
-    const { user } = useUser();
+  const user = useSelector((state) => state.auth.user);
 
-    if (user.userId === null || user.userId === undefined || user.userId === "") {
-        return <Navigate to="/users/login" />;
-    }
+  if (user === null) {
+    return <Navigate to="/users/login" />;
+  }
 
-    return <Outlet />
+  return <Outlet />;
 };
 
 export default UserRoutesProtector;

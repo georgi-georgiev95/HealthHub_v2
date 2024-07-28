@@ -1,11 +1,10 @@
 import { Outlet, Navigate } from "react-router-dom";
-
-import { useUser } from "../../contexts/userContext/UserContext";
+import { useSelector } from "react-redux";
 
 const GuestRoutesProtector = () => {
-  const { user } = useUser();
+  const user = useSelector((state) => state.auth.user);
 
-  if (user.userId !== null && user.userId !== undefined && user.userId !== "") {
+  if (user !== null) {
     return <Navigate to="/" />;
   }
 

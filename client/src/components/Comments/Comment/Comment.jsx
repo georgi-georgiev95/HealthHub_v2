@@ -1,9 +1,10 @@
+import { useSelector } from 'react-redux';
+
 import styles from './Comment.module.css';
-import { useUser } from '../../../contexts/userContext/UserContext';
 import ReactionSection from '../ReactionSection/ReactionSection';
 
 const Comment = ({ commentData, setIsOpenEditModal, setComment, setIsOpenDeleteModal }) => {
-    const { user } = useUser();
+    const user = useSelector(state => state.auth.user);
     let createdAt;
     let editAt;
 

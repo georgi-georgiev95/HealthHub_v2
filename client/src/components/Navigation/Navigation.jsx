@@ -1,14 +1,16 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux"; 
+import { logout } from "../../store/slices/authSlice";
 
 import styles from "./Navigation.module.css";
 import { firebaseAuth } from "../../config/firebase";
-import { useUser } from "../../contexts/userContext/UserContext";
 import Weather from "../Weather/Weather";
 
 const Navigation = () => {
   const navigate = useNavigate();
-  const { user, setUser } = useUser();
+  const dispatch = useDispatch();
+  const user = useSelector((state) => state.auth.user);
   const [mobileNavStatus, setMobileNavStatus] = useState(false);
   const [profileDetailsVisibility, setProfileDetailsVisibility] =
     useState(false);
@@ -20,7 +22,7 @@ const Navigation = () => {
 
   const logoutHandler = async () => {
     await firebaseAuth.logout();
-    setUser({});
+    dispatch(logout()); // Dispatch the logout action
     navigate("/");
   };
 
@@ -48,7 +50,7 @@ const Navigation = () => {
             <Link onClick={collapseNav} to="catalog">
               Catalog
             </Link>
-            {user.username && (
+            {user?.username && (
               <Link onClick={collapseNav} to="create">
                 Add
               </Link>
@@ -56,9 +58,9 @@ const Navigation = () => {
           </ul>
           <Weather />
           <ul className={styles.profileDropdown}>
-            {user.email ? (
+            {user?.email ? (
               <>
-                {user.username && (
+                {user?.username && (
                   <>
                     <button onClick={expandProfile}>
                       <i className="fa-regular fa-user"></i>
@@ -94,7 +96,7 @@ const Navigation = () => {
             <Link onClick={collapseNav} to="catalog">
               Catalog
             </Link>
-            {user.username && (
+            {user?.username && (
               <>
                 <Link onClick={collapseNav} to="create">
                   Add
@@ -104,7 +106,7 @@ const Navigation = () => {
                 </Link>
               </>
             )}
-            {user.email ? (
+            {user?.email ? (
               <Link onClick={handleLogout}>Logout</Link>
             ) : (
               <>
@@ -124,7 +126,7 @@ const Navigation = () => {
         )}
         {profileDetailsVisibility && (
           <ul className={styles.profileMenu}>
-            <p className={styles.username}>Welcome, {user.username}!</p>
+            <p className={styles.username}>Welcome, {user?.username}!</p>
             <Link onClick={collapseNav} to="users/profile">
               Profile
             </Link>

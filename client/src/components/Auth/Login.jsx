@@ -1,9 +1,10 @@
 import { useState, useRef, useEffect } from "react";
 import { useNavigate, Link } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { login } from "../../store/slices/authSlice";
 
 import styles from "./AuthForms.module.css";
 import { firebaseAuth } from "../../config/firebase";
-import { useUser } from "../../contexts/userContext/UserContext";
 import {
   validateEmail,
   validatePassword,
@@ -14,7 +15,7 @@ const Login = () => {
   const [error, setError] = useState({ email: "", password: "" });
 
   const navigate = useNavigate();
-  const { setUser } = useUser();
+  const dispatch = useDispatch();
 
   const inputRef = useRef();
 
@@ -36,11 +37,13 @@ const Login = () => {
       );
       const user = userCredential.user;
 
-      setUser({
-        userId: user.uid,
-        email: user.email,
-        username: user.displayName,
-      });
+      dispatch(
+        login({
+          userId: user.uid,
+          email: user.email,
+          username: user.displayName,
+        })
+      );
       navigate("/");
     } catch (error) {
       setError({ ...error, email: "Invalid email or password!" });

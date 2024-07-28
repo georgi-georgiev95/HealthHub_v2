@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
+import { useSelector } from "react-redux";
 
 import styles from "./UserProfile.module.css";
-import { useUser } from "../../contexts/userContext/UserContext";
 import {
   getUserRecipes,
   getUserWorkouts,
@@ -18,7 +18,7 @@ const UserProfile = () => {
   const [likedRecipes, setLikedRecipes] = useState([]);
   const [likedWorkouts, setLikedWorkouts] = useState([]);
   const [loading, setLoading] = useState(true);
-  const { user } = useUser();
+  const user = useSelector((state) => state.auth.user);
 
   useEffect(() => {
     (async () => {

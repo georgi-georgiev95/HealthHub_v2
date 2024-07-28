@@ -1,8 +1,9 @@
+import { useSelector } from "react-redux";
+
 import styles from "./Loader.module.css";
-import { useUser } from "../../../contexts/userContext/UserContext";
 
 const Loader = () => {
-  const { loading } = useUser();
+  const loading = useSelector((state) => state.auth.loading);
 
   if (!loading) return null;
 

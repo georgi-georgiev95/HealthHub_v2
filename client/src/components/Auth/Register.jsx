@@ -1,10 +1,11 @@
 import { useState, useRef, useEffect } from "react";
 import { useNavigate, Link } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { register } from "../../store/slices/authSlice";
 
 import styles from "./AuthForms.module.css";
 import { firebaseAuth } from "../../config/firebase";
 import { updateProfile } from "firebase/auth";
-import { useUser } from "../../contexts/userContext/UserContext";
 import {
   validateEmail,
   validatePassword,
@@ -26,7 +27,7 @@ const Register = () => {
   });
 
   const navigate = useNavigate();
-  const { setUser } = useUser();
+  const dispatch = useDispatch();
 
   const inputRef = useRef();
 
@@ -56,11 +57,13 @@ const Register = () => {
         displayName: userData.username,
       });
 
-      setUser({
-        userId: user.uid,
-        email: user.email,
-        username: userData.username,
-      });
+      dispatch(
+        register({
+          userId: user.uid,
+          email: user.email,
+          username: userData.username,
+        })
+      );
 
       navigate("/");
     } catch (error) {

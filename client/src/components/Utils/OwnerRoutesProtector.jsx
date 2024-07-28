@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Outlet, Navigate, useLocation, useParams } from "react-router-dom";
+import { useSelector } from "react-redux";
 
-import { useUser } from "../../contexts/userContext/UserContext";
 import { getOneRecipe } from "../../services/recipeService";
 import { getOneWorkout } from "../../services/workoutService";
 
@@ -18,7 +18,6 @@ const UserRoutesProtector = () => {
     (async () => {
       if (pathSegments.includes("recipes")) {
         const recipeData = await getOneRecipe(id);
-        console.log(recipeData.ownerId === user.userId);
         setIsOwner(recipeData.ownerId === user.userId);
       } else {
         const workoutData = await getOneWorkout(id);
@@ -28,7 +27,7 @@ const UserRoutesProtector = () => {
     })();
   }, []);
 
-  const { user } = useUser();
+  const user = useSelector((state) => state.auth.user);
 
   if (!isOwner && !loading) {
     return <Navigate to="/400" />;

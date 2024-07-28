@@ -31,7 +31,8 @@ const CreateWorkout = () => {
 
   useEffect(() => {
     (async () => {
-      await getOneWorkout(id, setWorkout);
+      const workoutData = await getOneWorkout(id);
+      setWorkout(workoutData);
       setLoading(false);
     })();
   }, [id]);

@@ -20,7 +20,8 @@ const EditRecipe = () => {
 
   useEffect(() => {
     (async () => {
-      await getOneRecipe(id, setRecipe);
+      const recipeData = await getOneRecipe(id);
+      setRecipe(recipeData);
       setLoading(false);
     })();
   }, [id]);

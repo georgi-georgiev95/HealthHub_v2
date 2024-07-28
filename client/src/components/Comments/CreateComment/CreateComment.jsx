@@ -1,8 +1,8 @@
 import { useState } from 'react';
 import { useParams } from 'react-router-dom';
+import {useSelector} from 'react-redux';
 
 import styles from './CreateComment.module.css'
-import { useUser } from "../../../contexts/userContext/UserContext";
 import { createComment } from "../../../services/commentService";
 import { useComments } from '../../../contexts/commentsContext/CommentsContext';
 
@@ -16,7 +16,7 @@ const CreateComment = () => {
         editAt: '',
     });
 
-    const { user } = useUser();
+    const user = useSelector(state => state.auth.user);
     const { createCommentHandler } = useComments();
     const { id } = useParams();
 

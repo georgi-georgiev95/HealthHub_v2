@@ -1,9 +1,9 @@
 import { useParams } from "react-router-dom";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 import styles from "./WorkoutDetails.module.css";
-import { useUser } from "../../../contexts/userContext/UserContext";
 import useFetch from "../../../hooks/useFetch";
 import { getOneWorkout, deleteWorkout, setLikes } from "../../../services/workoutService";
 import DeleteConfirmationModal from "../../Shared/DeleteModal/DeleteConfirmationModal";
@@ -13,7 +13,7 @@ import CommentSection from "../../Comments/CommentSection/CommentSection";
 
 const WorkoutDetails = () => {
   const { id } = useParams();
-  const { user } = useUser();
+  const user = useSelector(state => state.auth.user);
   const navigate = useNavigate();
   const { data: workout, comments, loading, setDataHandler } = useFetch(getOneWorkout, id, user.userId);
   const [showDeleteModal, setShowDeleteModal] = useState(false);

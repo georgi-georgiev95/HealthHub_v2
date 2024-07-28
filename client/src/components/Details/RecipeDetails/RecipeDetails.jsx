@@ -1,9 +1,9 @@
 import { useState } from "react";
 import { useParams } from "react-router-dom";
 import { Link, useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 import styles from "./RecipeDetails.module.css";
-import { useUser } from "../../../contexts/userContext/UserContext";
 import useFetch from "../../../hooks/useFetch";
 import { getOneRecipe, deleteRecipe, setLikes } from "../../../services/recipeService";
 import SecondaryLoader from "../../Shared/SecondaryLoader/SecondaryLoader";
@@ -13,7 +13,7 @@ import CommentSection from "../../Comments/CommentSection/CommentSection";
 
 const RecipeDetails = () => {
   const { id } = useParams();
-  const { user } = useUser();
+  const user = useSelector(state => state.auth.user);
   const navigate = useNavigate();
   const { data: recipe, comments, loading, setDataHandler } = useFetch(getOneRecipe, id, user.userId,);
   const [showDeleteModal, setShowDeleteModal] = useState(false);
