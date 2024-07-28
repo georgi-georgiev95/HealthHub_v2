@@ -1,10 +1,10 @@
 import { useState } from 'react';
 import { useParams } from 'react-router-dom';
-import {useSelector} from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 
 import styles from './CreateComment.module.css'
 import { createComment } from "../../../services/commentService";
-import { useComments } from '../../../contexts/commentsContext/CommentsContext';
+import { toggleIsCommentInteracted } from '../../../store/slices/commentsSlice';
 
 const CreateComment = () => {
     const [comment, setComment] = useState({
@@ -16,8 +16,8 @@ const CreateComment = () => {
         editAt: '',
     });
 
+    const dispatch = useDispatch();
     const user = useSelector(state => state.auth.user);
-    const { createCommentHandler } = useComments();
     const { id } = useParams();
 
     const formSubmitHandler = async (e) => {
@@ -25,7 +25,7 @@ const CreateComment = () => {
         if (comment.text === '') {
             return;
         }
-        createCommentHandler(true);
+        dispatch(toggleIsCommentInteracted());
         await createComment(comment);
         setComment({ text: '', ownerId: '', ownerName: '', entityId: '' });
     };

@@ -1,14 +1,15 @@
-import {useNavigate} from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
 
 import styles from './ReactionSection.module.css';
-import { useComments } from '../../../contexts/commentsContext/CommentsContext';
 import { setReaction } from '../../../services/commentService';
+import { toggleIsCommentInteracted } from '../../../store/slices/commentsSlice';
 
 const ReactionSection = ({
     commentData,
     userId
 }) => {
-    const { handleReaction } = useComments();
+    const dispatch = useDispatch();
     const navigate = useNavigate();
 
     const likes = commentData.reactions?.filter((reaction) => reaction.reaction === "like") || [];
@@ -27,7 +28,7 @@ const ReactionSection = ({
             return;
         }
         await setReaction(userId, commentData.id, "like");
-        handleReaction();
+        dispatch(toggleIsCommentInteracted());
     };
 
     const hateComment = async () => {
@@ -36,7 +37,7 @@ const ReactionSection = ({
             return;
         }
         await setReaction(userId, commentData.id, "hate");
-        handleReaction();
+        dispatch(toggleIsCommentInteracted());
     };
 
     const sadComment = async () => {
@@ -45,7 +46,7 @@ const ReactionSection = ({
             return;
         }
         await setReaction(userId, commentData.id, "sad");
-        handleReaction();
+        dispatch(toggleIsCommentInteracted());
     };
 
     const laughComment = async () => {
@@ -54,7 +55,7 @@ const ReactionSection = ({
             return;
         }
         await setReaction(userId, commentData.id, "laugh");
-        handleReaction();
+        dispatch(toggleIsCommentInteracted());
     };
 
     return (

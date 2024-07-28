@@ -1,12 +1,13 @@
 import { useRef, useEffect } from "react";
+import { useDispatch } from "react-redux";
 
 import styles from "./EditCommentModal.module.css";
 import { editComment } from "../../../services/commentService";
-import { useComments } from "../../../contexts/commentsContext/CommentsContext";
+import { toggleIsCommentInteracted } from "../../../store/slices/commentsSlice";
 
 const EditCommentModal = ({ isOpen, onClose, commentData, setCommentData }) => {
     const textareaRef = useRef(null);
-    const { editCommentHandler } = useComments();
+    const dispatch = useDispatch();
 
     useEffect(() => {
         if (isOpen) {
@@ -17,7 +18,7 @@ const EditCommentModal = ({ isOpen, onClose, commentData, setCommentData }) => {
 
     const onConfirm = async () => {
         await editComment(commentData.id, { ...commentData, editAt: new Date() });
-        editCommentHandler(true);
+        dispatch(toggleIsCommentInteracted());
         onClose();
     }
 

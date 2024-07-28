@@ -1,14 +1,15 @@
+import { useDispatch } from "react-redux";
+
 import styles from "./DeleteCommentModal.module.css";
 import { deleteComment } from "../../../services/commentService";
-import { useComments } from "../../../contexts/commentsContext/CommentsContext";
+import { toggleIsCommentInteracted } from "../../../store/slices/commentsSlice";
 
 const DeleteCommentModal = ({ isOpen, onClose, commentData, setCommentData }) => {
-
-    const { deleteCommentHandler } = useComments();
+    const dispatch = useDispatch();
 
     const onConfirm = async () => {
         await deleteComment(commentData.id);
-        deleteCommentHandler(true);
+        dispatch(toggleIsCommentInteracted());
         onClose();
     }
 
