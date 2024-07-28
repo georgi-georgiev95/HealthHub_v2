@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 
 import styles from './CreateComment.module.css'
@@ -19,12 +19,20 @@ const CreateComment = () => {
     const dispatch = useDispatch();
     const user = useSelector(state => state.auth.user);
     const { id } = useParams();
+    const navigate = useNavigate();
 
     const formSubmitHandler = async (e) => {
         e.preventDefault();
+
         if (comment.text === '') {
             return;
         }
+
+        if(user === null) {
+            navigate('/users/login');
+            return;
+        }
+        
         dispatch(toggleIsCommentInteracted());
         await createComment(comment);
         setComment({ text: '', ownerId: '', ownerName: '', entityId: '' });
@@ -38,7 +46,7 @@ const CreateComment = () => {
                     placeholder='Add your comment...'
                     value={comment.text}
                     required
-                    onChange={(e) => setComment({ ...comment, text: e.target.value, ownerId: user.userId, ownerName: user.username, entityId: id, createdAt: new Date() })}
+                    onChange={(e) => setComment({ ...comment, text: e.target.value, ownerId: user?.userId, ownerName: user?.username, entityId: id, createdAt: new Date() })}
                 />
             </div>
             <div className={styles.buttons}>

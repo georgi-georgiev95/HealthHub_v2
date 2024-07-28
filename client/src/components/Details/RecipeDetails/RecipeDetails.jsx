@@ -5,7 +5,11 @@ import { useSelector } from "react-redux";
 
 import styles from "./RecipeDetails.module.css";
 import useFetch from "../../../hooks/useFetch";
-import { getOneRecipe, deleteRecipe, setLikes } from "../../../services/recipeService";
+import {
+  getOneRecipe,
+  deleteRecipe,
+  setLikes,
+} from "../../../services/recipeService";
 import SecondaryLoader from "../../Shared/SecondaryLoader/SecondaryLoader";
 import DeleteConfirmationModal from "../../Shared/DeleteModal/DeleteConfirmationModal";
 import isBackButtonClicked from "../../../utils/experimentalBackButton";
@@ -13,9 +17,14 @@ import CommentSection from "../../Comments/CommentSection/CommentSection";
 
 const RecipeDetails = () => {
   const { id } = useParams();
-  const user = useSelector(state => state.auth.user);
+  const user = useSelector((state) => state.auth.user);
   const navigate = useNavigate();
-  const { data: recipe, comments, loading, setDataHandler } = useFetch(getOneRecipe, id, user.userId,);
+  const {
+    data: recipe,
+    comments,
+    loading,
+    setDataHandler,
+  } = useFetch(getOneRecipe, id, user?.userId);
   const [showDeleteModal, setShowDeleteModal] = useState(false);
 
   const handleBackButtonClick = (e) => {
@@ -50,7 +59,6 @@ const RecipeDetails = () => {
     }
   };
 
-
   if (loading) {
     return <SecondaryLoader />;
   }
@@ -77,28 +85,39 @@ const RecipeDetails = () => {
               ))}
             </ul>
             <div className={styles.buttons}>
-              {user.userId === recipe.ownerId && (
-                <Link to={`edit`}>
-                  <button className={styles.editButton}>Edit</button>
-                </Link>
+              {user?.userId === recipe.ownerId && (
+                <>
+                  <Link to={`edit`}>
+                    <button className={styles.editButton}>Edit</button>
+                  </Link>
+                  <button
+                    className={styles.deleteButton}
+                    onClick={openDeleteModal}
+                  >
+                    Delete
+                  </button>
+                </>
               )}
-              {user.userId === recipe.ownerId && (
-                <button className={styles.deleteButton} onClick={openDeleteModal}>
-                  Delete
-                </button>
-              )}
-              {user.userId !== recipe.ownerId &&
-                user.userId !== "" &&
-                user.userId !== undefined && (
-                  recipe.likes.includes(user.userId) ?
-                    <button className={styles.likeButton} onClick={handleLikeAction}>Remove from favorites</button>
-                    :
-                    <button className={styles.likeButton} onClick={handleLikeAction}>Add to favorites</button>
-                )}
+              {user?.userId !== recipe.ownerId &&
+                user !== null &&
+                (recipe.likes.includes(user.userId) ? (
+                  <button
+                    className={styles.likeButton}
+                    onClick={handleLikeAction}
+                  >
+                    Remove from favorites
+                  </button>
+                ) : (
+                  <button
+                    className={styles.likeButton}
+                    onClick={handleLikeAction}
+                  >
+                    Add to favorites
+                  </button>
+                ))}
             </div>
           </div>
         </div>
-
 
         <DeleteConfirmationModal
           isOpen={showDeleteModal}

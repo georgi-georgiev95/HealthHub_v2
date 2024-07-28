@@ -15,7 +15,7 @@ const WorkoutDetails = () => {
   const { id } = useParams();
   const user = useSelector(state => state.auth.user);
   const navigate = useNavigate();
-  const { data: workout, comments, loading, setDataHandler } = useFetch(getOneWorkout, id, user.userId);
+  const { data: workout, comments, loading, setDataHandler } = useFetch(getOneWorkout, id, user?.userId);
   const [showDeleteModal, setShowDeleteModal] = useState(false);
 
   const deleteHandler = async () => {
@@ -78,32 +78,39 @@ const WorkoutDetails = () => {
                 <span className={styles.exerciseName}>
                   {exercise.exerciseName}
                 </span>
-                <span className={styles.exerciseSets}>Sets: {exercise.sets}</span>
-                <span className={styles.exerciseReps}>Reps: {exercise.reps}</span>
+                <span className={styles.exerciseSets}>
+                  Sets: {exercise.sets}
+                </span>
+                <span className={styles.exerciseReps}>
+                  Reps: {exercise.reps}
+                </span>
               </li>
             ))}
           </ul>
         </div>
 
         <div className={styles.buttons}>
-          {user.userId === workout.ownerId && (
-            <Link to={`edit`}>
-              <button className={styles.editButton}>Edit</button>
-            </Link>
+          {user?.userId === workout.ownerId && (
+            <>
+              <Link to={`edit`}>
+                <button className={styles.editButton}>Edit</button>
+              </Link>
+              <button className={styles.deleteButton} onClick={openDeleteModal}>
+                Delete
+              </button>
+            </>
           )}
-          {user.userId === workout.ownerId && (
-            <button className={styles.deleteButton} onClick={openDeleteModal}>
-              Delete
-            </button>
-          )}
-          {user.userId !== workout.ownerId &&
-            user.userId !== "" &&
-            user.userId !== undefined && (
-              workout.likes.includes(user.userId) ?
-                <button className={styles.likeButton} onClick={handleLikeAction}>Remove from favorites</button>
-                :
-                <button className={styles.likeButton} onClick={handleLikeAction}>Add to favorites</button>
-            )}
+          {user?.userId !== workout.ownerId &&
+            user !== null &&
+            (workout.likes.includes(user?.userId) ? (
+              <button className={styles.likeButton} onClick={handleLikeAction}>
+                Remove from favorites
+              </button>
+            ) : (
+              <button className={styles.likeButton} onClick={handleLikeAction}>
+                Add to favorites
+              </button>
+            ))}
         </div>
 
         <DeleteConfirmationModal
