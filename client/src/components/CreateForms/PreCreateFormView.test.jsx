@@ -2,15 +2,12 @@ import { screen, render } from '@testing-library/react';
 import { BrowserRouter } from 'react-router-dom';
 
 import PreCreateFormView from './PreCreateFormView';
-import UserProvider from '../../contexts/userContext/UserProvider';
 
 const renderPreCreateFormView = () => {
     render(
-        <UserProvider>
             <BrowserRouter>
                 <PreCreateFormView />
             </BrowserRouter>
-        </UserProvider>
     );
 };
 

@@ -2,14 +2,11 @@ import { screen, render } from "@testing-library/react";
 import { BrowserRouter } from "react-router-dom";
 
 import WorkoutCreate from "./WorkoutCreate";
-import UserProvider from "../../../contexts/userContext/UserProvider";
 
 const renderWorkoutCreate = () => {
     render(
         <BrowserRouter>
-            <UserProvider>
                 <WorkoutCreate />
-            </UserProvider>
         </BrowserRouter>
     );
 };

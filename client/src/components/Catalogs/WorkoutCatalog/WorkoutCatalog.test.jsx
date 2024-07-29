@@ -3,21 +3,15 @@ import { describe, it, expect, vi } from "vitest";
 import { BrowserRouter } from "react-router-dom";
 
 import WorkoutCatalog from "./WorkoutCatalog";
-import UserProvider from "../../../contexts/userContext/UserProvider";
-import CommentsProvider from "../../../contexts/commentsContext/CommentsProvired";
 import useFetch from "../../../hooks/useFetch";
 
 vi.mock("../../../hooks/useFetch");
 
 const renderWorkoutCatalog = () => {
   render(
-    <UserProvider>
-      <CommentsProvider>
         <BrowserRouter>
           <WorkoutCatalog />
         </BrowserRouter>
-      </CommentsProvider>
-    </UserProvider>
   );
 };
 

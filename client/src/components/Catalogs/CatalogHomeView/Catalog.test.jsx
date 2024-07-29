@@ -2,15 +2,12 @@ import { render, screen } from '@testing-library/react';
 import { BrowserRouter } from 'react-router-dom';
 
 import Catalog from './Catalog';
-import UserProvider from '../../../contexts/userContext/UserProvider';
 
 const renderCatalogComponent = () => {
     render(
-        <UserProvider>
             <BrowserRouter>
                 <Catalog />
             </BrowserRouter>
-        </UserProvider>
     );
 };
 

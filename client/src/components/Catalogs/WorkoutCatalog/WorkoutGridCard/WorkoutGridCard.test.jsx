@@ -2,11 +2,9 @@ const { render, screen } = require("@testing-library/react");
 import { BrowserRouter } from "react-router-dom";
 
 import WorkoutGridCard from "./WorkoutGridCard";
-import UserProvider from "../../../../contexts/userContext/UserProvider";
 
 const renderWorkoutGridCard = () => {
   render(
-    <UserProvider>
       <BrowserRouter>
         <WorkoutGridCard
           title="Workout Title"
@@ -16,7 +14,6 @@ const renderWorkoutGridCard = () => {
           id="1"
         />
       </BrowserRouter>
-    </UserProvider>
   );
 };
 

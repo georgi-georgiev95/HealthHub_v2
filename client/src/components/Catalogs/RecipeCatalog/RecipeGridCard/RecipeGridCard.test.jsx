@@ -2,11 +2,9 @@ import { render, screen } from '@testing-library/react';
 import { BrowserRouter } from 'react-router-dom';
 
 import RecipeGridCard from './RecipeGridCard';
-import UserProvider from '../../../../contexts/userContext/UserProvider';
 
 const renderRecipeGridCard = () => {
     render(
-        <UserProvider>
             <BrowserRouter>
                 <RecipeGridCard
                     recipeData={{
@@ -18,7 +16,6 @@ const renderRecipeGridCard = () => {
                     }}
                 />
             </BrowserRouter>
-        </UserProvider>
     );
 };
 

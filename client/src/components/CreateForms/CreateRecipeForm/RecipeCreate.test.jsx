@@ -3,14 +3,11 @@ import { fireEvent } from "@testing-library/dom";
 import { BrowserRouter } from "react-router-dom";
 
 import RecipeCreate from "./RecipeCreate";
-import UserProvider from "../../../contexts/userContext/UserProvider";
 
 const renderRecipeCreate = () => {
   render(
     <BrowserRouter>
-      <UserProvider>
         <RecipeCreate />
-      </UserProvider>
     </BrowserRouter>
   );
 };
