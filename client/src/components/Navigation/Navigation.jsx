@@ -1,43 +1,19 @@
-import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
-import { useSelector, useDispatch } from "react-redux"; 
-import { logout } from "../../store/slices/authSlice";
+import { Link } from "react-router-dom";
 
 import styles from "./Navigation.module.css";
-import { firebaseAuth } from "../../config/firebase";
+import useNavigation from "../../hooks/useNavigation";
 import Weather from "../Weather/Weather";
 
 const Navigation = () => {
-  const navigate = useNavigate();
-  const dispatch = useDispatch();
-  const user = useSelector((state) => state.auth.user);
-  const [mobileNavStatus, setMobileNavStatus] = useState(false);
-  const [profileDetailsVisibility, setProfileDetailsVisibility] =
-    useState(false);
-
-  const handleLogout = async () => {
-    await logoutHandler();
-    collapseNav();
-  };
-
-  const logoutHandler = async () => {
-    await firebaseAuth.logout();
-    dispatch(logout()); // Dispatch the logout action
-    navigate("/");
-  };
-
-  const expandNav = () => {
-    setMobileNavStatus(!mobileNavStatus);
-  };
-
-  const collapseNav = () => {
-    setMobileNavStatus(false);
-    setProfileDetailsVisibility(false);
-  };
-
-  const expandProfile = () => {
-    setProfileDetailsVisibility(!profileDetailsVisibility);
-  };
+  const {
+    user,
+    mobileNavStatus,
+    profileDetailsVisibility,
+    handleLogout,
+    expandNav,
+    collapseNav,
+    expandProfile,
+  } = useNavigation();
 
   return (
     <div className={styles.navWrapper}>
