@@ -1,11 +1,8 @@
-import { useState, useEffect } from 'react';
-
 import styles from './CommentSection.module.css';
 import Comment from '../Comment/Comment';
 import CreateComment from '../CreateComment/CreateComment';
 import DeleteCommentModal from '../DeleteCommentModal/DeleteCommentModal';
 import EditCommentModal from '../EditCommentModal/EditCommentModal';
-import commentsSorter from '../../../utils/commentsSorter';
 import useComments from '../../../hooks/useComments';
 
 
