@@ -8,6 +8,7 @@ import store from "../../../store/store";
 const renderCommentSection = () => {
   render(
     <Provider store={store}>
+      <BrowserRouter>
           <CommentSection
             comments={[
               {
@@ -38,7 +39,8 @@ const renderCommentSection = () => {
                 editAt: new Date(),
               },
             ]}
-          />
+        />
+      </BrowserRouter>
     </Provider>
   );
 };
