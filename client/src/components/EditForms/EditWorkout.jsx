@@ -1,91 +1,43 @@
+import useEditForms from "../../hooks/useEditForms";
+import { getOneWorkout, editWorkout } from "../../services/workoutService";
 import styles from "../CreateForms/EntityForm.module.css";
-import { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
-import { editWorkout } from "../../services/workoutService";
-import { useParams } from "react-router-dom";
-import { getOneWorkout } from "../../services/workoutService";
 import SecondaryLoader from "../Shared/SecondaryLoader/SecondaryLoader";
 
-const CreateWorkout = () => {
+const EditWorkout = () => {
   const difficultyLevels = ["-", "Beginner", "Intermediate", "Advanced"];
   const goals = ["-", "Weight Loss", "Muscle Gain"];
-  const [exercises, setExercises] = useState([
-    {
-      exerciseName: "",
-      sets: "",
-      reps: "",
-    },
-  ]);
-  const [workout, setWorkout] = useState({
+
+  const initialState = {
     title: "",
     description: "",
     difficulty: "",
     goal: "",
-    exercises: [],
+    exercises: [
+      {
+        exerciseName: "",
+        sets: "",
+        reps: "",
+      },
+    ],
     ownerId: "",
     ownerName: "",
-  });
-  const [loading, setLoading] = useState(true);
-  const navigate = useNavigate();
-  const { id } = useParams();
-
-  useEffect(() => {
-    (async () => {
-      const workoutData = await getOneWorkout(id);
-      setWorkout(workoutData);
-      setLoading(false);
-    })();
-  }, [id]);
-
-  const addInputField = () => {
-    if (
-      exercises[exercises.length - 1].sets === "" ||
-      exercises[exercises.length - 1].reps === "" ||
-      exercises[exercises.length - 1].exerciseName === "" ||
-      exercises[exercises.length - 1].sets === undefined ||
-      exercises[exercises.length - 1].reps === undefined ||
-      exercises[exercises.length - 1].exerciseName === undefined
-    ) {
-      return;
-    }
-    setExercises([...exercises, { value: "" }]);
   };
 
-  const handleNewExercise = (index, field, value) => {
-    const updatedExercises = [...exercises];
-    updatedExercises[index] = {
-      ...updatedExercises[index],
-      [field]: value,
-    };
-    setExercises(updatedExercises);
-  };
+  const {
+    entity: workout,
+    handleChange,
+    addInputField,
+    deleteInputField,
+    handleSubmit,
+    loading,
+  } = useEditForms(
+    initialState,
+    getOneWorkout,
+    editWorkout,
+    "/catalog/workouts/"
+  );
 
-  const deleteExercise = (index) => {
-    setExercises(exercises.filter((exercise, i) => i !== index));
-  };
-
-  const handleSubmit = async (event) => {
-    event.preventDefault();
-
-    if (
-      workout.title === "" ||
-      workout.description === "" ||
-      workout.difficulty === "-" ||
-      workout.goal === "-" ||
-      workout.exercises[0] === "" ||
-      workout.exercises[0] === undefined
-    ) {
-      return;
-    }
-
-    await editWorkout(id, workout);
-
-    navigate("/catalog/workouts/" + id);
-  };
-
-  if (loading) {
-    return <SecondaryLoader />;
-  }
+  if (loading) return <SecondaryLoader />;
 
   return (
     <>
@@ -98,7 +50,7 @@ const CreateWorkout = () => {
             name="title"
             id="title"
             value={workout.title}
-            onChange={(e) => setWorkout({ ...workout, title: e.target.value })}
+            onChange={(e) => handleChange("title", e.target.value)}
           />
         </div>
         <div className={styles.formGroup}>
@@ -107,9 +59,7 @@ const CreateWorkout = () => {
             name="description"
             id="description"
             value={workout.description}
-            onChange={(e) =>
-              setWorkout({ ...workout, description: e.target.value })
-            }
+            onChange={(e) => handleChange("description", e.target.value)}
           />
         </div>
         <div className={styles.listGroup}>
@@ -131,7 +81,11 @@ const CreateWorkout = () => {
                   value={exercise.exerciseName}
                   className={styles.exerciseInput}
                   onChange={(e) =>
-                    handleNewExercise(index, "exerciseName", e.target.value)
+                    handleChange("exercises", [
+                      ...workout.exercises.slice(0, index),
+                      { ...exercise, exerciseName: e.target.value },
+                      ...workout.exercises.slice(index + 1),
+                    ])
                   }
                   required
                 />
@@ -145,7 +99,11 @@ const CreateWorkout = () => {
                   value={exercise.sets}
                   className={styles.exerciseInput}
                   onChange={(e) =>
-                    handleNewExercise(index, "sets", e.target.value)
+                    handleChange("exercises", [
+                      ...workout.exercises.slice(0, index),
+                      { ...exercise, sets: e.target.value },
+                      ...workout.exercises.slice(index + 1),
+                    ])
                   }
                   required
                 />
@@ -159,14 +117,18 @@ const CreateWorkout = () => {
                   value={exercise.reps}
                   className={styles.exerciseInput}
                   onChange={(e) =>
-                    handleNewExercise(index, "reps", e.target.value)
+                    handleChange("exercises", [
+                      ...workout.exercises.slice(0, index),
+                      { ...exercise, reps: e.target.value },
+                      ...workout.exercises.slice(index + 1),
+                    ])
                   }
                   required
                 />
               </div>
               {workout.exercises.length > 1 && (
                 <i
-                  onClick={() => deleteExercise(index)}
+                  onClick={() => deleteInputField("exercises", index)}
                   className="fa-solid fa-x"
                 ></i>
               )}
@@ -175,7 +137,7 @@ const CreateWorkout = () => {
           <button
             type="button"
             className={styles.addButton}
-            onClick={addInputField}
+            onClick={() => addInputField("exercises")}
           >
             Add Exercise
           </button>
@@ -186,9 +148,7 @@ const CreateWorkout = () => {
             name="difficulty"
             id="difficulty"
             value={workout.difficulty}
-            onChange={(e) =>
-              setWorkout({ ...workout, difficulty: e.target.value })
-            }
+            onChange={(e) => handleChange("difficulty", e.target.value)}
           >
             {difficultyLevels.map((level) => (
               <option key={level} value={level}>
@@ -203,7 +163,7 @@ const CreateWorkout = () => {
             name="goal"
             id="goal"
             value={workout.goal}
-            onChange={(e) => setWorkout({ ...workout, goal: e.target.value })}
+            onChange={(e) => handleChange("goal", e.target.value)}
           >
             {goals.map((level) => (
               <option key={level} value={level}>
@@ -222,4 +182,4 @@ const CreateWorkout = () => {
   );
 };
 
-export default CreateWorkout;
+export default EditWorkout;

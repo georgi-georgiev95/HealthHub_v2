@@ -1,63 +1,28 @@
-import { useEffect, useState } from "react";
-import { useParams, useNavigate } from "react-router-dom";
-
 import styles from "../CreateForms/EntityForm.module.css";
+import useEditForms from "../../hooks/useEditForms";
 import { getOneRecipe, editRecipe } from "../../services/recipeService";
 import SecondaryLoader from "../Shared/SecondaryLoader/SecondaryLoader";
 
 const EditRecipe = () => {
-  const [recipe, setRecipe] = useState({
+  const initialState = {
     title: "",
     image: "",
     description: "",
     ingredients: [],
     instructions: "",
     difficulty: 1,
-  });
-  const { id } = useParams();
-  const navigate = useNavigate();
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    (async () => {
-      const recipeData = await getOneRecipe(id);
-      setRecipe(recipeData);
-      setLoading(false);
-    })();
-  }, [id]);
-
-  const addInputField = () => {
-    if (recipe.ingredients[recipe.ingredients.length - 1] === "") {
-      return;
-    }
-    setRecipe({
-      ...recipe,
-      ingredients: [...recipe.ingredients, ""],
-    });
   };
 
-  const deleteInputField = (index) => {
-    setRecipe({
-      ...recipe,
-      ingredients: recipe.ingredients.filter((_, i) => i !== index),
-    });
-  };
+  const {
+    entity: recipe,
+    handleChange,
+    addInputField,
+    deleteInputField,
+    handleSubmit,
+    loading,
+  } = useEditForms(initialState, getOneRecipe, editRecipe, "/catalog/recipes/");
 
-  const handleSubmit = async (event) => {
-    event.preventDefault();
-    if(recipe.ingredients[recipe.ingredients.length - 1] === "") {
-      return;
-    }
-
-    const recipeData = recipe;
-
-    await editRecipe(id, recipeData);
-    navigate("/catalog/recipes/" + id);
-  };
-
-  if (loading) {
-    return <SecondaryLoader />;
-  }
+  if (loading) return <SecondaryLoader />;
 
   return (
     <>
@@ -70,7 +35,7 @@ const EditRecipe = () => {
             name="title"
             id="title"
             value={recipe.title}
-            onChange={(e) => setRecipe({ ...recipe, title: e.target.value })}
+            onChange={(e) => handleChange("title", e.target.value)}
           />
         </div>
         <div className={styles.formGroup}>
@@ -79,9 +44,7 @@ const EditRecipe = () => {
             name="description"
             id="description"
             value={recipe.description}
-            onChange={(e) =>
-              setRecipe({ ...recipe, description: e.target.value })
-            }
+            onChange={(e) => handleChange("description", e.target.value)}
           />
         </div>
         <div className={styles.formGroup}>
@@ -93,19 +56,16 @@ const EditRecipe = () => {
                 type="text"
                 value={ingredient}
                 onChange={(e) =>
-                  setRecipe({
-                    ...recipe,
-                    ingredients: [
-                      ...recipe.ingredients.slice(0, index),
-                      e.target.value,
-                      ...recipe.ingredients.slice(index + 1),
-                    ],
-                  })
+                  handleChange("ingredients", [
+                    ...recipe.ingredients.slice(0, index),
+                    e.target.value,
+                    ...recipe.ingredients.slice(index + 1),
+                  ])
                 }
               />
               {recipe.ingredients.length > 1 && (
                 <i
-                  onClick={() => deleteInputField(index)}
+                  onClick={() => deleteInputField("ingredients", index)}
                   className="fa-solid fa-x"
                 ></i>
               )}
@@ -114,7 +74,7 @@ const EditRecipe = () => {
           <button
             type="button"
             className={styles.addButton}
-            onClick={addInputField}
+            onClick={() => addInputField("ingredients")}
           >
             Add Ingredient
           </button>
@@ -126,7 +86,7 @@ const EditRecipe = () => {
             name="image"
             id="image"
             value={recipe.image}
-            onChange={(e) => setRecipe({ ...recipe, image: e.target.value })}
+            onChange={(e) => handleChange("image", e.target.value)}
           />
         </div>
         <div className={styles.formGroup}>
@@ -136,7 +96,7 @@ const EditRecipe = () => {
             id="difficulty"
             value={recipe.difficulty}
             onChange={(e) =>
-              setRecipe({ ...recipe, difficulty: parseInt(e.target.value) })
+              handleChange("difficulty", parseInt(e.target.value))
             }
           >
             {[...Array(5).keys()].map((num) => (
