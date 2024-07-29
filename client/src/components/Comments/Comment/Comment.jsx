@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux';
 import styles from './Comment.module.css';
 import ReactionSection from '../ReactionSection/ReactionSection';
 
-const Comment = ({ commentData, setIsOpenEditModal, setComment, setIsOpenDeleteModal }) => {
+const Comment = ({ commentData, onEdit, onDelete }) => {
     const user = useSelector(state => state.auth.user);
     let createdAt;
     let editAt;
@@ -31,12 +31,10 @@ const Comment = ({ commentData, setIsOpenEditModal, setComment, setIsOpenDeleteM
                     {user !== null && user.userId === commentData.ownerId && (
                         <>
                             <button className={styles.ownerButton} onClick={() => {
-                                setIsOpenEditModal(true);
-                                setComment(commentData);
+                                onEdit(commentData);
                             }}>Edit</button>
                             <button className={styles.ownerButton} onClick={() => {
-                                setIsOpenDeleteModal(true)
-                                setComment(commentData)
+                                onDelete(commentData);
                             }}>Delete</button>
                         </>
                     )}
