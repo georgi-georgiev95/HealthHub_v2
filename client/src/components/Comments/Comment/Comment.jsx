@@ -23,12 +23,12 @@ const Comment = ({ commentData, onEdit, onDelete }) => {
                 <div>
                     <span>by {commentData.ownerName}</span>
                     <p className={styles.text}>{commentData.text}</p>
-                    <p className={styles.date}>Posted at: {createdAt.toLocaleString()}</p>
-                    {editAt && <p className={styles.date}>Edited at: {editAt.toLocaleString()}</p>}
+                    <p className={styles.date}>Posted at: {createdAt && createdAt.toLocaleString()}</p>
+                    {editAt && <p className={styles.date}>Edited at: { editAt && editAt.toLocaleString()}</p>}
                 </div>
 
                 <div className={styles.buttons}>
-                    {user !== null && user.userId === commentData.ownerId && (
+                    {user !== null && user?.userId === commentData.ownerId && (
                         <>
                             <button className={styles.ownerButton} onClick={() => {
                                 onEdit(commentData);
@@ -38,7 +38,7 @@ const Comment = ({ commentData, onEdit, onDelete }) => {
                             }}>Delete</button>
                         </>
                     )}
-                    {user !== null && user.userId !== commentData.ownerId &&
+                    {user !== null && user?.userId !== commentData.ownerId &&
                         <>
                             <ReactionSection commentData={commentData} userId={user.userId} />
                         </>

@@ -100,7 +100,7 @@ const RecipeDetails = () => {
               )}
               {user?.userId !== recipe.ownerId &&
                 user !== null &&
-                (recipe.likes.includes(user.userId) ? (
+                (recipe.likes.includes(user?.userId) ? (
                   <button
                     className={styles.likeButton}
                     onClick={handleLikeAction}
