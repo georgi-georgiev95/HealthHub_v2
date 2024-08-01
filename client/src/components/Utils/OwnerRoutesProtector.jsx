@@ -13,21 +13,21 @@ const UserRoutesProtector = () => {
   const location = useLocation();
   const path = location.pathname;
   const pathSegments = path.split("/");
+  const user = useSelector((state) => state.auth.user);
 
   useEffect(() => {
     (async () => {
       if (pathSegments.includes("recipes")) {
         const recipeData = await getOneRecipe(id);
-        setIsOwner(recipeData.ownerId === user.userId);
+        setIsOwner(recipeData.ownerId === user?.userId);
       } else {
         const workoutData = await getOneWorkout(id);
-        setIsOwner(workoutData.ownerId === user.userId);
+        setIsOwner(workoutData.ownerId === user?.userId);
       }
       setLoading(false);
     })();
   }, []);
-
-  const user = useSelector((state) => state.auth.user);
+  
 
   if (!isOwner && !loading) {
     return <Navigate to="/400" />;
