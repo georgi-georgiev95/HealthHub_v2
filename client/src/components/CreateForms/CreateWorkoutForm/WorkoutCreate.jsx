@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import styles from "../EntityForm.module.css";
 import { firebaseAuth } from "../../../config/firebase";
 import { createWorkout } from "../../../services/workoutService";
+import { validateTitle, validateDescription } from "../../../utils/createFormValidator";
 
 const CreateWorkout = () => {
   const difficultyLevels = ["-", "Beginner", "Intermediate", "Advanced"];
@@ -17,6 +18,20 @@ const CreateWorkout = () => {
   ]);
   const [difficulty, setDifficulty] = useState("-");
   const [goal, setGoal] = useState("-");
+  const [errors, setErrors] = useState({
+    title: "",
+    description: "",
+    exercises: "",
+    difficulty: "",
+    goal: "",
+  });
+
+  const handleError = (element, error) => {
+    setErrors((prevErrors) => ({
+      ...prevErrors,
+      [element]: error,
+    }));
+  };
 
   const navigate = useNavigate();
 
@@ -44,7 +59,33 @@ const CreateWorkout = () => {
   };
 
   const handleDifficultyChange = (event) => {
+    if (event.target.value !== "-") {
+      setErrors((prevErrors) => ({
+        ...prevErrors,
+        difficulty: "",
+      }));
+    } else {
+      setErrors((prevErrors) => ({
+        ...prevErrors,
+        difficulty: "Field cannot be empty!",
+      }));
+    }
     setDifficulty(event.target.value);
+  };
+
+  const handleGoalChange = (event) => {
+    if (event.target.value !== "-") {
+      setErrors((prevErrors) => ({
+        ...prevErrors,
+        goal: "",
+      }));
+    } else {
+      setErrors((prevErrors) => ({
+        ...prevErrors,
+        goal: "Field cannot be empty!",
+      }));
+    }
+    setGoal(event.target.value);
   };
 
   const deleteExercise = (index) => {
@@ -85,12 +126,25 @@ const CreateWorkout = () => {
       <form className={styles.form} onSubmit={handleSubmit}>
         <div className={styles.formGroup}>
           <label htmlFor="title">Title:</label>
-          <input type="text" name="title" id="title" />
+          <input
+            type="text"
+            name="title"
+            id="title"
+            onBlur={(e) => validateTitle(e, handleError)}
+          />
         </div>
+        {errors.title && <p className={styles.error}>{errors.title}</p>}
         <div className={styles.formGroup}>
           <label htmlFor="description">Description:</label>
-          <textarea name="description" id="description" />
+          <textarea
+            name="description"
+            id="description"
+            onBlur={(e) => validateDescription(e, handleError)}
+          />
         </div>
+        {errors.description && (
+          <p className={styles.error}>{errors.description}</p>
+        )}
         <div className={styles.listGroup}>
           <label className={styles.exerciseLabel}>Exercises:</label>
           <div className={styles.labels}>
@@ -174,13 +228,16 @@ const CreateWorkout = () => {
             ))}
           </select>
         </div>
+        {errors.difficulty && (
+          <p className={styles.error}>{errors.difficulty}</p>
+        )}
         <div className={styles.formGroup}>
           <label htmlFor="goal">Goal:</label>
           <select
             name="goal"
             id="goal"
             value={goal}
-            onChange={(e) => setGoal(e.target.value)}
+            onChange={handleGoalChange}
           >
             {goals.map((level) => (
               <option key={level} value={level}>
@@ -189,6 +246,7 @@ const CreateWorkout = () => {
             ))}
           </select>
         </div>
+        {errors.goal && <p className={styles.error}>{errors.goal}</p>}
         <div className={styles.buttons}>
           <button className={styles.button} type="submit">
             Add Workout

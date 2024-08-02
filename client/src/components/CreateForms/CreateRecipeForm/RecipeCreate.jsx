@@ -5,17 +5,44 @@ import { firebaseAuth } from "../../../config/firebase";
 import { createRecipe } from "../../../services/recipeService";
 import MultiRowInput from "../../Shared/MultiRowInput/MultiRowInput";
 import styles from "../EntityForm.module.css";
+import {
+  validateTitle,
+  validateDescription,
+  validateImageURL,
+} from "../../../utils/createFormValidator";
 
 const CreateRecipe = () => {
   const [ingredients, setIngredients] = useState([{ value: "" }]);
   const [difficulty, setDifficulty] = useState("-");
+  const [errors, setErrors] = useState({
+    title: "",
+    description: "",
+    ingredients: "",
+    image: "",
+    difficulty: "",
+  });
+
+  const handleError = (element, error) => {
+    setErrors((prevErrors) => ({
+      ...prevErrors,
+      [element]: error,
+    }));
+  };
 
   const navigate = useNavigate();
 
   const addInputField = () => {
     if (ingredients[ingredients.length - 1].value === "") {
+      setErrors((prevErrors) => ({
+        ...prevErrors,
+        ingredients: "Field cannot be empty!",
+      }));
       return;
     }
+    setErrors((prevErrors) => ({
+      ...prevErrors,
+      ingredients: "",
+    }));
     setIngredients([...ingredients, { value: "" }]);
   };
 
@@ -23,24 +50,55 @@ const CreateRecipe = () => {
     const values = [...ingredients];
     values[index].value = event.target.value;
     setIngredients(values);
+    setErrors((prevErrors) => ({
+      ...prevErrors,
+      ingredients: "",
+    }))
   };
 
   const handleDifficultyChange = (event) => {
+    if (event.target.value !== "-") {
+      setErrors((prevErrors) => ({
+        ...prevErrors,
+        difficulty: "",
+      }));
+    } else {
+      setErrors((prevErrors) => ({
+        ...prevErrors,
+        difficulty: "Field cannot be empty!",
+      }));
+    }
     setDifficulty(parseInt(event.target.value));
   };
 
   const deleteInputField = (index) => {
     setIngredients(ingredients.filter((ingredient, i) => i !== index));
+    setErrors((prevErrors) => ({
+      ...prevErrors,
+      ingredients: "",
+    }));
   };
 
   const handleSubmit = async (event) => {
     event.preventDefault();
 
+    if (errors.title || errors.description || errors.ingredients || errors.image || errors.difficulty) {
+      return;
+    }
+
+    if (ingredients.some((ingredient) => ingredient.value === "")) {
+      setErrors((prevErrors) => ({
+        ...prevErrors,
+        ingredients: "Field cannot be empty!",
+      }))
+      return;
+    }
+
     const recipeData = {
-      title: event.target.title.value,
-      description: event.target.description.value,
-      ingredients: ingredients.map((field) => field.value),
-      image: event.target.image.value,
+      title: event.target.title.value.trim(),
+      description: event.target.description.value.trim(),
+      ingredients: ingredients.map((field) => field.value.trim()),
+      image: event.target.image.value.trim(),
       difficulty: difficulty,
       ownerId: firebaseAuth.currentUser().uid,
       ownerName: firebaseAuth.currentUser().displayName,
@@ -67,12 +125,25 @@ const CreateRecipe = () => {
       <form className={styles.form} onSubmit={handleSubmit}>
         <div className={styles.formGroup}>
           <label htmlFor="title">Title:</label>
-          <input type="text" name="title" id="title" />
+          <input
+            type="text"
+            name="title"
+            id="title"
+            onBlur={(e) => validateTitle(e, handleError)}
+          />
         </div>
+        {errors.title && <p className={styles.error}>{errors.title}</p>}
         <div className={styles.formGroup}>
           <label htmlFor="description">Description:</label>
-          <textarea name="description" id="description" />
+          <textarea
+            name="description"
+            id="description"
+            onBlur={(e) => validateDescription(e, handleError)}
+          />
         </div>
+        {errors.description && (
+          <p className={styles.error}>{errors.description}</p>
+        )}
         <div className={styles.formGroup}>
           <label htmlFor="ingredients">Ingredients:</label>
           {ingredients.map((inputField, index) => (
@@ -85,6 +156,9 @@ const CreateRecipe = () => {
               deleteEntity={deleteInputField}
             />
           ))}
+          {errors.ingredients && (
+            <p className={styles.error}>{errors.ingredients}</p>
+          )}
           <button
             type="button"
             className={styles.addButton}
@@ -95,8 +169,14 @@ const CreateRecipe = () => {
         </div>
         <div className={styles.formGroup}>
           <label htmlFor="image">ImageURL:</label>
-          <input type="text" name="image" id="image" />
+          <input
+            type="text"
+            name="image"
+            id="image"
+            onBlur={(e) => validateImageURL(e, handleError)}
+          />
         </div>
+        {errors.image && <p className={styles.error}>{errors.image}</p>}
         <div className={styles.formGroup}>
           <label htmlFor="difficulty">Difficulty Level:</label>
           <select
@@ -113,6 +193,7 @@ const CreateRecipe = () => {
             ))}
           </select>
         </div>
+        {errors.difficulty && <p className={styles.error}>{errors.difficulty}</p>}
         <div className={styles.buttons}>
           <button className={styles.button} type="submit">
             Add Recipe
