@@ -129,6 +129,7 @@ const CreateRecipe = () => {
             type="text"
             name="title"
             id="title"
+            placeholder="ex. Avocado Toast"
             onBlur={(e) => validateTitle(e, handleError)}
           />
         </div>
@@ -138,6 +139,7 @@ const CreateRecipe = () => {
           <textarea
             name="description"
             id="description"
+            placeholder="ex. This recipe is so easy! It's healthy and delicious."
             onBlur={(e) => validateDescription(e, handleError)}
           />
         </div>
@@ -173,6 +175,7 @@ const CreateRecipe = () => {
             type="text"
             name="image"
             id="image"
+            placeholder="ex. https://www.example.com/recipe.jpg"
             onBlur={(e) => validateImageURL(e, handleError)}
           />
         </div>

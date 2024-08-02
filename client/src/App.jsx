@@ -12,6 +12,7 @@ import GuestRoutesProtector from "./components/Utils/GuestRoutesProtector";
 import OwnerRoutesProtector from "./components/Utils/OwnerRoutesProtector";
 import { selectLoading } from "./store/slices/authSlice";
 import useVerifyUserSession from "./hooks/useVerifyUserSession";
+import "./App.css";
 
 const Catalog = lazy(() => import("./components/Catalogs/CatalogHomeView/Catalog"));
 const RecipeCatalog = lazy(() => import("./components/Catalogs/RecipeCatalog/RecipeCatalog"));

@@ -130,6 +130,7 @@ const CreateWorkout = () => {
             type="text"
             name="title"
             id="title"
+            placeholder="ex. Intense Cardio Workout"
             onBlur={(e) => validateTitle(e, handleError)}
           />
         </div>
@@ -139,6 +140,7 @@ const CreateWorkout = () => {
           <textarea
             name="description"
             id="description"
+            placeholder="ex. 30 minutes of cardio with weights"
             onBlur={(e) => validateDescription(e, handleError)}
           />
         </div>

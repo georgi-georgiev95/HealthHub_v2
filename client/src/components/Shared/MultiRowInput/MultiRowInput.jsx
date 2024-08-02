@@ -15,6 +15,7 @@ const MultiRowInput = ({
       <input
         type="text"
         value={inputField.value}
+        placeholder="ex. 1 Avocado"
         onChange={(e) => handleNewEntity(index, e)}
       />
       {entitiesArray.length > 1 && (
