@@ -81,7 +81,10 @@ const RecipeDetails = () => {
             </p>
             <ul className={styles.ingredientList}>
               {recipe.ingredients.map((ingredient, index) => (
-                <li key={index}>{ingredient}</li>
+                <li key={index}>
+                  <i class="fa-solid fa-caret-right"></i>
+                  {ingredient}
+                </li>
               ))}
             </ul>
             <div className={styles.buttons}>

@@ -92,6 +92,10 @@
   background-color: #e5533d;
 }
 
+li > i {
+  margin-right: 0.5em;
+}
+
 @media (max-width: 900px) {
   .details {
     flex-direction: column;
