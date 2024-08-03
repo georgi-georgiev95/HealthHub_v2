@@ -4,7 +4,10 @@ import { useNavigate } from "react-router-dom";
 import styles from "../EntityForm.module.css";
 import { firebaseAuth } from "../../../config/firebase";
 import { createWorkout } from "../../../services/workoutService";
-import { validateTitle, validateDescription } from "../../../utils/createFormValidator";
+import {
+  validateTitle,
+  validateDescription,
+} from "../../../utils/createFormValidator";
 
 const CreateWorkout = () => {
   const difficultyLevels = ["-", "Beginner", "Intermediate", "Advanced"];
@@ -96,21 +99,30 @@ const CreateWorkout = () => {
     event.preventDefault();
 
     const workoutData = {
-      title: event.target.title.value,
-      description: event.target.description.value,
-      exercises: exercises,
-      difficulty: difficulty,
-      goal: goal,
+      title: event.target.title.value || "",
+      description: event.target.description.value || "",
+      exercises: exercises || [],
+      difficulty: difficulty || "-",
+      goal: goal || "-",
       ownerId: firebaseAuth.currentUser().uid,
       ownerName: firebaseAuth.currentUser().displayName,
     };
 
+    for (const entry in workoutData) {
+      if (workoutData[entry] === "" || workoutData[entry] === "-") {
+        setErrors((prevErrors) => ({
+          ...prevErrors,
+          [entry]: "Field cannot be empty!",
+        }));
+      }
+    }
+
     if (
       workoutData.title === "" ||
       workoutData.description === "" ||
-      difficulty === "-" ||
-      goal === "-" ||
-      workoutData.exercises[0] === ""
+      workoutData.exercises.length === 0 ||
+      workoutData.difficulty === "-" ||
+      workoutData.goal === "-"
     ) {
       return;
     }
