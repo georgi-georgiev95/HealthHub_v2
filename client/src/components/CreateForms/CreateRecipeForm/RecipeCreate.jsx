@@ -10,114 +10,20 @@ import {
   validateDescription,
   validateImageURL,
 } from "../../../utils/createFormValidator";
+import useCreateForm from "../../../hooks/useCreateForm";
 
 const CreateRecipe = () => {
-  const [ingredients, setIngredients] = useState([{ value: "" }]);
-  const [difficulty, setDifficulty] = useState("-");
-  const [errors, setErrors] = useState({
-    title: "",
-    description: "",
-    ingredients: "",
-    image: "",
-    difficulty: "",
-  });
-
-  const handleError = (element, error) => {
-    setErrors((prevErrors) => ({
-      ...prevErrors,
-      [element]: error,
-    }));
-  };
-
-  const navigate = useNavigate();
-
-  const addInputField = () => {
-    if (ingredients[ingredients.length - 1].value === "") {
-      setErrors((prevErrors) => ({
-        ...prevErrors,
-        ingredients: "Field cannot be empty!",
-      }));
-      return;
-    }
-    setErrors((prevErrors) => ({
-      ...prevErrors,
-      ingredients: "",
-    }));
-    setIngredients([...ingredients, { value: "" }]);
-  };
-
-  const handleIngredientsChange = (index, event) => {
-    const values = [...ingredients];
-    values[index].value = event.target.value;
-    setIngredients(values);
-    setErrors((prevErrors) => ({
-      ...prevErrors,
-      ingredients: "",
-    }))
-  };
-
-  const handleDifficultyChange = (event) => {
-    if (event.target.value !== "-") {
-      setErrors((prevErrors) => ({
-        ...prevErrors,
-        difficulty: "",
-      }));
-    } else {
-      setErrors((prevErrors) => ({
-        ...prevErrors,
-        difficulty: "Field cannot be empty!",
-      }));
-    }
-    setDifficulty(parseInt(event.target.value));
-  };
-
-  const deleteInputField = (index) => {
-    setIngredients(ingredients.filter((ingredient, i) => i !== index));
-    setErrors((prevErrors) => ({
-      ...prevErrors,
-      ingredients: "",
-    }));
-  };
-
-  const handleSubmit = async (event) => {
-    event.preventDefault();
-
-    if (errors.title || errors.description || errors.ingredients || errors.image || errors.difficulty) {
-      return;
-    }
-
-    if (ingredients.some((ingredient) => ingredient.value === "")) {
-      setErrors((prevErrors) => ({
-        ...prevErrors,
-        ingredients: "Field cannot be empty!",
-      }))
-      return;
-    }
-
-    const recipeData = {
-      title: event.target.title.value.trim(),
-      description: event.target.description.value.trim(),
-      ingredients: ingredients.map((field) => field.value.trim()),
-      image: event.target.image.value.trim(),
-      difficulty: difficulty,
-      ownerId: firebaseAuth.currentUser().uid,
-      ownerName: firebaseAuth.currentUser().displayName,
-    };
-
-    if (
-      recipeData.title === "" ||
-      recipeData.description === "" ||
-      difficulty === "-" ||
-      recipeData.ingredients[0] === "" ||
-      recipeData.image === ""
-    ) {
-      return;
-    }
-
-    await createRecipe(recipeData);
-
-    navigate("/catalog/recipes");
-  };
+  const {
+    ingredients,
+    difficulty,
+    errors,
+    addInputField,
+    deleteInputField,
+    handleIngredientsChange,
+    handleDifficultyChange,
+    handleSubmit,
+    handleError
+  } = useCreateForm();
 
   return (
     <>
@@ -196,7 +102,9 @@ const CreateRecipe = () => {
             ))}
           </select>
         </div>
-        {errors.difficulty && <p className={styles.error}>{errors.difficulty}</p>}
+        {errors.difficulty && (
+          <p className={styles.error}>{errors.difficulty}</p>
+        )}
         <div className={styles.buttons}>
           <button className={styles.button} type="submit">
             Add Recipe

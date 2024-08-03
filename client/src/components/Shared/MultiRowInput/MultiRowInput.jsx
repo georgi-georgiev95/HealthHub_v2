@@ -14,7 +14,7 @@ const MultiRowInput = ({
       <span>{index + 1}. </span>
       <input
         type="text"
-        value={inputField.value}
+        value={inputField}
         placeholder="ex. 1 Avocado"
         onChange={(e) => handleNewEntity(index, e)}
       />
@@ -26,7 +26,7 @@ const MultiRowInput = ({
 };
 
 MultiRowInput.propTypes = {
-  inputField: PropTypes.object,
+  inputField: PropTypes.string,
   index: PropTypes.number,
   entitiesArray: PropTypes.array,
   handleNewEntity: PropTypes.func,
