@@ -3,6 +3,7 @@ const validateTitle = (e, callback) => {
         callback('title', 'Title is required!');
         return;
     }
+    
     if (e.target.value.length < 5) {
         callback('title', 'Title must be at least 5 characters long!');
         return;

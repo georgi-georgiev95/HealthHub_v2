@@ -4,8 +4,8 @@ import styles from "../CreateForms/EntityForm.module.css";
 import SecondaryLoader from "../Shared/SecondaryLoader/SecondaryLoader";
 
 const EditWorkout = () => {
-  const difficultyLevels = ["-", "Beginner", "Intermediate", "Advanced"];
-  const goals = ["-", "Weight Loss", "Muscle Gain"];
+  const difficultyLevels = ["Beginner", "Intermediate", "Advanced"];
+  const goals = ["Weight Loss", "Muscle Gain"];
 
   const initialState = {
     title: "",
@@ -30,6 +30,7 @@ const EditWorkout = () => {
     deleteInputField,
     handleSubmit,
     loading,
+    errors,
   } = useEditForms(
     initialState,
     getOneWorkout,
@@ -53,6 +54,7 @@ const EditWorkout = () => {
             onChange={(e) => handleChange("title", e.target.value)}
           />
         </div>
+        {errors.title && <p className={styles.error}>{errors.title}</p>}
         <div className={styles.formGroup}>
           <label htmlFor="description">Description:</label>
           <textarea
@@ -62,6 +64,7 @@ const EditWorkout = () => {
             onChange={(e) => handleChange("description", e.target.value)}
           />
         </div>
+        {errors.description && <p className={styles.error}>{errors.description}</p> }
         <div className={styles.listGroup}>
           <label className={styles.exerciseLabel}>Exercises:</label>
           <div className={styles.labels}>
@@ -134,6 +137,7 @@ const EditWorkout = () => {
               )}
             </div>
           ))}
+          {errors.exercises && <p className={styles.error}>{errors.exercises}</p>}
           <button
             type="button"
             className={styles.addButton}

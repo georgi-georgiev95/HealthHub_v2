@@ -20,6 +20,7 @@ const EditRecipe = () => {
     deleteInputField,
     handleSubmit,
     loading,
+    errors
   } = useEditForms(initialState, getOneRecipe, editRecipe, "/catalog/recipes/");
 
   if (loading) return <SecondaryLoader />;
@@ -38,6 +39,7 @@ const EditRecipe = () => {
             onChange={(e) => handleChange("title", e.target.value)}
           />
         </div>
+        {errors.title && <p className={styles.error}>{errors.title}</p>}
         <div className={styles.formGroup}>
           <label htmlFor="description">Description:</label>
           <textarea
@@ -47,6 +49,7 @@ const EditRecipe = () => {
             onChange={(e) => handleChange("description", e.target.value)}
           />
         </div>
+        {errors.description && <p className={styles.error}>{errors.description}</p>}
         <div className={styles.formGroup}>
           <label htmlFor="ingredients">Ingredients:</label>
           {recipe.ingredients.map((ingredient, index) => (
@@ -71,6 +74,7 @@ const EditRecipe = () => {
               )}
             </div>
           ))}
+          {errors.ingredients && <p className={styles.error}>{errors.ingredients}</p>}
           <button
             type="button"
             className={styles.addButton}
@@ -89,6 +93,7 @@ const EditRecipe = () => {
             onChange={(e) => handleChange("image", e.target.value)}
           />
         </div>
+        {errors.image && <p className={styles.error}>{errors.image}</p>}
         <div className={styles.formGroup}>
           <label htmlFor="difficulty">Difficulty Level:</label>
           <select
