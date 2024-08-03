@@ -16,10 +16,10 @@ const MultiRowInput = ({
         type="text"
         value={inputField}
         placeholder="ex. 1 Avocado"
-        onChange={(e) => handleNewEntity(index, e)}
+        onChange={(e) => handleNewEntity(e, index)}
       />
       {entitiesArray.length > 1 && (
-        <i onClick={() => deleteEntity(index)} className="fa-solid fa-x"></i>
+        <i onClick={(e) => deleteEntity(e, index)} datatype="ingredient" className="fa-solid fa-x"></i>
       )}
     </li>
   );

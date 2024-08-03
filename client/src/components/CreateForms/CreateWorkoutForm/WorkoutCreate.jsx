@@ -1,141 +1,30 @@
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
-
 import styles from "../EntityForm.module.css";
-import { firebaseAuth } from "../../../config/firebase";
-import { createWorkout } from "../../../services/workoutService";
 import {
   validateTitle,
   validateDescription,
 } from "../../../utils/createFormValidator";
+import useCreateForm from "../../../hooks/useCreateForm";
 
 const CreateWorkout = () => {
   const difficultyLevels = ["-", "Beginner", "Intermediate", "Advanced"];
   const goals = ["-", "Weight Loss", "Muscle Gain"];
-  const [exercises, setExercises] = useState([
-    {
-      exerciseName: "",
-      sets: "",
-      reps: "",
-    },
-  ]);
-  const [difficulty, setDifficulty] = useState("-");
-  const [goal, setGoal] = useState("-");
-  const [errors, setErrors] = useState({
-    title: "",
-    description: "",
-    exercises: "",
-    difficulty: "",
-    goal: "",
-  });
-
-  const handleError = (element, error) => {
-    setErrors((prevErrors) => ({
-      ...prevErrors,
-      [element]: error,
-    }));
-  };
-
-  const navigate = useNavigate();
-
-  const addInputField = () => {
-    if (
-      exercises[exercises.length - 1].sets === "" ||
-      exercises[exercises.length - 1].reps === "" ||
-      exercises[exercises.length - 1].exerciseName === "" ||
-      exercises[exercises.length - 1].sets === undefined ||
-      exercises[exercises.length - 1].reps === undefined ||
-      exercises[exercises.length - 1].exerciseName === undefined
-    ) {
-      return;
-    }
-    setExercises([...exercises, { exerciseName: "", sets: "", reps: "" }]);
-  };
-
-  const handleNewExercise = (index, field, value) => {
-    const updatedExercises = [...exercises];
-    updatedExercises[index] = {
-      ...updatedExercises[index],
-      [field]: value,
-    };
-    setExercises(updatedExercises);
-  };
-
-  const handleDifficultyChange = (event) => {
-    if (event.target.value !== "-") {
-      setErrors((prevErrors) => ({
-        ...prevErrors,
-        difficulty: "",
-      }));
-    } else {
-      setErrors((prevErrors) => ({
-        ...prevErrors,
-        difficulty: "Field cannot be empty!",
-      }));
-    }
-    setDifficulty(event.target.value);
-  };
-
-  const handleGoalChange = (event) => {
-    if (event.target.value !== "-") {
-      setErrors((prevErrors) => ({
-        ...prevErrors,
-        goal: "",
-      }));
-    } else {
-      setErrors((prevErrors) => ({
-        ...prevErrors,
-        goal: "Field cannot be empty!",
-      }));
-    }
-    setGoal(event.target.value);
-  };
-
-  const deleteExercise = (index) => {
-    setExercises(exercises.filter((exercise, i) => i !== index));
-  };
-
-  const handleSubmit = async (event) => {
-    event.preventDefault();
-
-    const workoutData = {
-      title: event.target.title.value || "",
-      description: event.target.description.value || "",
-      exercises: exercises || [],
-      difficulty: difficulty || "-",
-      goal: goal || "-",
-      ownerId: firebaseAuth.currentUser().uid,
-      ownerName: firebaseAuth.currentUser().displayName,
-    };
-
-    for (const entry in workoutData) {
-      if (workoutData[entry] === "" || workoutData[entry] === "-") {
-        setErrors((prevErrors) => ({
-          ...prevErrors,
-          [entry]: "Field cannot be empty!",
-        }));
-      }
-    }
-
-    if (
-      workoutData.title === "" ||
-      workoutData.description === "" ||
-      workoutData.exercises.length === 0 ||
-      workoutData.difficulty === "-" ||
-      workoutData.goal === "-"
-    ) {
-      return;
-    }
-
-    await createWorkout(workoutData);
-
-    navigate("/catalog/workouts");
-  };
+  const { 
+    exercises,
+    difficulty,
+    goal,
+    errors,
+    addInputField,
+    handleGoalChange,
+    handleNewField,
+    deleteInputField,
+    handleDifficultyChange,
+    handleSubmit,
+    handleError } = useCreateForm();
 
   return (
     <>
       <h2 className={styles.formTitle}>Create Workout</h2>
-      <form className={styles.form} onSubmit={handleSubmit}>
+      <form className={styles.form} onSubmit={handleSubmit} datatype="workout">
         <div className={styles.formGroup}>
           <label htmlFor="title">Title:</label>
           <input
@@ -177,9 +66,7 @@ const CreateWorkout = () => {
                   placeholder="Exercise name"
                   value={exercises.exerciseName}
                   className={styles.exerciseInput}
-                  onChange={(e) =>
-                    handleNewExercise(index, "exerciseName", e.target.value)
-                  }
+                  onChange={(e) => handleNewField(e, index, "exerciseName")}
                   required
                 />
               </div>
@@ -191,9 +78,7 @@ const CreateWorkout = () => {
                   placeholder="Sets"
                   value={exercises.sets}
                   className={styles.exerciseInput}
-                  onChange={(e) =>
-                    handleNewExercise(index, "sets", e.target.value)
-                  }
+                  onChange={(e) => handleNewField(e, index, "sets")}
                   required
                 />
               </div>
@@ -205,16 +90,15 @@ const CreateWorkout = () => {
                   placeholder="Reps"
                   value={exercises.reps}
                   className={styles.exerciseInput}
-                  onChange={(e) =>
-                    handleNewExercise(index, "reps", e.target.value)
-                  }
+                  onChange={(e) => handleNewField(e, index, "reps")}
                   required
                 />
               </div>
               {exercises.length > 1 && (
                 <i
-                  onClick={() => deleteExercise(index)}
+                  onClick={(e) => deleteInputField(e, index)}
                   className="fa-solid fa-x"
+                  datatype="exercise"
                 ></i>
               )}
             </div>
@@ -234,6 +118,7 @@ const CreateWorkout = () => {
             id="difficulty"
             value={difficulty}
             onChange={handleDifficultyChange}
+            datatype="workout"
           >
             {difficultyLevels.map((level) => (
               <option key={level} value={level}>

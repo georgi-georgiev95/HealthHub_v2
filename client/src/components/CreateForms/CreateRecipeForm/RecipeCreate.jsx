@@ -1,8 +1,3 @@
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
-
-import { firebaseAuth } from "../../../config/firebase";
-import { createRecipe } from "../../../services/recipeService";
 import MultiRowInput from "../../Shared/MultiRowInput/MultiRowInput";
 import styles from "../EntityForm.module.css";
 import {
@@ -19,7 +14,7 @@ const CreateRecipe = () => {
     errors,
     addInputField,
     deleteInputField,
-    handleIngredientsChange,
+    handleNewField,
     handleDifficultyChange,
     handleSubmit,
     handleError
@@ -28,7 +23,7 @@ const CreateRecipe = () => {
   return (
     <>
       <h2 className={styles.formTitle}>Create Recipe</h2>
-      <form className={styles.form} onSubmit={handleSubmit}>
+      <form className={styles.form} onSubmit={handleSubmit} datatype="recipe">
         <div className={styles.formGroup}>
           <label htmlFor="title">Title:</label>
           <input
@@ -60,7 +55,7 @@ const CreateRecipe = () => {
               index={index}
               inputField={inputField}
               entitiesArray={ingredients}
-              handleNewEntity={handleIngredientsChange}
+              handleNewEntity={handleNewField}
               deleteEntity={deleteInputField}
             />
           ))}
@@ -93,6 +88,7 @@ const CreateRecipe = () => {
             id="difficulty"
             value={difficulty}
             onChange={handleDifficultyChange}
+            datatype="recipe"
           >
             <option value="-">-</option>
             {[...Array(5).keys()].map((num) => (
