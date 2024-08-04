@@ -138,6 +138,12 @@ export default function useCreateForm() {
                 }
             }
 
+            if (field === 'exercises') {
+                if (entityData[field][0].exerciseName === "" || entityData[field][0].sets === "" || entityData[field][0].reps === "") {
+                    handleError(field, "Field must not be empty!");
+                }
+             }
+
             if (field !== 'ingredients') {
                 if (entityData[field] === '' || entityData[field] === undefined) {
                     handleError(field, "Field must not be empty!")
@@ -149,6 +155,12 @@ export default function useCreateForm() {
                     handleError(field, "Please select difficulty!")
                 }
             }
+
+            if (field === "goal") {
+                if (entityData[field] === "-") {
+                    handleError(field, "Please select goal!")
+                }
+            }       
         }
 
 

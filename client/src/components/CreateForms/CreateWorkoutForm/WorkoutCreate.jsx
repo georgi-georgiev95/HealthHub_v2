@@ -34,8 +34,8 @@ const CreateWorkout = () => {
             placeholder="ex. Intense Cardio Workout"
             onBlur={(e) => validateTitle(e, handleError)}
           />
+          {errors.title && <p className={styles.error}>{errors.title}</p>}
         </div>
-        {errors.title && <p className={styles.error}>{errors.title}</p>}
         <div className={styles.formGroup}>
           <label htmlFor="description">Description:</label>
           <textarea
@@ -44,10 +44,10 @@ const CreateWorkout = () => {
             placeholder="ex. 30 minutes of cardio with weights"
             onBlur={(e) => validateDescription(e, handleError)}
           />
+          {errors.description && (
+            <p className={styles.error}>{errors.description}</p>
+          )}
         </div>
-        {errors.description && (
-          <p className={styles.error}>{errors.description}</p>
-        )}
         <div className={styles.listGroup}>
           <label className={styles.exerciseLabel}>Exercises:</label>
           <div className={styles.labels}>
@@ -55,54 +55,56 @@ const CreateWorkout = () => {
             <div>Sets:</div>
             <div>Reps:</div>
           </div>
-          {exercises.map((exercise, index) => (
-            <div key={index} className={styles.exerciseRow}>
-              <span>{index + 1}. </span>
-              <div className={styles.col}>
-                <input
-                  type="text"
-                  name="exerciseName"
-                  id="exerciseName"
-                  placeholder="Exercise name"
-                  value={exercises.exerciseName}
-                  className={styles.exerciseInput}
-                  onChange={(e) => handleNewField(e, index, "exerciseName")}
-                  required
-                />
+          <div className={styles.listGroupMultyLine}>
+            {exercises.map((exercise, index) => (
+              <div key={index} className={styles.exerciseRow}>
+                <span>{index + 1}. </span>
+                <div className={styles.col}>
+                  <input
+                    type="text"
+                    name="exerciseName"
+                    id="exerciseName"
+                    placeholder="Exercise name"
+                    value={exercises.exerciseName}
+                    className={styles.exerciseInput}
+                    onChange={(e) => handleNewField(e, index, "exerciseName")}
+                  />
+                </div>
+                <div className={styles.col}>
+                  <input
+                    type="number"
+                    name="sets"
+                    id="sets"
+                    placeholder="Sets"
+                    value={exercises.sets}
+                    className={styles.exerciseInput}
+                    onChange={(e) => handleNewField(e, index, "sets")}
+                  />
+                </div>
+                <div className={styles.col}>
+                  <input
+                    type="number"
+                    name="reps"
+                    id="reps"
+                    placeholder="Reps"
+                    value={exercises.reps}
+                    className={styles.exerciseInput}
+                    onChange={(e) => handleNewField(e, index, "reps")}
+                  />
+                </div>
+                {exercises.length > 1 && (
+                  <i
+                    onClick={(e) => deleteInputField(e, index)}
+                    className="fa-solid fa-x"
+                    datatype="exercise"
+                  ></i>
+                )}
               </div>
-              <div className={styles.col}>
-                <input
-                  type="number"
-                  name="sets"
-                  id="sets"
-                  placeholder="Sets"
-                  value={exercises.sets}
-                  className={styles.exerciseInput}
-                  onChange={(e) => handleNewField(e, index, "sets")}
-                  required
-                />
-              </div>
-              <div className={styles.col}>
-                <input
-                  type="number"
-                  name="reps"
-                  id="reps"
-                  placeholder="Reps"
-                  value={exercises.reps}
-                  className={styles.exerciseInput}
-                  onChange={(e) => handleNewField(e, index, "reps")}
-                  required
-                />
-              </div>
-              {exercises.length > 1 && (
-                <i
-                  onClick={(e) => deleteInputField(e, index)}
-                  className="fa-solid fa-x"
-                  datatype="exercise"
-                ></i>
-              )}
-            </div>
-          ))}
+            ))}
+            {errors.exercises && (
+              <p className={styles.error}>{errors.exercises}</p>
+            )}
+          </div>
           <button
             type="button"
             className={styles.addButton}
@@ -126,10 +128,10 @@ const CreateWorkout = () => {
               </option>
             ))}
           </select>
+          {errors.difficulty && (
+            <p className={styles.error}>{errors.difficulty}</p>
+          )}
         </div>
-        {errors.difficulty && (
-          <p className={styles.error}>{errors.difficulty}</p>
-        )}
         <div className={styles.formGroup}>
           <label htmlFor="goal">Goal:</label>
           <select
@@ -144,8 +146,8 @@ const CreateWorkout = () => {
               </option>
             ))}
           </select>
+          {errors.goal && <p className={styles.error}>{errors.goal}</p>}
         </div>
-        {errors.goal && <p className={styles.error}>{errors.goal}</p>}
         <div className={styles.buttons}>
           <button className={styles.button} type="submit">
             Add Workout

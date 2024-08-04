@@ -33,8 +33,8 @@ const CreateRecipe = () => {
             placeholder="ex. Avocado Toast"
             onBlur={(e) => validateTitle(e, handleError)}
           />
+          {errors.title && <p className={styles.error}>{errors.title}</p>}
         </div>
-        {errors.title && <p className={styles.error}>{errors.title}</p>}
         <div className={styles.formGroup}>
           <label htmlFor="description">Description:</label>
           <textarea
@@ -43,25 +43,27 @@ const CreateRecipe = () => {
             placeholder="ex. This recipe is so easy! It's healthy and delicious."
             onBlur={(e) => validateDescription(e, handleError)}
           />
+          {errors.description && (
+            <p className={styles.error}>{errors.description}</p>
+          )}
         </div>
-        {errors.description && (
-          <p className={styles.error}>{errors.description}</p>
-        )}
         <div className={styles.formGroup}>
           <label htmlFor="ingredients">Ingredients:</label>
-          {ingredients.map((inputField, index) => (
-            <MultiRowInput
-              key={index}
-              index={index}
-              inputField={inputField}
-              entitiesArray={ingredients}
-              handleNewEntity={handleNewField}
-              deleteEntity={deleteInputField}
-            />
-          ))}
-          {errors.ingredients && (
-            <p className={styles.error}>{errors.ingredients}</p>
-          )}
+          <div className={styles.listGroupMultyLine}>
+            {ingredients.map((inputField, index) => (
+              <MultiRowInput
+                key={index}
+                index={index}
+                inputField={inputField}
+                entitiesArray={ingredients}
+                handleNewEntity={handleNewField}
+                deleteEntity={deleteInputField}
+              />
+            ))}
+            {errors.ingredients && (
+              <p className={styles.error}>{errors.ingredients}</p>
+            )}
+          </div>
           <button
             type="button"
             className={styles.addButton}
@@ -79,8 +81,8 @@ const CreateRecipe = () => {
             placeholder="ex. https://www.example.com/recipe.jpg"
             onBlur={(e) => validateImageURL(e, handleError)}
           />
+          {errors.image && <p className={styles.error}>{errors.image}</p>}
         </div>
-        {errors.image && <p className={styles.error}>{errors.image}</p>}
         <div className={styles.formGroup}>
           <label htmlFor="difficulty">Difficulty Level:</label>
           <select
@@ -97,10 +99,10 @@ const CreateRecipe = () => {
               </option>
             ))}
           </select>
+          {errors.difficulty && (
+            <p className={styles.error}>{errors.difficulty}</p>
+          )}
         </div>
-        {errors.difficulty && (
-          <p className={styles.error}>{errors.difficulty}</p>
-        )}
         <div className={styles.buttons}>
           <button className={styles.button} type="submit">
             Add Recipe

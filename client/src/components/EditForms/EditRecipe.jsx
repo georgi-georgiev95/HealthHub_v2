@@ -38,8 +38,8 @@ const EditRecipe = () => {
             value={recipe.title}
             onChange={(e) => handleChange("title", e.target.value)}
           />
+          {errors.title && <p className={styles.error}>{errors.title}</p>}
         </div>
-        {errors.title && <p className={styles.error}>{errors.title}</p>}
         <div className={styles.formGroup}>
           <label htmlFor="description">Description:</label>
           <textarea
@@ -48,33 +48,39 @@ const EditRecipe = () => {
             value={recipe.description}
             onChange={(e) => handleChange("description", e.target.value)}
           />
+          {errors.description && (
+            <p className={styles.error}>{errors.description}</p>
+          )}
         </div>
-        {errors.description && <p className={styles.error}>{errors.description}</p>}
         <div className={styles.formGroup}>
           <label htmlFor="ingredients">Ingredients:</label>
-          {recipe.ingredients.map((ingredient, index) => (
-            <div key={index} className={styles.listGroupRecipes}>
-              <span>{index + 1}. </span>
-              <input
-                type="text"
-                value={ingredient}
-                onChange={(e) =>
-                  handleChange("ingredients", [
-                    ...recipe.ingredients.slice(0, index),
-                    e.target.value,
-                    ...recipe.ingredients.slice(index + 1),
-                  ])
-                }
-              />
-              {recipe.ingredients.length > 1 && (
-                <i
-                  onClick={() => deleteInputField("ingredients", index)}
-                  className="fa-solid fa-x"
-                ></i>
-              )}
-            </div>
-          ))}
-          {errors.ingredients && <p className={styles.error}>{errors.ingredients}</p>}
+          <div className={styles.listGroupMultyLine}>
+            {recipe.ingredients.map((ingredient, index) => (
+              <div key={index} className={styles.listGroupRecipes}>
+                <span>{index + 1}. </span>
+                <input
+                  type="text"
+                  value={ingredient}
+                  onChange={(e) =>
+                    handleChange("ingredients", [
+                      ...recipe.ingredients.slice(0, index),
+                      e.target.value,
+                      ...recipe.ingredients.slice(index + 1),
+                    ])
+                  }
+                />
+                {recipe.ingredients.length > 1 && (
+                  <i
+                    onClick={() => deleteInputField("ingredients", index)}
+                    className="fa-solid fa-x"
+                  ></i>
+                )}
+              </div>
+            ))}
+          {errors.ingredients && (
+            <p className={styles.error}>{errors.ingredients}</p>
+          )}
+          </div>
           <button
             type="button"
             className={styles.addButton}
@@ -92,8 +98,8 @@ const EditRecipe = () => {
             value={recipe.image}
             onChange={(e) => handleChange("image", e.target.value)}
           />
-        </div>
         {errors.image && <p className={styles.error}>{errors.image}</p>}
+        </div>
         <div className={styles.formGroup}>
           <label htmlFor="difficulty">Difficulty Level:</label>
           <select
@@ -110,6 +116,9 @@ const EditRecipe = () => {
               </option>
             ))}
           </select>
+          {errors.difficulty && (
+            <p className={styles.error}>{errors.difficulty}</p>
+          )}
         </div>
         <div className={styles.buttons}>
           <button className={styles.button} type="submit">
