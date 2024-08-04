@@ -111,6 +111,7 @@ const EditWorkout = () => {
                         ...workout.exercises.slice(index + 1),
                       ])
                     }
+                    min={1}
                   />
                 </div>
                 <div className={styles.col}>
@@ -128,6 +129,7 @@ const EditWorkout = () => {
                         ...workout.exercises.slice(index + 1),
                       ])
                     }
+                    min={1}
                   />
                 </div>
                 {workout.exercises.length > 1 && (

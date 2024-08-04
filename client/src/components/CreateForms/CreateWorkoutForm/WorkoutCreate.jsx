@@ -81,6 +81,7 @@ const CreateWorkout = () => {
                     value={exercises.sets}
                     className={styles.exerciseInput}
                     onChange={(e) => handleNewField(e, index, "sets")}
+                    min={1}
                   />
                 </div>
                 <div className={styles.col}>
@@ -92,6 +93,7 @@ const CreateWorkout = () => {
                     value={exercises.reps}
                     className={styles.exerciseInput}
                     onChange={(e) => handleNewField(e, index, "reps")}
+                    min={1}
                   />
                 </div>
                 {exercises.length > 1 && (
