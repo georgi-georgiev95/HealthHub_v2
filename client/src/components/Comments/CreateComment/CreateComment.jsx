@@ -15,6 +15,7 @@ const CreateComment = () => {
         createdAt: '',
         editAt: '',
     });
+    const [isPending, setIsPending] = useState(false);
 
     const dispatch = useDispatch();
     const user = useSelector(state => state.auth.user);
@@ -23,6 +24,7 @@ const CreateComment = () => {
 
     const formSubmitHandler = async (e) => {
         e.preventDefault();
+        setIsPending(true);
 
         if (comment.text === '') {
             return;
@@ -36,6 +38,7 @@ const CreateComment = () => {
         dispatch(toggleIsCommentInteracted());
         await createComment(comment);
         setComment({ text: '', ownerId: '', ownerName: '', entityId: '' });
+        setIsPending(false);
     };
 
     return (
@@ -50,7 +53,7 @@ const CreateComment = () => {
                 />
             </div>
             <div className={styles.buttons}>
-                <input type="submit" value={'Post'} />
+                <input type="submit" value={'Post'} disabled={isPending} />
             </div>
         </form>
     )
