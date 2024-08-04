@@ -31,6 +31,7 @@ const EditWorkout = () => {
     handleSubmit,
     loading,
     errors,
+    isPending
   } = useEditForms(
     initialState,
     getOneWorkout,
@@ -177,7 +178,7 @@ const EditWorkout = () => {
           </select>
         </div>
         <div className={styles.buttons}>
-          <button className={styles.button} type="submit">
+          <button className={styles.button} type="submit" disabled={isPending}>
             Save Changes
           </button>
         </div>

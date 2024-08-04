@@ -17,7 +17,8 @@ const CreateRecipe = () => {
     handleNewField,
     handleDifficultyChange,
     handleSubmit,
-    handleError
+    handleError,
+    isPending
   } = useCreateForm();
 
   return (
@@ -104,7 +105,7 @@ const CreateRecipe = () => {
           )}
         </div>
         <div className={styles.buttons}>
-          <button className={styles.button} type="submit">
+          <button className={styles.button} type="submit" disabled={isPending}>
             Add Recipe
           </button>
         </div>

@@ -20,7 +20,8 @@ const EditRecipe = () => {
     deleteInputField,
     handleSubmit,
     loading,
-    errors
+    errors,
+    isPending
   } = useEditForms(initialState, getOneRecipe, editRecipe, "/catalog/recipes/");
 
   if (loading) return <SecondaryLoader />;
@@ -121,7 +122,7 @@ const EditRecipe = () => {
           )}
         </div>
         <div className={styles.buttons}>
-          <button className={styles.button} type="submit">
+          <button className={styles.button} type="submit" disabled={isPending}>
             Save Changes
           </button>
         </div>

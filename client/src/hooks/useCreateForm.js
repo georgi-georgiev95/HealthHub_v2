@@ -24,6 +24,7 @@ export default function useCreateForm() {
         image: "",
         difficulty: "",
     });
+    const [isPending, setIsPending] = useState(false);
 
     const navigate = useNavigate();
     const user = useSelector((state) => state.auth.user);
@@ -112,6 +113,7 @@ export default function useCreateForm() {
 
     const handleSubmit = async (event) => {
         event.preventDefault();
+        setIsPending(true);
 
         const entity = event.target.getAttribute('datatype');
 
@@ -193,6 +195,7 @@ export default function useCreateForm() {
 
             await createWorkout(entityData);
             navigate("/catalog/workouts");
+            setIsPending(false);
         }
     }
 
@@ -209,6 +212,7 @@ export default function useCreateForm() {
         handleNewField,
         handleDifficultyChange,
         handleSubmit,
-        handleError
+        handleError,
+        isPending
     }
 };

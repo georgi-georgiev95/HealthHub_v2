@@ -14,6 +14,7 @@ const useEditForms = (initialState, getOneEntity, editEntity, redirectPath) => {
         difficulty: "",
         goal: "",
     });
+    const [isPending, setIsPending] = useState(false);
     const { id } = useParams();
     const navigate = useNavigate();
 
@@ -79,6 +80,7 @@ const useEditForms = (initialState, getOneEntity, editEntity, redirectPath) => {
 
     const handleSubmit = async (event) => {
         event.preventDefault();
+        setIsPending(true);
 
         if(entity.ingredients?.some(ingredient => ingredient === "")) {
             setErrors((prevErrors) => ({
@@ -94,6 +96,7 @@ const useEditForms = (initialState, getOneEntity, editEntity, redirectPath) => {
 
         await editEntity(id, entity);
         navigate(`${redirectPath}${id}`);
+        setIsPending(false);
     };
 
     return {
@@ -103,7 +106,8 @@ const useEditForms = (initialState, getOneEntity, editEntity, redirectPath) => {
         addInputField,
         deleteInputField,
         handleSubmit,
-        errors
+        errors,
+        isPending,
     };
 };
 
