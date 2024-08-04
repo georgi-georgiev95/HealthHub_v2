@@ -43,7 +43,7 @@ const EditWorkout = () => {
 
   return (
     <>
-      <h2 className={styles.formTitle}>Create Workout</h2>
+      <h2 className={styles.formTitle}>Edit Workout</h2>
       <form className={styles.form} onSubmit={handleSubmit}>
         <div className={styles.formGroup}>
           <label htmlFor="title">Title:</label>
@@ -54,8 +54,8 @@ const EditWorkout = () => {
             value={workout.title}
             onChange={(e) => handleChange("title", e.target.value)}
           />
-        </div>
         {errors.title && <p className={styles.error}>{errors.title}</p>}
+        </div>
         <div className={styles.formGroup}>
           <label htmlFor="description">Description:</label>
           <textarea
@@ -64,8 +64,10 @@ const EditWorkout = () => {
             value={workout.description}
             onChange={(e) => handleChange("description", e.target.value)}
           />
+        {errors.description && (
+          <p className={styles.error}>{errors.description}</p>
+        )}
         </div>
-        {errors.description && <p className={styles.error}>{errors.description}</p> }
         <div className={styles.listGroup}>
           <label className={styles.exerciseLabel}>Exercises:</label>
           <div className={styles.labels}>
@@ -73,72 +75,73 @@ const EditWorkout = () => {
             <div>Sets:</div>
             <div>Reps:</div>
           </div>
-          {workout.exercises.map((exercise, index) => (
-            <div key={index} className={styles.exerciseRow}>
-              <span>{index + 1}. </span>
-              <div className={styles.col}>
-                <input
-                  type="text"
-                  name="exerciseName"
-                  id="exerciseName"
-                  placeholder="Exercise name"
-                  value={exercise.exerciseName}
-                  className={styles.exerciseInput}
-                  onChange={(e) =>
-                    handleChange("exercises", [
-                      ...workout.exercises.slice(0, index),
-                      { ...exercise, exerciseName: e.target.value },
-                      ...workout.exercises.slice(index + 1),
-                    ])
-                  }
-                  required
-                />
+          <div className={styles.listGroupMultyLine}>
+            {workout.exercises.map((exercise, index) => (
+              <div key={index} className={styles.exerciseRow}>
+                <span>{index + 1}. </span>
+                <div className={styles.col}>
+                  <input
+                    type="text"
+                    name="exerciseName"
+                    id="exerciseName"
+                    placeholder="Exercise name"
+                    value={exercise.exerciseName}
+                    className={styles.exerciseInput}
+                    onChange={(e) =>
+                      handleChange("exercises", [
+                        ...workout.exercises.slice(0, index),
+                        { ...exercise, exerciseName: e.target.value },
+                        ...workout.exercises.slice(index + 1),
+                      ])
+                    }
+                  />
+                </div>
+                <div className={styles.col}>
+                  <input
+                    type="number"
+                    name="sets"
+                    id="sets"
+                    placeholder="Sets"
+                    value={exercise.sets}
+                    className={styles.exerciseInput}
+                    onChange={(e) =>
+                      handleChange("exercises", [
+                        ...workout.exercises.slice(0, index),
+                        { ...exercise, sets: e.target.value },
+                        ...workout.exercises.slice(index + 1),
+                      ])
+                    }
+                  />
+                </div>
+                <div className={styles.col}>
+                  <input
+                    type="number"
+                    name="reps"
+                    id="reps"
+                    placeholder="Reps"
+                    value={exercise.reps}
+                    className={styles.exerciseInput}
+                    onChange={(e) =>
+                      handleChange("exercises", [
+                        ...workout.exercises.slice(0, index),
+                        { ...exercise, reps: e.target.value },
+                        ...workout.exercises.slice(index + 1),
+                      ])
+                    }
+                  />
+                </div>
+                {workout.exercises.length > 1 && (
+                  <i
+                    onClick={() => deleteInputField("exercises", index)}
+                    className="fa-solid fa-x"
+                  ></i>
+                )}
               </div>
-              <div className={styles.col}>
-                <input
-                  type="number"
-                  name="sets"
-                  id="sets"
-                  placeholder="Sets"
-                  value={exercise.sets}
-                  className={styles.exerciseInput}
-                  onChange={(e) =>
-                    handleChange("exercises", [
-                      ...workout.exercises.slice(0, index),
-                      { ...exercise, sets: e.target.value },
-                      ...workout.exercises.slice(index + 1),
-                    ])
-                  }
-                  required
-                />
-              </div>
-              <div className={styles.col}>
-                <input
-                  type="number"
-                  name="reps"
-                  id="reps"
-                  placeholder="Reps"
-                  value={exercise.reps}
-                  className={styles.exerciseInput}
-                  onChange={(e) =>
-                    handleChange("exercises", [
-                      ...workout.exercises.slice(0, index),
-                      { ...exercise, reps: e.target.value },
-                      ...workout.exercises.slice(index + 1),
-                    ])
-                  }
-                  required
-                />
-              </div>
-              {workout.exercises.length > 1 && (
-                <i
-                  onClick={() => deleteInputField("exercises", index)}
-                  className="fa-solid fa-x"
-                ></i>
-              )}
-            </div>
-          ))}
-          {errors.exercises && <p className={styles.error}>{errors.exercises}</p>}
+            ))}
+          {errors.exercises && (
+            <p className={styles.error}>{errors.exercises}</p>
+          )}
+          </div>
           <button
             type="button"
             className={styles.addButton}
