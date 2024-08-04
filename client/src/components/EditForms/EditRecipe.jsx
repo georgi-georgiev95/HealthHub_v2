@@ -63,11 +63,7 @@ const EditRecipe = () => {
                   type="text"
                   value={ingredient}
                   onChange={(e) =>
-                    handleChange("ingredients", [
-                      ...recipe.ingredients.slice(0, index),
-                      e.target.value,
-                      ...recipe.ingredients.slice(index + 1),
-                    ])
+                    handleChange("ingredients", e.target.value, index)
                   }
                 />
                 {recipe.ingredients.length > 1 && (

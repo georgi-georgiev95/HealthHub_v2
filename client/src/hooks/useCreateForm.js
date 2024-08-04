@@ -56,6 +56,7 @@ export default function useCreateForm() {
             ) {
                 return;
             }
+            handleError("exercises", "");
             setExercises([...exercises, { exerciseName: "", sets: "", reps: "" }]);
         }
     };
@@ -135,13 +136,13 @@ export default function useCreateForm() {
 
         for (const field in entityData) {
             if (field === 'ingredients') {
-                if (entityData[field].length === 0 || entityData[field][entityData[field].length - 1] === "") {
+                if (entityData[field].some(ingredient => ingredient === "")) {
                     handleError(field, "Field must not be empty!");
                 }
             }
 
             if (field === 'exercises') {
-                if (entityData[field][0].exerciseName === "" || entityData[field][0].sets === "" || entityData[field][0].reps === "") {
+                if (entityData[field].some(exercise => exercise.exerciseName === "" || exercise.sets === "" || exercise.reps === "")) {
                     handleError(field, "Field must not be empty!");
                 }
              }
@@ -166,17 +167,15 @@ export default function useCreateForm() {
         }
 
 
-
-
-
         if (entity === 'recipe') {
             if (entityData.title === "" ||
                 entityData.description === "" ||
                 entityData.ingredients.length === 0 ||
-                entityData.ingredients[entityData.ingredients.length - 1] === "" ||
+                entityData.ingredients.some(ingredient => ingredient === "") ||
                 entityData.image === "" ||
                 entityData.difficulty === "-"
             ) {
+                setIsPending(false);
                 return;
             }
 
@@ -187,9 +186,11 @@ export default function useCreateForm() {
                 entityData.title === "" ||
                 entityData.description === "" ||
                 entityData.exercises.length === 0 ||
+                entityData.exercises.some(exercise => exercise.exerciseName === "" || exercise.sets === "" || exercise.reps === "") ||
                 entityData.difficulty === "-" ||
                 entityData.goal === "-"
             ) {
+                setIsPending(false);
                 return;
             }
 

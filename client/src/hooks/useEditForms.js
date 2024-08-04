@@ -39,8 +39,6 @@ const useEditForms = (initialState, getOneEntity, editEntity, redirectPath) => {
                 return validateTitle(value, handleNewError);
             case "description":
                 return validateDescription(value, handleNewError);
-            case "ingredients":
-                return validateIngredients(value, handleNewError);
             case "image":
                 return validateImageURL(value, handleNewError);
             default:
@@ -48,23 +46,57 @@ const useEditForms = (initialState, getOneEntity, editEntity, redirectPath) => {
         }
     };
 
-    const handleChange = (field, value) => {
+    const handleChange = (field, value, index) => {
         validator(field, value);
 
-        setEntity((prevEntity) => ({
-            ...prevEntity,
-            [field]: value,
-        }));
+        if (field === 'ingredients') {
+            const newIngredients = [...entity['ingredients']];
+            newIngredients[index] = value;
+            setEntity((prevEntity) => ({
+                ...prevEntity,
+                [field]: newIngredients
+            }))
+        } else {
+            setEntity((prevEntity) => ({
+                ...prevEntity,
+                [field]: value
+            }))
+        }
+
+        if(errors[field]) {
+            handleNewError(field, "")
+        }
     };
 
     const addInputField = (field) => {
-        if (entity[field][entity[field].length - 1] === "") {
-            return;
+        if (field === "ingredients") {
+            if (entity[field][entity[field].length - 1] === "") {
+                return;
+            }
+            handleNewError(field, "");
+            setEntity((prevEntity) => {
+                return {
+                    ...prevEntity,
+                    [field]: [...prevEntity[field], ""]
+                }
+            })
+        } else {
+            if (
+                entity[field][entity[field].length - 1].sets === "" ||
+                entity[field][entity[field].length - 1].reps === "" ||
+                entity[field][entity[field].length - 1].exerciseName === "" ||
+                entity[field][entity[field].length - 1].sets === undefined ||
+                entity[field][entity[field].length - 1].reps === undefined ||
+                entity[field][entity[field].length - 1].exerciseName === undefined
+            ) {
+                return;
+            }
+            setEntity((prevEntity) => ({
+                ...prevEntity,
+                [field]: [...prevEntity[field], { exerciseName: "", sets: "", reps: "" }],
+            }));
+            handleNewError(field, "")
         }
-        setEntity((prevEntity) => ({
-            ...prevEntity,
-            [field]: [...prevEntity[field], ""],
-        }));
     };
 
     const deleteInputField = (field, index) => {
@@ -87,10 +119,21 @@ const useEditForms = (initialState, getOneEntity, editEntity, redirectPath) => {
                 ...prevErrors,
                 ingredients: "Cannot have empty fields.",
             }));
+            setIsPending(false);
+            return;
+        }
+        
+        if (entity.exercises?.some(exercise => exercise.exerciseName === "" || exercise.sets === "" || exercise.reps === "")) {
+            setErrors((prevErrors) => ({
+                ...prevErrors,
+                exercises: "Cannot have empty fields."
+            }));
+            setIsPending(false);
             return;
         }
 
         if (Object.values(errors).some(error => error !== "")) {
+            setIsPending(false);
             return;
         }
 
