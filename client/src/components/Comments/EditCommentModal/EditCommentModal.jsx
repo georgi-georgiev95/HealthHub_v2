@@ -17,6 +17,7 @@ const EditCommentModal = ({ isOpen, onClose, commentData, setCommentData }) => {
     }, [isOpen]);
 
     const onConfirm = async () => {
+        commentData.text = commentData.text.trim();
         await editComment(commentData.id, { ...commentData, editAt: new Date() });
         dispatch(toggleIsCommentInteracted());
         onClose();

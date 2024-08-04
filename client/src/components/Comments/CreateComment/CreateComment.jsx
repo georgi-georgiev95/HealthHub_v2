@@ -30,10 +30,12 @@ const CreateComment = () => {
             return;
         }
 
-        if(user === null) {
+        if (user === null) {
             navigate('/users/login');
             return;
         }
+
+        comment.text = comment.text.trim();
         
         dispatch(toggleIsCommentInteracted());
         await createComment(comment);
