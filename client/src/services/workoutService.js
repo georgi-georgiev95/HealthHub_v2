@@ -13,7 +13,7 @@ export const getAllWorkouts = async () => {
         });
         return workoutsList;
     } catch (error) {
-        console.log(error);
+        throw new Error(error);
     }
 };
 
@@ -27,7 +27,7 @@ export const getOneWorkout = async (workoutId) => {
         }
         return workoutData;
     } catch (error) {
-        console.log(error);
+        throw new Error(error);
     }
 };
 
@@ -36,7 +36,7 @@ export const createWorkout = async (workoutData) => {
         const workoutDocRef = doc(collection(firebaseAuth.db(), "workouts"));
         await setDoc(workoutDocRef, workoutData);
     } catch (error) {
-        console.log(error);
+        throw new Error(error);
     }
 };
 
@@ -46,7 +46,7 @@ export const deleteWorkout = async (workoutId) => {
         const workoutDocRef = doc(firebaseAuth.db(), "workouts", workoutId);
         await deleteDoc(workoutDocRef);
     } catch (error) {
-        console.log(error);
+        throw new Error(error);
     }
 };
 
@@ -55,7 +55,7 @@ export const editWorkout = async (workoutId, workoutData) => {
         const workoutDocRef = doc(firebaseAuth.db(), "workouts", workoutId);
         await updateDoc(workoutDocRef, workoutData);
     } catch (error) {
-        console.log(error);
+        throw new Error(error);
     }
 };
 
@@ -76,6 +76,6 @@ export const setLikes = async (userId, workoutId) => {
             });
         }
     } catch (error) {
-        console.log(error);
+        throw new Error(error);
     }
 };

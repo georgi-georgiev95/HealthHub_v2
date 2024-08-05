@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 
 import { getAllComments } from '../services/commentService';
@@ -8,6 +9,8 @@ const useFetch = (callback, id, userId) => {
     const [comments, setComments] = useState([]);
     const [loading, setLoading] = useState(true);
     const isCommentInteracted = useSelector(state => state.comments.isCommentInteracted);
+
+    const navigate = useNavigate();
 
     useEffect(() => {
         (async () => {
@@ -23,6 +26,7 @@ const useFetch = (callback, id, userId) => {
                 }
             } catch (error) {
                 console.error("Error fetching data:", error);
+                navigate('/404');
             } finally {
                 setLoading(false);
             }

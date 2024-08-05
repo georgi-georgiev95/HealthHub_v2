@@ -13,7 +13,7 @@ export const getAllRecipes = async () => {
         });
         return recipesList;
     } catch (error) {
-        console.log(error);
+        throw new Error(error);
     }
 };
 
@@ -27,7 +27,7 @@ export const getOneRecipe = async (recipeId) => {
         }
         return recipeData;
     } catch (error) {
-        console.log(error);
+        throw new Error(error);
     }
 };
 
@@ -36,7 +36,7 @@ export const createRecipe = async (recipeData) => {
         const recipeDocRef = doc(collection(firebaseAuth.db(), "recipes"));
         await setDoc(recipeDocRef, recipeData);
     } catch (error) {
-        console.log(error);
+        throw new Error(error);
     }
 };
 
@@ -45,7 +45,7 @@ export const editRecipe = async (recipeId, recipeData) => {
         const recipeDocRef = doc(firebaseAuth.db(), "recipes", recipeId);
         await updateDoc(recipeDocRef, recipeData);
     } catch (error) {
-        console.log(error);
+        throw new Error(error);
     }
 };
 
@@ -54,7 +54,7 @@ export const deleteRecipe = async (recipeId) => {
         const recipeDocRef = doc(firebaseAuth.db(), "recipes", recipeId);
         await deleteDoc(recipeDocRef);
     } catch (error) {
-        console.log(error);
+        throw new Error(error);
     }
 };
 
@@ -75,6 +75,6 @@ export const setLikes = async (userId, recipeId) => {
             });
         }
     } catch (error) {
-        console.log(error);
+        throw new Error(error);
     }
 };

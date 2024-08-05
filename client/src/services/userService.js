@@ -57,7 +57,7 @@ export const getUserLikedWorkouts = async (userId) => {
         }));
         return userLikedWorkoutsList;
     } catch (error) {
-        console.log(error);
+        throw new Error(error);
     }
 };
 

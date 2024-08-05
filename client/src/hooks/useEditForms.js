@@ -27,9 +27,13 @@ const useEditForms = (initialState, getOneEntity, editEntity, redirectPath) => {
 
     useEffect(() => {
         (async () => {
-            const entityData = await getOneEntity(id);
-            setEntity(entityData);
-            setLoading(false);
+            try {
+                const entityData = await getOneEntity(id);
+                setEntity(entityData);
+                setLoading(false);
+            } catch (err) {
+                navigate('/404');
+            }
         })();
     }, [id, getOneEntity]);
 

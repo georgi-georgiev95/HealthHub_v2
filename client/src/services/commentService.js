@@ -6,7 +6,7 @@ export const createComment = async (commentData) => {
         const commentDocRef = doc(collection(firebaseAuth.db(), "comments"));
         await setDoc(commentDocRef, commentData);
     } catch (error) {
-        console.log(error);
+        throw new Error(error);
     }
 };
 
@@ -21,7 +21,7 @@ export const getAllComments = async (entityId) => {
         }));
         return commentsList;
     } catch (error) {
-        console.log(error);
+        throw new Error(error);
     }
 };
 
@@ -30,7 +30,7 @@ export const editComment = async (commentId, commentData) => {
         const commentDocRef = doc(firebaseAuth.db(), "comments", commentId);
         await updateDoc(commentDocRef, commentData);
     } catch (error) {
-        console.log(error);
+        throw new Error(error);
     }
 };
 
@@ -39,7 +39,7 @@ export const deleteComment = async (commentId) => {
         const commentDocRef = doc(firebaseAuth.db(), "comments", commentId);
         await deleteDoc(commentDocRef);
     } catch (error) {
-        console.log(error);
+        throw new Error(error);
     }
 };
 
@@ -70,6 +70,6 @@ export const setReaction = async (userId, commentId, reaction) => {
         }
 
     } catch (error) {
-        console.log(error);
+        throw new Error(error);
     }
 }
