@@ -93,6 +93,8 @@ const Weather = () => {
   const [weatherIcon, setWeatherIcon] = useState(null);
   const [error, setError] = useState("");
 
+  const API_KEY = "8ro3wQeVSdciHjtmZAqYyYcLORn907Hh";
+
   useEffect(() => {
     navigator.geolocation.getCurrentPosition(
       async (position) => {
@@ -101,12 +103,12 @@ const Weather = () => {
 
         try {
           const locationKeyResponse = await fetch(
-            `https://dataservice.accuweather.com/locations/v1/cities/geoposition/search?apikey=VUxwPyAAN6UISAK8xcCBLlEGbjQq1MpA&q=${latitude},${longitude}`
+            `https://dataservice.accuweather.com/locations/v1/cities/geoposition/search?apikey=${API_KEY}&q=${latitude},${longitude}`
           );
 
           // for (const city of mainCities) {
           //   const response = await fetch(
-          //     `https://dataservice.accuweather.com/locations/v1/cities/search?apikey=OU88uVEA4TXy4IigSQiw8X9dyfBWIkVA&q=${city}`
+          //     `https://dataservice.accuweather.com/locations/v1/cities/search?apikey=${API_KEY}&q=${city}`
           //   );
           //   const cityData = (await response.json()).filter(x => x.Country.ID === 'BG')[0];
           //   console.log(cityData);
@@ -121,7 +123,7 @@ const Weather = () => {
           setCityName(locationKeyData.LocalizedName);
 
           const weatherResponse = await fetch(
-            `https://dataservice.accuweather.com/currentconditions/v1/${locationKey}?apikey=VUxwPyAAN6UISAK8xcCBLlEGbjQq1MpA`
+            `https://dataservice.accuweather.com/currentconditions/v1/${locationKey}?apikey=${API_KEY}`
           );
 
           if (!weatherResponse.ok) {
