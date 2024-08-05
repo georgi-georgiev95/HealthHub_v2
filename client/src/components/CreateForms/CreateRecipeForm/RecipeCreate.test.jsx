@@ -1,14 +1,18 @@
 import { render, screen } from "@testing-library/react";
 import { fireEvent } from "@testing-library/dom";
 import { BrowserRouter } from "react-router-dom";
+import { Provider } from "react-redux";
 
 import RecipeCreate from "./RecipeCreate";
+import store from "../../../store/store";
 
 const renderRecipeCreate = () => {
   render(
-    <BrowserRouter>
+    <Provider store={store}>
+      <BrowserRouter>
         <RecipeCreate />
-    </BrowserRouter>
+      </BrowserRouter>
+    </Provider>
   );
 };
 
