@@ -8,6 +8,7 @@ import useCreateForm from "../../../hooks/useCreateForm";
 const CreateWorkout = () => {
   const difficultyLevels = ["-", "Beginner", "Intermediate", "Advanced"];
   const goals = ["-", "Weight Loss", "Muscle Gain"];
+
   const { 
     exercises,
     difficulty,
@@ -67,7 +68,7 @@ const CreateWorkout = () => {
                     name="exerciseName"
                     id="exerciseName"
                     placeholder="Exercise name"
-                    value={exercises.exerciseName}
+                    value={exercise.exerciseName}
                     className={styles.exerciseInput}
                     onChange={(e) => handleNewField(e, index, "exerciseName")}
                   />
@@ -78,7 +79,7 @@ const CreateWorkout = () => {
                     name="sets"
                     id="sets"
                     placeholder="Sets"
-                    value={exercises.sets}
+                    value={exercise.sets}
                     className={styles.exerciseInput}
                     onChange={(e) => handleNewField(e, index, "sets")}
                     min={1}
@@ -90,7 +91,7 @@ const CreateWorkout = () => {
                     name="reps"
                     id="reps"
                     placeholder="Reps"
-                    value={exercises.reps}
+                    value={exercise.reps}
                     className={styles.exerciseInput}
                     onChange={(e) => handleNewField(e, index, "reps")}
                     min={1}
