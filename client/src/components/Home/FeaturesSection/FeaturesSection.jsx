@@ -11,8 +11,8 @@ const FeaturesSection = () => {
       <HomeFeatureCard
         imageUrl={recipesFeatureURL}
         destination={'/create/recipe'}
-        title={'Create a Workout'}
-        message={'Design and share workout routines tailored to your needs.'}
+        title={'Create a Recipe'}
+        message={'Share your taste for fine and healthy food.'}
       />
       <Advice />
       <HomeFeatureCard
